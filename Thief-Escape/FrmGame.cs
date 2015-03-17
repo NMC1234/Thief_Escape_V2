@@ -95,25 +95,72 @@ namespace Theif_Escape
                 case Keys.Left:
                     btnMoveWest.PerformClick();
                     break;
+				case Keys.A:
+					btnMoveWest.PerformClick( );
+					break;
+				case Keys.NumPad4:
+					btnMoveWest.PerformClick( );
+					break;
 
                     //  Move east
                 case Keys.Right:
                     btnMoveEast.PerformClick();
                     break;
+				case Keys.D:
+					btnMoveEast.PerformClick( );
+					break;
+				case Keys.NumPad6:
+					btnMoveEast.PerformClick( );
+					break;
 
                     //  Move north
                 case Keys.Up:
                     btnMoveNorth.PerformClick();
                     break;
+				case Keys.W:
+					btnMoveNorth.PerformClick( );
+					break;
+				case Keys.NumPad8:
+					btnMoveNorth.PerformClick( );
+					break;
 
                     //  Move south
                 case Keys.Down:
                     btnMoveSouth.PerformClick();
                     break;
+				case Keys.S:
+					btnMoveSouth.PerformClick( );
+					break;
+				case Keys.NumPad2:
+					btnMoveSouth.PerformClick( );
+					break;
 
+					//Pickup Key
+				case Keys.Q:
+					btnPickupKey.PerformClick( );
+					break;
+				case Keys.P:
+					btnPickupKey.PerformClick( );
+					break;
+				case Keys.NumPad7:
+					btnPickupKey.PerformClick( );
+					break;
+
+					//Use Key
+				case Keys.E:
+					btnUseKey.PerformClick( );
+					break;
+				case Keys.K:
+					btnUseKey.PerformClick( );
+					break;
+				case Keys.NumPad9:
+					btnUseKey.PerformClick( );
+					break;
+
+				
                     //  Do nothing
-                default:
-                    break;
+				//default:
+				//	break;
 
             }
             //  No idea what this does, compiler error if removed.
