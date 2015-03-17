@@ -29,3 +29,11 @@ D:\02 Documents\NMC 2014 Stuff\Git Hub\Thief_Escape_V2\Thief-Escape\obj\Debug\Th
 D:\02 Documents\NMC 2014 Stuff\CIT195 .net Programming\Group phiv Project\Current\Thief_Escape_V2\Thief-Escape\bin\Debug\Theif-Escape.exe.config
 D:\02 Documents\NMC 2014 Stuff\CIT195 .net Programming\Group phiv Project\Current\Thief_Escape_V2\Thief-Escape\obj\Debug\Theif-Escape.exe
 D:\02 Documents\NMC 2014 Stuff\CIT195 .net Programming\Group phiv Project\Current\Thief_Escape_V2\Thief-Escape\obj\Debug\Theif-Escape.pdb
+D:\02 Documents\NMC 2014 Stuff\CIT195 .net Programming\Group phiv Project\Current\Thief_Escape_V2\Thief-Escape\bin\Debug\Theif-Escape.exe
+D:\02 Documents\NMC 2014 Stuff\CIT195 .net Programming\Group phiv Project\Current\Thief_Escape_V2\Thief-Escape\bin\Debug\Theif-Escape.pdb
+D:\02 Documents\NMC 2014 Stuff\CIT195 .net Programming\Group phiv Project\Current\Thief_Escape_V2\Thief-Escape\obj\Debug\Thief-Escape.csprojResolveAssemblyReference.cache
+D:\02 Documents\NMC 2014 Stuff\CIT195 .net Programming\Group phiv Project\Current\Thief_Escape_V2\Thief-Escape\obj\Debug\Theif_Escape.FrmGame.resources
+D:\02 Documents\NMC 2014 Stuff\CIT195 .net Programming\Group phiv Project\Current\Thief_Escape_V2\Thief-Escape\obj\Debug\Theif_Escape.FrmGetName.resources
+D:\02 Documents\NMC 2014 Stuff\CIT195 .net Programming\Group phiv Project\Current\Thief_Escape_V2\Thief-Escape\obj\Debug\Theif_Escape.FrmMain.resources
+D:\02 Documents\NMC 2014 Stuff\CIT195 .net Programming\Group phiv Project\Current\Thief_Escape_V2\Thief-Escape\obj\Debug\Theif_Escape.Properties.Resources.resources
+D:\02 Documents\NMC 2014 Stuff\CIT195 .net Programming\Group phiv Project\Current\Thief_Escape_V2\Thief-Escape\obj\Debug\Thief-Escape.csproj.GenerateResource.Cache
