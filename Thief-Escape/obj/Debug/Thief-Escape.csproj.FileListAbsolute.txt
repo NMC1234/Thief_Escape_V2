@@ -26,3 +26,6 @@ D:\02 Documents\NMC 2014 Stuff\Git Hub\Thief_Escape_New\Thief-Escape\obj\Debug\T
 D:\02 Documents\NMC 2014 Stuff\Git Hub\Thief_Escape_V2\Thief-Escape\bin\Debug\Theif-Escape.exe.config
 D:\02 Documents\NMC 2014 Stuff\Git Hub\Thief_Escape_V2\Thief-Escape\obj\Debug\Theif-Escape.exe
 D:\02 Documents\NMC 2014 Stuff\Git Hub\Thief_Escape_V2\Thief-Escape\obj\Debug\Theif-Escape.pdb
+D:\02 Documents\NMC 2014 Stuff\CIT195 .net Programming\Group phiv Project\Current\Thief_Escape_V2\Thief-Escape\bin\Debug\Theif-Escape.exe.config
+D:\02 Documents\NMC 2014 Stuff\CIT195 .net Programming\Group phiv Project\Current\Thief_Escape_V2\Thief-Escape\obj\Debug\Theif-Escape.exe
+D:\02 Documents\NMC 2014 Stuff\CIT195 .net Programming\Group phiv Project\Current\Thief_Escape_V2\Thief-Escape\obj\Debug\Theif-Escape.pdb
