@@ -20,3 +20,9 @@ C:\Users\Keegon\Documents\GitHub\Thief_Escape\Thief-Escape\obj\Debug\Theif_Escap
 C:\Users\Keegon\Documents\GitHub\Thief_Escape\Thief-Escape\obj\Debug\Theif_Escape.FrmMain.resources
 C:\Users\Keegon\Documents\GitHub\Thief_Escape\Thief-Escape\obj\Debug\Theif_Escape.Properties.Resources.resources
 C:\Users\Keegon\Documents\GitHub\Thief_Escape\Thief-Escape\obj\Debug\Thief-Escape.csproj.GenerateResource.Cache
+D:\02 Documents\NMC 2014 Stuff\Git Hub\Thief_Escape_New\Thief-Escape\bin\Debug\Theif-Escape.exe.config
+D:\02 Documents\NMC 2014 Stuff\Git Hub\Thief_Escape_New\Thief-Escape\obj\Debug\Theif-Escape.exe
+D:\02 Documents\NMC 2014 Stuff\Git Hub\Thief_Escape_New\Thief-Escape\obj\Debug\Theif-Escape.pdb
+D:\02 Documents\NMC 2014 Stuff\Git Hub\Thief_Escape_V2\Thief-Escape\bin\Debug\Theif-Escape.exe.config
+D:\02 Documents\NMC 2014 Stuff\Git Hub\Thief_Escape_V2\Thief-Escape\obj\Debug\Theif-Escape.exe
+D:\02 Documents\NMC 2014 Stuff\Git Hub\Thief_Escape_V2\Thief-Escape\obj\Debug\Theif-Escape.pdb
