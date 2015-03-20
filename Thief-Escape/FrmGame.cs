@@ -392,7 +392,38 @@ namespace Theif_Escape
             UpdateInventory();
         }
 
+        private void btnPickupKitten_Click(object sender, EventArgs e)
+        {
+            int[] kittenDetails = CheckForNearbyKitten();
 
+            if (kittenDetails[0] != 0)
+            {
+                //  Remove key from grid.
+                cellGrid.RemoveItem(kittenDetails[1], kittenDetails[2]);
+
+                //  Refresh grid.
+                ViewArea();
+
+                //  Add a key to the inventory
+                Inventory.Add(kitten);
+                UpdateInventory();
+
+                //  Tell user they have picked up a key.
+                lstDialog.Items.Add("I found a kitten!");
+                lstDialog.SelectedIndex = lstDialog.Items.Count - 1;
+                lstDialog.SelectedIndex = -1;
+            }
+            else
+            {
+                //  Tell user there is no key nearby.
+                lstDialog.Items.Add("There is no kitten nearby!");
+                lstDialog.SelectedIndex = lstDialog.Items.Count - 1;
+                lstDialog.SelectedIndex = -1;
+            }
+
+            //  Update
+            UpdateInventory();
+        }
         // Use Key Button
         private void btnUseKey_Click(object sender, EventArgs e)
         {
@@ -513,6 +544,7 @@ namespace Theif_Escape
 
         #region [ Action Methods ]
 
+
         private int[] CheckForNearbyKey()
         {
             //The array defined as (bool,x-coord,y-coord). Bool is 0-false 1-true, with default of false.
@@ -545,6 +577,37 @@ namespace Theif_Escape
 
         }
 
+        private int[] CheckForNearbyKitten()
+        {
+            //The array defined as (bool,x-coord,y-coord). Bool is 0-false 1-true, with default of false.
+            int[] result = { 0, 0, 0 };
+
+            //Creates starting point for search, 1 cell up and 1 cell left, centered on the player.
+            int x = player.XCoord - 1;
+            int y = player.YCoord - 1;
+
+            //Goes through each "column" of the search area
+            for (int ix = 0; ix < 3; ix++)
+            {
+                //Goes through each "row" of the column
+                for (int iy = 0; iy < 3; iy++)
+                {
+                    //If the cell has a key, return true.
+                    if (cellGrid.CheckForItem((x + ix), (y + iy)) == Cell.Contents.KITTEN)
+                    {
+                        //Bool true
+                        result[0] = 1;
+                        //Kiten's x-coord
+                        result[1] = (x + ix);
+                        //Kiten's y-coord
+                        result[2] = (y + iy);
+                    }
+                }
+            }
+
+            return result;
+
+        }
         private void UpdateInventory()
         {
             //  Clear the current inventory dialog
@@ -890,6 +953,8 @@ namespace Theif_Escape
 
 
         #endregion
+
+      
 
 
 
