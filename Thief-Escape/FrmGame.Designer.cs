@@ -28,14 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Syncfusion.Windows.Forms.Grid.GridBaseStyle gridBaseStyle1 = new Syncfusion.Windows.Forms.Grid.GridBaseStyle();
-            Syncfusion.Windows.Forms.Grid.GridBaseStyle gridBaseStyle2 = new Syncfusion.Windows.Forms.Grid.GridBaseStyle();
-            Syncfusion.Windows.Forms.Grid.GridBaseStyle gridBaseStyle3 = new Syncfusion.Windows.Forms.Grid.GridBaseStyle();
-            Syncfusion.Windows.Forms.Grid.GridBaseStyle gridBaseStyle4 = new Syncfusion.Windows.Forms.Grid.GridBaseStyle();
-            Syncfusion.Windows.Forms.Grid.GridRangeStyle gridRangeStyle1 = new Syncfusion.Windows.Forms.Grid.GridRangeStyle();
-            Syncfusion.Windows.Forms.Grid.GridRangeStyle gridRangeStyle2 = new Syncfusion.Windows.Forms.Grid.GridRangeStyle();
-            Syncfusion.Windows.Forms.Grid.GridRangeStyle gridRangeStyle3 = new Syncfusion.Windows.Forms.Grid.GridRangeStyle();
-            Syncfusion.Windows.Forms.Grid.GridRangeStyle gridRangeStyle4 = new Syncfusion.Windows.Forms.Grid.GridRangeStyle();
+            Syncfusion.Windows.Forms.Grid.GridBaseStyle gridBaseStyle5 = new Syncfusion.Windows.Forms.Grid.GridBaseStyle();
+            Syncfusion.Windows.Forms.Grid.GridBaseStyle gridBaseStyle6 = new Syncfusion.Windows.Forms.Grid.GridBaseStyle();
+            Syncfusion.Windows.Forms.Grid.GridBaseStyle gridBaseStyle7 = new Syncfusion.Windows.Forms.Grid.GridBaseStyle();
+            Syncfusion.Windows.Forms.Grid.GridBaseStyle gridBaseStyle8 = new Syncfusion.Windows.Forms.Grid.GridBaseStyle();
+            Syncfusion.Windows.Forms.Grid.GridRangeStyle gridRangeStyle6 = new Syncfusion.Windows.Forms.Grid.GridRangeStyle();
+            Syncfusion.Windows.Forms.Grid.GridRangeStyle gridRangeStyle7 = new Syncfusion.Windows.Forms.Grid.GridRangeStyle();
+            Syncfusion.Windows.Forms.Grid.GridRangeStyle gridRangeStyle8 = new Syncfusion.Windows.Forms.Grid.GridRangeStyle();
+            Syncfusion.Windows.Forms.Grid.GridRangeStyle gridRangeStyle9 = new Syncfusion.Windows.Forms.Grid.GridRangeStyle();
+            Syncfusion.Windows.Forms.Grid.GridRangeStyle gridRangeStyle10 = new Syncfusion.Windows.Forms.Grid.GridRangeStyle();
             this.grpboxLegend = new System.Windows.Forms.GroupBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.lblKey = new System.Windows.Forms.Label();
@@ -112,11 +113,13 @@
             // textBox2
             // 
             this.textBox2.BackColor = System.Drawing.Color.DimGray;
+            this.textBox2.Enabled = false;
             this.textBox2.Location = new System.Drawing.Point(6, 45);
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
             this.textBox2.Size = new System.Drawing.Size(21, 20);
             this.textBox2.TabIndex = 20;
+            this.textBox2.TabStop = false;
             // 
             // lblKey
             // 
@@ -130,11 +133,13 @@
             // txtKey
             // 
             this.txtKey.BackColor = System.Drawing.Color.SpringGreen;
+            this.txtKey.Enabled = false;
             this.txtKey.Location = new System.Drawing.Point(6, 200);
             this.txtKey.Name = "txtKey";
             this.txtKey.ReadOnly = true;
             this.txtKey.Size = new System.Drawing.Size(21, 20);
             this.txtKey.TabIndex = 18;
+            this.txtKey.TabStop = false;
             // 
             // label2
             // 
@@ -148,11 +153,13 @@
             // txtBejeweledKitten
             // 
             this.txtBejeweledKitten.BackColor = System.Drawing.Color.Purple;
+            this.txtBejeweledKitten.Enabled = false;
             this.txtBejeweledKitten.Location = new System.Drawing.Point(6, 174);
             this.txtBejeweledKitten.Name = "txtBejeweledKitten";
             this.txtBejeweledKitten.ReadOnly = true;
             this.txtBejeweledKitten.Size = new System.Drawing.Size(21, 20);
             this.txtBejeweledKitten.TabIndex = 16;
+            this.txtBejeweledKitten.TabStop = false;
             // 
             // lblStairs
             // 
@@ -166,11 +173,13 @@
             // txtStairsUp
             // 
             this.txtStairsUp.BackColor = System.Drawing.Color.Cyan;
+            this.txtStairsUp.Enabled = false;
             this.txtStairsUp.Location = new System.Drawing.Point(6, 97);
             this.txtStairsUp.Name = "txtStairsUp";
             this.txtStairsUp.ReadOnly = true;
             this.txtStairsUp.Size = new System.Drawing.Size(21, 20);
             this.txtStairsUp.TabIndex = 12;
+            this.txtStairsUp.TabStop = false;
             // 
             // lblCurrentCell
             // 
@@ -184,11 +193,13 @@
             // txtCurrentCell
             // 
             this.txtCurrentCell.BackColor = System.Drawing.Color.Orange;
+            this.txtCurrentCell.Enabled = false;
             this.txtCurrentCell.Location = new System.Drawing.Point(6, 19);
             this.txtCurrentCell.Name = "txtCurrentCell";
             this.txtCurrentCell.ReadOnly = true;
             this.txtCurrentCell.Size = new System.Drawing.Size(21, 20);
             this.txtCurrentCell.TabIndex = 10;
+            this.txtCurrentCell.TabStop = false;
             // 
             // lblDoorOpen
             // 
@@ -202,11 +213,13 @@
             // textBox1
             // 
             this.textBox1.BackColor = System.Drawing.Color.Chocolate;
+            this.textBox1.Enabled = false;
             this.textBox1.Location = new System.Drawing.Point(6, 148);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(21, 20);
             this.textBox1.TabIndex = 8;
+            this.textBox1.TabStop = false;
             // 
             // lblDoorLocked
             // 
@@ -220,11 +233,13 @@
             // txtDoorLocked
             // 
             this.txtDoorLocked.BackColor = System.Drawing.Color.SaddleBrown;
+            this.txtDoorLocked.Enabled = false;
             this.txtDoorLocked.Location = new System.Drawing.Point(6, 123);
             this.txtDoorLocked.Name = "txtDoorLocked";
             this.txtDoorLocked.ReadOnly = true;
             this.txtDoorLocked.Size = new System.Drawing.Size(21, 20);
             this.txtDoorLocked.TabIndex = 6;
+            this.txtDoorLocked.TabStop = false;
             // 
             // lblFloors
             // 
@@ -238,11 +253,14 @@
             // txtFloors
             // 
             this.txtFloors.BackColor = System.Drawing.Color.White;
+            this.txtFloors.Cursor = System.Windows.Forms.Cursors.No;
+            this.txtFloors.Enabled = false;
             this.txtFloors.Location = new System.Drawing.Point(6, 71);
             this.txtFloors.Name = "txtFloors";
             this.txtFloors.ReadOnly = true;
             this.txtFloors.Size = new System.Drawing.Size(21, 20);
-            this.txtFloors.TabIndex = 2;
+            this.txtFloors.TabIndex = 20;
+            this.txtFloors.TabStop = false;
             // 
             // lblWall
             // 
@@ -517,30 +535,30 @@
             this.grdconMap.AllowIncreaseSmallChange = false;
             this.grdconMap.AllowSelection = Syncfusion.Windows.Forms.Grid.GridSelectionFlags.None;
             this.grdconMap.BackColor = System.Drawing.Color.Black;
-            gridBaseStyle1.Name = "Header";
-            gridBaseStyle1.StyleInfo.Borders.Bottom = new Syncfusion.Windows.Forms.Grid.GridBorder(Syncfusion.Windows.Forms.Grid.GridBorderStyle.None);
-            gridBaseStyle1.StyleInfo.Borders.Left = new Syncfusion.Windows.Forms.Grid.GridBorder(Syncfusion.Windows.Forms.Grid.GridBorderStyle.None);
-            gridBaseStyle1.StyleInfo.Borders.Right = new Syncfusion.Windows.Forms.Grid.GridBorder(Syncfusion.Windows.Forms.Grid.GridBorderStyle.None);
-            gridBaseStyle1.StyleInfo.Borders.Top = new Syncfusion.Windows.Forms.Grid.GridBorder(Syncfusion.Windows.Forms.Grid.GridBorderStyle.None);
-            gridBaseStyle1.StyleInfo.CellType = "Header";
-            gridBaseStyle1.StyleInfo.Font.Bold = true;
-            gridBaseStyle1.StyleInfo.Interior = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.Vertical, System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(199)))), ((int)(((byte)(184))))), System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(234)))), ((int)(((byte)(216))))));
-            gridBaseStyle1.StyleInfo.VerticalAlignment = Syncfusion.Windows.Forms.Grid.GridVerticalAlignment.Middle;
-            gridBaseStyle2.Name = "Standard";
-            gridBaseStyle2.StyleInfo.Font.Facename = "Tahoma";
-            gridBaseStyle2.StyleInfo.Interior = new Syncfusion.Drawing.BrushInfo(System.Drawing.SystemColors.Window);
-            gridBaseStyle3.Name = "Column Header";
-            gridBaseStyle3.StyleInfo.BaseStyle = "Header";
-            gridBaseStyle3.StyleInfo.HorizontalAlignment = Syncfusion.Windows.Forms.Grid.GridHorizontalAlignment.Center;
-            gridBaseStyle4.Name = "Row Header";
-            gridBaseStyle4.StyleInfo.BaseStyle = "Header";
-            gridBaseStyle4.StyleInfo.HorizontalAlignment = Syncfusion.Windows.Forms.Grid.GridHorizontalAlignment.Left;
-            gridBaseStyle4.StyleInfo.Interior = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.Horizontal, System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(199)))), ((int)(((byte)(184))))), System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(234)))), ((int)(((byte)(216))))));
+            gridBaseStyle5.Name = "Header";
+            gridBaseStyle5.StyleInfo.Borders.Bottom = new Syncfusion.Windows.Forms.Grid.GridBorder(Syncfusion.Windows.Forms.Grid.GridBorderStyle.None);
+            gridBaseStyle5.StyleInfo.Borders.Left = new Syncfusion.Windows.Forms.Grid.GridBorder(Syncfusion.Windows.Forms.Grid.GridBorderStyle.None);
+            gridBaseStyle5.StyleInfo.Borders.Right = new Syncfusion.Windows.Forms.Grid.GridBorder(Syncfusion.Windows.Forms.Grid.GridBorderStyle.None);
+            gridBaseStyle5.StyleInfo.Borders.Top = new Syncfusion.Windows.Forms.Grid.GridBorder(Syncfusion.Windows.Forms.Grid.GridBorderStyle.None);
+            gridBaseStyle5.StyleInfo.CellType = "Header";
+            gridBaseStyle5.StyleInfo.Font.Bold = true;
+            gridBaseStyle5.StyleInfo.Interior = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.Vertical, System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(199)))), ((int)(((byte)(184))))), System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(234)))), ((int)(((byte)(216))))));
+            gridBaseStyle5.StyleInfo.VerticalAlignment = Syncfusion.Windows.Forms.Grid.GridVerticalAlignment.Middle;
+            gridBaseStyle6.Name = "Standard";
+            gridBaseStyle6.StyleInfo.Font.Facename = "Tahoma";
+            gridBaseStyle6.StyleInfo.Interior = new Syncfusion.Drawing.BrushInfo(System.Drawing.SystemColors.Window);
+            gridBaseStyle7.Name = "Column Header";
+            gridBaseStyle7.StyleInfo.BaseStyle = "Header";
+            gridBaseStyle7.StyleInfo.HorizontalAlignment = Syncfusion.Windows.Forms.Grid.GridHorizontalAlignment.Center;
+            gridBaseStyle8.Name = "Row Header";
+            gridBaseStyle8.StyleInfo.BaseStyle = "Header";
+            gridBaseStyle8.StyleInfo.HorizontalAlignment = Syncfusion.Windows.Forms.Grid.GridHorizontalAlignment.Left;
+            gridBaseStyle8.StyleInfo.Interior = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.Horizontal, System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(199)))), ((int)(((byte)(184))))), System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(234)))), ((int)(((byte)(216))))));
             this.grdconMap.BaseStylesMap.AddRange(new Syncfusion.Windows.Forms.Grid.GridBaseStyle[] {
-            gridBaseStyle1,
-            gridBaseStyle2,
-            gridBaseStyle3,
-            gridBaseStyle4});
+            gridBaseStyle5,
+            gridBaseStyle6,
+            gridBaseStyle7,
+            gridBaseStyle8});
             this.grdconMap.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.grdconMap.ColCount = 24;
             this.grdconMap.ColWidthEntries.AddRange(new Syncfusion.Windows.Forms.Grid.GridColWidth[] {
@@ -566,43 +584,52 @@
             this.grdconMap.Properties.MarkColHeader = false;
             this.grdconMap.Properties.MarkRowHeader = false;
             this.grdconMap.Properties.RowHeaders = false;
-            gridRangeStyle1.Range = Syncfusion.Windows.Forms.Grid.GridRangeInfo.Table();
-            gridRangeStyle1.StyleInfo.Font.Bold = false;
-            gridRangeStyle1.StyleInfo.Font.Facename = "Arial";
-            gridRangeStyle1.StyleInfo.Font.Italic = false;
-            gridRangeStyle1.StyleInfo.Font.Size = 15F;
-            gridRangeStyle1.StyleInfo.Font.Strikeout = false;
-            gridRangeStyle1.StyleInfo.Font.Underline = false;
-            gridRangeStyle1.StyleInfo.Font.Unit = System.Drawing.GraphicsUnit.Point;
-            gridRangeStyle2.Range = Syncfusion.Windows.Forms.Grid.GridRangeInfo.Table();
-            gridRangeStyle2.StyleInfo.Font.Bold = false;
-            gridRangeStyle2.StyleInfo.Font.Facename = "Arial";
-            gridRangeStyle2.StyleInfo.Font.Italic = false;
-            gridRangeStyle2.StyleInfo.Font.Size = 15F;
-            gridRangeStyle2.StyleInfo.Font.Strikeout = false;
-            gridRangeStyle2.StyleInfo.Font.Underline = false;
-            gridRangeStyle2.StyleInfo.Font.Unit = System.Drawing.GraphicsUnit.Point;
-            gridRangeStyle3.Range = Syncfusion.Windows.Forms.Grid.GridRangeInfo.Table();
-            gridRangeStyle3.StyleInfo.Font.Bold = false;
-            gridRangeStyle3.StyleInfo.Font.Facename = "Arial";
-            gridRangeStyle3.StyleInfo.Font.Italic = false;
-            gridRangeStyle3.StyleInfo.Font.Size = 15F;
-            gridRangeStyle3.StyleInfo.Font.Strikeout = false;
-            gridRangeStyle3.StyleInfo.Font.Underline = false;
-            gridRangeStyle3.StyleInfo.Font.Unit = System.Drawing.GraphicsUnit.Point;
-            gridRangeStyle4.Range = Syncfusion.Windows.Forms.Grid.GridRangeInfo.Table();
-            gridRangeStyle4.StyleInfo.Font.Bold = false;
-            gridRangeStyle4.StyleInfo.Font.Facename = "Arial";
-            gridRangeStyle4.StyleInfo.Font.Italic = false;
-            gridRangeStyle4.StyleInfo.Font.Size = 15F;
-            gridRangeStyle4.StyleInfo.Font.Strikeout = false;
-            gridRangeStyle4.StyleInfo.Font.Underline = false;
-            gridRangeStyle4.StyleInfo.Font.Unit = System.Drawing.GraphicsUnit.Point;
+            gridRangeStyle6.Range = Syncfusion.Windows.Forms.Grid.GridRangeInfo.Table();
+            gridRangeStyle6.StyleInfo.Font.Bold = false;
+            gridRangeStyle6.StyleInfo.Font.Facename = "Arial";
+            gridRangeStyle6.StyleInfo.Font.Italic = false;
+            gridRangeStyle6.StyleInfo.Font.Size = 15F;
+            gridRangeStyle6.StyleInfo.Font.Strikeout = false;
+            gridRangeStyle6.StyleInfo.Font.Underline = false;
+            gridRangeStyle6.StyleInfo.Font.Unit = System.Drawing.GraphicsUnit.Point;
+            gridRangeStyle7.Range = Syncfusion.Windows.Forms.Grid.GridRangeInfo.Table();
+            gridRangeStyle7.StyleInfo.Font.Bold = false;
+            gridRangeStyle7.StyleInfo.Font.Facename = "Arial";
+            gridRangeStyle7.StyleInfo.Font.Italic = false;
+            gridRangeStyle7.StyleInfo.Font.Size = 15F;
+            gridRangeStyle7.StyleInfo.Font.Strikeout = false;
+            gridRangeStyle7.StyleInfo.Font.Underline = false;
+            gridRangeStyle7.StyleInfo.Font.Unit = System.Drawing.GraphicsUnit.Point;
+            gridRangeStyle8.Range = Syncfusion.Windows.Forms.Grid.GridRangeInfo.Table();
+            gridRangeStyle8.StyleInfo.Font.Bold = false;
+            gridRangeStyle8.StyleInfo.Font.Facename = "Arial";
+            gridRangeStyle8.StyleInfo.Font.Italic = false;
+            gridRangeStyle8.StyleInfo.Font.Size = 15F;
+            gridRangeStyle8.StyleInfo.Font.Strikeout = false;
+            gridRangeStyle8.StyleInfo.Font.Underline = false;
+            gridRangeStyle8.StyleInfo.Font.Unit = System.Drawing.GraphicsUnit.Point;
+            gridRangeStyle9.Range = Syncfusion.Windows.Forms.Grid.GridRangeInfo.Table();
+            gridRangeStyle9.StyleInfo.Font.Bold = false;
+            gridRangeStyle9.StyleInfo.Font.Facename = "Arial";
+            gridRangeStyle9.StyleInfo.Font.Italic = false;
+            gridRangeStyle9.StyleInfo.Font.Size = 15F;
+            gridRangeStyle9.StyleInfo.Font.Strikeout = false;
+            gridRangeStyle9.StyleInfo.Font.Underline = false;
+            gridRangeStyle9.StyleInfo.Font.Unit = System.Drawing.GraphicsUnit.Point;
+            gridRangeStyle10.Range = Syncfusion.Windows.Forms.Grid.GridRangeInfo.Table();
+            gridRangeStyle10.StyleInfo.Font.Bold = false;
+            gridRangeStyle10.StyleInfo.Font.Facename = "Arial";
+            gridRangeStyle10.StyleInfo.Font.Italic = false;
+            gridRangeStyle10.StyleInfo.Font.Size = 15F;
+            gridRangeStyle10.StyleInfo.Font.Strikeout = false;
+            gridRangeStyle10.StyleInfo.Font.Underline = false;
+            gridRangeStyle10.StyleInfo.Font.Unit = System.Drawing.GraphicsUnit.Point;
             this.grdconMap.RangeStyles.AddRange(new Syncfusion.Windows.Forms.Grid.GridRangeStyle[] {
-            gridRangeStyle1,
-            gridRangeStyle2,
-            gridRangeStyle3,
-            gridRangeStyle4});
+            gridRangeStyle6,
+            gridRangeStyle7,
+            gridRangeStyle8,
+            gridRangeStyle9,
+            gridRangeStyle10});
             this.grdconMap.ResizeColsBehavior = Syncfusion.Windows.Forms.Grid.GridResizeCellsBehavior.None;
             this.grdconMap.ResizeRowsBehavior = Syncfusion.Windows.Forms.Grid.GridResizeCellsBehavior.None;
             this.grdconMap.RowCount = 24;

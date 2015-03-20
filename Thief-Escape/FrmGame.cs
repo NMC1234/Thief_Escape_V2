@@ -398,24 +398,24 @@ namespace Theif_Escape
 
             if (kittenDetails[0] != 0)
             {
-                //  Remove key from grid.
+                //  Remove kitten from grid.
                 cellGrid.RemoveItem(kittenDetails[1], kittenDetails[2]);
 
                 //  Refresh grid.
                 ViewArea();
 
-                //  Add a key to the inventory
+                //  Add a kitten to the inventory
                 Inventory.Add(kitten);
                 UpdateInventory();
 
-                //  Tell user they have picked up a key.
+                //  Tell user they have picked up a kitten.
                 lstDialog.Items.Add("I found a kitten!");
                 lstDialog.SelectedIndex = lstDialog.Items.Count - 1;
                 lstDialog.SelectedIndex = -1;
             }
             else
             {
-                //  Tell user there is no key nearby.
+                //  Tell user there is no kitten nearby.
                 lstDialog.Items.Add("There is no kitten nearby!");
                 lstDialog.SelectedIndex = lstDialog.Items.Count - 1;
                 lstDialog.SelectedIndex = -1;
@@ -592,14 +592,14 @@ namespace Theif_Escape
                 //Goes through each "row" of the column
                 for (int iy = 0; iy < 3; iy++)
                 {
-                    //If the cell has a key, return true.
+                    //If the cell has a kitten, return true.
                     if (cellGrid.CheckForItem((x + ix), (y + iy)) == Cell.Contents.KITTEN)
                     {
                         //Bool true
                         result[0] = 1;
-                        //Kiten's x-coord
+                        //Kitten's x-coord
                         result[1] = (x + ix);
-                        //Kiten's y-coord
+                        //Kitten's y-coord
                         result[2] = (y + iy);
                     }
                 }
