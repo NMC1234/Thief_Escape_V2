@@ -1,4 +1,4 @@
-﻿namespace Theif_Escape
+﻿namespace Thief_Escape
 {
     partial class FrmMain
     {
@@ -60,7 +60,7 @@
             this.btnNew.Location = new System.Drawing.Point(12, 355);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(111, 50);
-            this.btnNew.TabIndex = 8;
+            this.btnNew.TabIndex = 0;
             this.btnNew.Text = "&New Game";
             this.toolTip1.SetToolTip(this.btnNew, "Start a New Game");
             this.btnNew.UseVisualStyleBackColor = false;
@@ -70,15 +70,15 @@
             // 
             this.btnLoadGame.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnLoadGame.BackColor = System.Drawing.Color.DarkGray;
-            this.btnLoadGame.Cursor = System.Windows.Forms.Cursors.No;
+            this.btnLoadGame.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.btnLoadGame.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLoadGame.ForeColor = System.Drawing.Color.MidnightBlue;
             this.btnLoadGame.Location = new System.Drawing.Point(129, 355);
             this.btnLoadGame.Name = "btnLoadGame";
             this.btnLoadGame.Size = new System.Drawing.Size(111, 50);
-            this.btnLoadGame.TabIndex = 10;
+            this.btnLoadGame.TabIndex = 1;
             this.btnLoadGame.Text = "&Load Game";
-            this.toolTip1.SetToolTip(this.btnLoadGame, "This feature is not yet Implemented");
+            this.toolTip1.SetToolTip(this.btnLoadGame, "Click here to load a new game.");
             this.btnLoadGame.UseVisualStyleBackColor = false;
             this.btnLoadGame.Click += new System.EventHandler(this.btnLoadGame_Click);
             // 
@@ -92,7 +92,7 @@
             this.btnExit.Location = new System.Drawing.Point(461, 355);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(111, 50);
-            this.btnExit.TabIndex = 11;
+            this.btnExit.TabIndex = 3;
             this.btnExit.Text = "E&xit   Game";
             this.toolTip1.SetToolTip(this.btnExit, "Close the program");
             this.btnExit.UseVisualStyleBackColor = false;

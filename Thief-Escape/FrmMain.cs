@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Theif_Escape
+namespace Thief_Escape
 {
     public partial class FrmMain : Form
     {
@@ -35,6 +35,13 @@ namespace Theif_Escape
         private void btnLoadGame_Click(object sender, EventArgs e)
         {
             //to-do
+            var LoadGame = new frmLoad();
+            if (LoadGame.ShowDialog() == DialogResult.OK) 
+            {
+                Form LoadSavedGame = new FrmGame();
+                LoadSavedGame.Show();
+            }
+
         }
 
         //  Exit Game Button

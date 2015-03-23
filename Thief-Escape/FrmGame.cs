@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using Syncfusion.Windows.Forms.Grid;
 using Syncfusion.Drawing;
 
-namespace Theif_Escape
+namespace Thief_Escape
 {
     public partial class FrmGame : Form
     {
@@ -244,8 +244,9 @@ namespace Theif_Escape
         //  Load Button
         private void btnLoadGame_Click(object sender, EventArgs e)
         {
-            //to-do
-            //Planned feature: Load a game from a save file
+            //message box to go along with loading of new game...
+            DialogResult newDialog = MessageBox.Show("Your game is being loaded.", "LOADING...",
+                MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
         }
 
 
@@ -254,6 +255,10 @@ namespace Theif_Escape
         {
             //to-do
             //Planned feature: Save a gamestate to file
+
+            //message box to go along with saving of new game...
+            DialogResult newDialog = MessageBox.Show("Are you sure you want to save your game?", "SAVING...",
+                MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
         }
 
 

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Theif_Escape
+namespace Thief_Escape
 {
     static class Program
     {

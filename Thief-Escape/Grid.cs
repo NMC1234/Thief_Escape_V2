@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace Theif_Escape
+namespace Thief_Escape
 {
     class Grid
     {

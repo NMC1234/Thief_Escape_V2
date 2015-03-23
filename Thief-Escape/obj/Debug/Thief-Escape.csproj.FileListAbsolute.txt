@@ -35,10 +35,6 @@ C:\Users\jamie\Documents\GitHub\Thief_Escape_V2\Thief-Escape\obj\Debug\Theif-Esc
 C:\Users\jamie\Documents\GitHub\Thief_Escape_V2\Thief-Escape\bin\Debug\Theif-Escape.exe
 C:\Users\jamie\Documents\GitHub\Thief_Escape_V2\Thief-Escape\bin\Debug\Theif-Escape.pdb
 C:\Users\jamie\Documents\GitHub\Thief_Escape_V2\Thief-Escape\obj\Debug\Thief-Escape.csprojResolveAssemblyReference.cache
-C:\Users\jamie\Documents\GitHub\Thief_Escape_V2\Thief-Escape\obj\Debug\Theif_Escape.FrmGame.resources
-C:\Users\jamie\Documents\GitHub\Thief_Escape_V2\Thief-Escape\obj\Debug\Theif_Escape.FrmGetName.resources
-C:\Users\jamie\Documents\GitHub\Thief_Escape_V2\Thief-Escape\obj\Debug\Theif_Escape.FrmMain.resources
-C:\Users\jamie\Documents\GitHub\Thief_Escape_V2\Thief-Escape\obj\Debug\Theif_Escape.Properties.Resources.resources
 C:\Users\jamie\Documents\GitHub\Thief_Escape_V2\Thief-Escape\obj\Debug\Thief-Escape.csproj.GenerateResource.Cache
 D:\02 Documents\NMC 2014 Stuff\CIT195 .net Programming\Thief_Escape_V2\Thief_Escape_V2\Thief-Escape\bin\Debug\Theif-Escape.exe.config
 D:\02 Documents\NMC 2014 Stuff\CIT195 .net Programming\Thief_Escape_V2\Thief_Escape_V2\Thief-Escape\obj\Debug\Theif-Escape.exe
@@ -51,3 +47,8 @@ D:\02 Documents\NMC 2014 Stuff\CIT195 .net Programming\Thief_Escape_V2\Thief_Esc
 D:\02 Documents\NMC 2014 Stuff\CIT195 .net Programming\Thief_Escape_V2\Thief_Escape_V2\Thief-Escape\obj\Debug\Theif_Escape.FrmMain.resources
 D:\02 Documents\NMC 2014 Stuff\CIT195 .net Programming\Thief_Escape_V2\Thief_Escape_V2\Thief-Escape\obj\Debug\Theif_Escape.Properties.Resources.resources
 D:\02 Documents\NMC 2014 Stuff\CIT195 .net Programming\Thief_Escape_V2\Thief_Escape_V2\Thief-Escape\obj\Debug\Thief-Escape.csproj.GenerateResource.Cache
+C:\Users\jamie\Documents\GitHub\Thief_Escape_V2\Thief-Escape\obj\Debug\Thief_Escape.frmLoad.resources
+C:\Users\jamie\Documents\GitHub\Thief_Escape_V2\Thief-Escape\obj\Debug\Thief_Escape.FrmGame.resources
+C:\Users\jamie\Documents\GitHub\Thief_Escape_V2\Thief-Escape\obj\Debug\Thief_Escape.FrmGetName.resources
+C:\Users\jamie\Documents\GitHub\Thief_Escape_V2\Thief-Escape\obj\Debug\Thief_Escape.FrmMain.resources
+C:\Users\jamie\Documents\GitHub\Thief_Escape_V2\Thief-Escape\obj\Debug\Thief_Escape.Properties.Resources.resources

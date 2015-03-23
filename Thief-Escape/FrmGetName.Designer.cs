@@ -1,4 +1,4 @@
-﻿namespace Theif_Escape
+﻿namespace Thief_Escape
 {
     partial class FrmGetName
     {

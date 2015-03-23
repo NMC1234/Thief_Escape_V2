@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Theif_Escape
+namespace Thief_Escape
 {
     public partial class FrmGetName : Form
     {
