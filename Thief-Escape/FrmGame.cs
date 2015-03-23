@@ -95,21 +95,90 @@ namespace Theif_Escape
                 case Keys.Left:
                     btnMoveWest.PerformClick();
                     break;
+				case Keys.A:
+					btnMoveWest.PerformClick();
+                    break;
+				case Keys.NumPad4:
+					btnMoveWest.PerformClick();
+                    break;
 
                     //  Move east
                 case Keys.Right:
                     btnMoveEast.PerformClick();
                     break;
+				case Keys.D:
+					btnMoveEast.PerformClick( );
+					break;
+				case Keys.NumPad6:
+					btnMoveEast.PerformClick( );
+					break;
 
                     //  Move north
                 case Keys.Up:
                     btnMoveNorth.PerformClick();
                     break;
+				case Keys.W:
+					btnMoveNorth.PerformClick( );
+					break;
+				case Keys.NumPad8:
+					btnMoveNorth.PerformClick( );
+					break;
 
                     //  Move south
                 case Keys.Down:
                     btnMoveSouth.PerformClick();
                     break;
+				case Keys.S:
+					btnMoveSouth.PerformClick( );
+					break;
+				case Keys.NumPad2:
+					btnMoveSouth.PerformClick( );
+					break;
+
+					//Use a Key
+				case Keys.Q:
+					btnUseKey.PerformClick( );
+					break;
+				case Keys.K:
+					btnUseKey.PerformClick( );
+					break;
+				case Keys.NumPad7:
+					btnUseKey.PerformClick( );
+					break;
+
+					//Pickup A Key
+				case Keys.E:
+					btnPickupKey.PerformClick( );
+					break;
+				case Keys.P:
+					btnPickupKey.PerformClick( );
+					break;
+				case Keys.NumPad9:
+					btnPickupKey.PerformClick( );
+					break;
+
+					//Pickup A Kitten
+				case Keys.R:
+					btnPickupKitten.PerformClick( );
+					break;
+				case Keys.O:
+					btnPickupKitten.PerformClick( );
+					break;
+				case Keys.NumPad3:
+					btnPickupKitten.PerformClick( );
+					break;
+
+					//Use Stairs
+				case Keys.F:
+					btnUseStairs.PerformClick();
+					break;
+				case Keys.L:
+					btnUseStairs.PerformClick( );
+					break;
+				case Keys.NumPad1:
+					btnUseStairs.PerformClick( );
+					break;
+
 
                     //  Do nothing
                 default:
