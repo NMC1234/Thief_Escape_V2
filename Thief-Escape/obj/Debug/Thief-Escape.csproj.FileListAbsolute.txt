@@ -52,3 +52,6 @@ C:\Users\jamie\Documents\GitHub\Thief_Escape_V2\Thief-Escape\obj\Debug\Thief_Esc
 C:\Users\jamie\Documents\GitHub\Thief_Escape_V2\Thief-Escape\obj\Debug\Thief_Escape.FrmGetName.resources
 C:\Users\jamie\Documents\GitHub\Thief_Escape_V2\Thief-Escape\obj\Debug\Thief_Escape.FrmMain.resources
 C:\Users\jamie\Documents\GitHub\Thief_Escape_V2\Thief-Escape\obj\Debug\Thief_Escape.Properties.Resources.resources
+D:\02 Documents\NMC 2014 Stuff\CIT195 .net Programming\Group phiv Project\Thief_Escape_V2\Thief-Escape\bin\Debug\Theif-Escape.exe.config
+D:\02 Documents\NMC 2014 Stuff\CIT195 .net Programming\Group phiv Project\Thief_Escape_V2\Thief-Escape\obj\Debug\Theif-Escape.exe
+D:\02 Documents\NMC 2014 Stuff\CIT195 .net Programming\Group phiv Project\Thief_Escape_V2\Thief-Escape\obj\Debug\Theif-Escape.pdb
