@@ -18,14 +18,23 @@ namespace Thief_Escape
             InitializeComponent();
         }
 
+        string PlayerName = "User";
+
+        public FrmMain(string playerName)
+        {
+            InitializeComponent();
+            playerName = PlayerName;
+        }
+
         #region [ Button Click Events ]
 
         //New Game Button
         private void btnNew_Click(object sender, EventArgs e)
         {
             //Create the GetName form, and launch it
-            FrmGetName frm = new FrmGetName();
-            frm.Show();
+            
+                FrmGetName frm = new FrmGetName();
+                frm.Show();
 
             //Hide this form
             this.Hide();
@@ -35,14 +44,16 @@ namespace Thief_Escape
         private void btnLoadGame_Click(object sender, EventArgs e)
         {
             //to-do
-            var LoadGame = new frmLoad();
+            var LoadGame = new frmLoad(PlayerName);
             if (LoadGame.ShowDialog() == DialogResult.OK) 
             {
-                Form LoadSavedGame = new FrmGame();
-                LoadSavedGame.Show();
+                    Form LoadSavedGame = new FrmGame(PlayerName);
+                    LoadSavedGame.Show();
+                    this.Hide();
             }
 
         }
+     
 
         //  Exit Game Button
         private void btnExit_Click(object sender, EventArgs e)

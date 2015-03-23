@@ -35,7 +35,7 @@ namespace Thief_Escape
         Color floorColor = Color.White;
         Color doorUnlockedColor = Color.Chocolate;
         Color doorLockedColor = Color.SaddleBrown;
-        Color stairColor = Color.Cyan;
+        Color stairColor = Color.Yellow;
         Color kittenColor = Color.Purple;
         Color keyColor = Color.SpringGreen;
 
