@@ -1,2 +1,0 @@
-C:\Users\Keegon\Documents\GitHub\Thief-Escape.Remake\Theif-Escape\bin\Debug\Theif-Escape.exe.config
-C:\Users\Keegon\Documents\GitHub\Thief-Escape.Remake\Thief-Escape\bin\Debug\Theif-Escape.exe.config
