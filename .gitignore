@@ -47,7 +47,6 @@ Temporary Items
 
 # User-specific files
 *.suo
-Thief-Escape.v12.suo
 *.v12.suo
 *.user
 *.userosscache
@@ -240,3 +239,5 @@ FakesAssemblies/
 
 # Visual Studio 6 workspace options file
 *.opt
+
+# Visual Studio v12
