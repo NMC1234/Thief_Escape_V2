@@ -22,10 +22,7 @@ namespace Thief_Escape
         private void btnBack_Click(object sender, EventArgs e)
         {
             FrmMain frm = new FrmMain();
-
             frm.Show();
-           
-
             //Close this form
             this.Close();
         }

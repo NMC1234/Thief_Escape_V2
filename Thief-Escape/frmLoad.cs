@@ -13,6 +13,7 @@ namespace Thief_Escape
     public partial class frmLoad : Form
     {
         public string UserName;
+
         public frmLoad()
         {
             InitializeComponent();
@@ -20,7 +21,7 @@ namespace Thief_Escape
         public frmLoad(string userName)
         {
             InitializeComponent();
-            userName = UserName;
+            UserName = userName;
         }
 
         private void btnSelect_Click(object sender, EventArgs e)

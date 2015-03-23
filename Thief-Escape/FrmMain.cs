@@ -20,12 +20,6 @@ namespace Thief_Escape
 
         string PlayerName = "User";
 
-        public FrmMain(string playerName)
-        {
-            InitializeComponent();
-            playerName = PlayerName;
-        }
-
         #region [ Button Click Events ]
 
         //New Game Button
@@ -47,7 +41,7 @@ namespace Thief_Escape
             var LoadGame = new frmLoad(PlayerName);
             if (LoadGame.ShowDialog() == DialogResult.OK) 
             {
-                    Form LoadSavedGame = new FrmGame(PlayerName);
+                    Form LoadSavedGame = new FrmGame(LoadGame.UserName);
                     LoadSavedGame.Show();
                     this.Hide();
             }
