@@ -47,6 +47,42 @@ namespace Thief_Escape
             else
                 MessageBox.Show("Please select a game to load.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
+
+        private void loadSelectedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (lstLoadGame.SelectedIndex == 0)
+            {
+                UserName = "Jamie";
+                this.DialogResult = DialogResult.OK;
+                this.Hide();
+            }
+            if (lstLoadGame.SelectedIndex == 1)
+            {
+                UserName = "Zachary";
+                this.DialogResult = DialogResult.OK;
+                this.Hide();
+            }
+            if (lstLoadGame.SelectedIndex == 2)
+            {
+                UserName = "Keegon";
+                this.DialogResult = DialogResult.OK;
+                this.Hide();
+            }
+            else
+                MessageBox.Show("Please select a game to load.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void newGameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //Create the GetName form, and launch it
+            FrmGetName frm = new FrmGetName();
+            frm.Show();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }
 

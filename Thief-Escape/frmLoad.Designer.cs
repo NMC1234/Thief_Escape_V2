@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lstLoadGame = new System.Windows.Forms.ListBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.selectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -36,11 +37,13 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnSelect = new System.Windows.Forms.Button();
             this.btnMain = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lstLoadGame
             // 
+            this.lstLoadGame.BackColor = System.Drawing.Color.DarkKhaki;
             this.lstLoadGame.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lstLoadGame.FormattingEnabled = true;
             this.lstLoadGame.Items.AddRange(new object[] {
@@ -54,6 +57,7 @@
             // 
             // menuStrip1
             // 
+            this.menuStrip1.BackColor = System.Drawing.Color.DarkKhaki;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.selectToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -75,42 +79,53 @@
             // newGameToolStripMenuItem
             // 
             this.newGameToolStripMenuItem.Name = "newGameToolStripMenuItem";
-            this.newGameToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.newGameToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.newGameToolStripMenuItem.Text = "&New Game";
+            this.newGameToolStripMenuItem.Click += new System.EventHandler(this.newGameToolStripMenuItem_Click);
             // 
             // loadSelectedToolStripMenuItem
             // 
             this.loadSelectedToolStripMenuItem.Name = "loadSelectedToolStripMenuItem";
-            this.loadSelectedToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.loadSelectedToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.loadSelectedToolStripMenuItem.Text = "&Load Selected";
+            this.loadSelectedToolStripMenuItem.Click += new System.EventHandler(this.loadSelectedToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // btnSelect
             // 
             this.btnSelect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSelect.BackColor = System.Drawing.Color.DarkGray;
             this.btnSelect.Location = new System.Drawing.Point(153, 163);
             this.btnSelect.Name = "btnSelect";
             this.btnSelect.Size = new System.Drawing.Size(75, 23);
             this.btnSelect.TabIndex = 4;
             this.btnSelect.Text = "&Select";
-            this.btnSelect.UseVisualStyleBackColor = true;
+            this.toolTip1.SetToolTip(this.btnSelect, "After selecting a game from the list,\r\nclick here to load it. ");
+            this.btnSelect.UseVisualStyleBackColor = false;
             this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
             // 
             // btnMain
             // 
             this.btnMain.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMain.BackColor = System.Drawing.Color.DarkGray;
             this.btnMain.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnMain.Location = new System.Drawing.Point(72, 163);
             this.btnMain.Name = "btnMain";
             this.btnMain.Size = new System.Drawing.Size(75, 23);
             this.btnMain.TabIndex = 5;
             this.btnMain.Text = "&Main Menu";
-            this.btnMain.UseVisualStyleBackColor = true;
+            this.toolTip1.SetToolTip(this.btnMain, "Click here to go back\r\nto the main menu.");
+            this.btnMain.UseVisualStyleBackColor = false;
+            // 
+            // toolTip1
+            // 
+            this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             // 
             // frmLoad
             // 
@@ -145,5 +160,6 @@
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.Button btnSelect;
         private System.Windows.Forms.Button btnMain;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
