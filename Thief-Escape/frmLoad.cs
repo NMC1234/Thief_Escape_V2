@@ -30,22 +30,22 @@ namespace Thief_Escape
             {
                 UserName = "Jamie";
                 this.DialogResult = DialogResult.OK;
-                this.Hide();
             }
             if (lstLoadGame.SelectedIndex == 1)
             {
                 UserName = "Zachary";
                 this.DialogResult = DialogResult.OK;
-                this.Hide();
             }
             if (lstLoadGame.SelectedIndex == 2)
             {
                 UserName = "Keegon";
                 this.DialogResult = DialogResult.OK;
-                this.Hide();
             }
             else
-                MessageBox.Show("Please select a game to load.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            {
+                if (lstLoadGame.SelectedIndex < 0 || lstLoadGame.SelectedIndex > 2)
+                    MessageBox.Show("Please select a game to load.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }   
         }
 
         private void loadSelectedToolStripMenuItem_Click(object sender, EventArgs e)
@@ -54,22 +54,22 @@ namespace Thief_Escape
             {
                 UserName = "Jamie";
                 this.DialogResult = DialogResult.OK;
-                this.Hide();
             }
             if (lstLoadGame.SelectedIndex == 1)
             {
                 UserName = "Zachary";
                 this.DialogResult = DialogResult.OK;
-                this.Hide();
             }
             if (lstLoadGame.SelectedIndex == 2)
             {
                 UserName = "Keegon";
                 this.DialogResult = DialogResult.OK;
-                this.Hide();
             }
             else
-                MessageBox.Show("Please select a game to load.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            {
+                if (lstLoadGame.SelectedIndex < 0 || lstLoadGame.SelectedIndex > 2)
+                    MessageBox.Show("Please select a game to load.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }        
         }
 
         private void newGameToolStripMenuItem_Click(object sender, EventArgs e)
