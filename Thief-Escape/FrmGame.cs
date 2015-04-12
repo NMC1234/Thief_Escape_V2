@@ -91,6 +91,17 @@ namespace Thief_Escape
             //  Switch on Key press -- This can be used for other keys, currently only handles arrow keys.
             switch (keyData)
             {
+					//Interact Button
+				case Keys.Q:
+					btnInteract.PerformClick( );
+					break;
+				case Keys.NumPad7:
+					btnInteract.PerformClick( );
+					break;
+				case Keys.Space:
+					btnInteract.PerformClick( );
+					break;
+
                     //  Move west
                 case Keys.Left:
                     btnMoveWest.PerformClick();
@@ -136,48 +147,48 @@ namespace Thief_Escape
 					break;
 
 					//Use a Key
-				case Keys.Q:
-					btnUseKey.PerformClick( );
-					break;
-				case Keys.K:
-					btnUseKey.PerformClick( );
-					break;
-				case Keys.NumPad7:
-					btnUseKey.PerformClick( );
-					break;
+				//case Keys.Q:
+				//	btnUseKey.PerformClick( );
+				//	break;
+				//case Keys.K:
+				//	btnUseKey.PerformClick( );
+				//	break;
+				//case Keys.NumPad7:
+				//	btnUseKey.PerformClick( );
+				//	break;
 
 					//Pickup A Key
-				case Keys.E:
-					btnPickupKey.PerformClick( );
-					break;
-				case Keys.P:
-					btnPickupKey.PerformClick( );
-					break;
-				case Keys.NumPad9:
-					btnPickupKey.PerformClick( );
-					break;
+				//case Keys.E:
+				//	btnPickupKey.PerformClick( );
+				//	break;
+				//case Keys.P:
+				//	btnPickupKey.PerformClick( );
+				//	break;
+				//case Keys.NumPad9:
+				//	btnPickupKey.PerformClick( );
+				//	break;
 
 					//Pickup A Kitten
-				case Keys.R:
-					btnPickupKitten.PerformClick( );
-					break;
-				case Keys.O:
-					btnPickupKitten.PerformClick( );
-					break;
-				case Keys.NumPad3:
-					btnPickupKitten.PerformClick( );
-					break;
+				//case Keys.R:
+				//	btnPickupKitten.PerformClick( );
+				//	break;
+				//case Keys.O:
+				//	btnPickupKitten.PerformClick( );
+				//	break;
+				//case Keys.NumPad3:
+				//	btnPickupKitten.PerformClick( );
+				//	break;
 
 					//Use Stairs
-				case Keys.F:
-					btnUseStairs.PerformClick();
-					break;
-				case Keys.L:
-					btnUseStairs.PerformClick( );
-					break;
-				case Keys.NumPad1:
-					btnUseStairs.PerformClick( );
-					break;
+				//case Keys.F:
+				//	btnUseStairs.PerformClick();
+				//	break;
+				//case Keys.L:
+				//	btnUseStairs.PerformClick( );
+				//	break;
+				//case Keys.NumPad1:
+				//	btnUseStairs.PerformClick( );
+				//	break;
 
 
                     //  Do nothing
@@ -220,6 +231,9 @@ namespace Thief_Escape
 
             //  Check Valid Movements
             CheckValidMovements(player.XCoord, player.YCoord);
+
+			//Check Valid Special Interactions
+			CheckSpecialActions( );
 
             //  Initial Prompt
             InitalPrompt();
@@ -323,7 +337,6 @@ namespace Thief_Escape
         public void CheckValidMovements(int x, int y)
         {
 
-
             //Check the cell north of the player. y - 1
             //  If the cell is a wall, disable movement
             if (cellGrid.CheckType(x, y - 1) == Cell.Archetypes.WALL)
@@ -419,8 +432,119 @@ namespace Thief_Escape
 
             //Re-validate valid movements.
             CheckValidMovements(player.XCoord, player.YCoord);
+
+			//Check Valid Special Interactions
+			CheckSpecialActions( );
+
+			//Check Valid Special Interactions
+			CheckSpecialActions( );
         }
 
+		internal int CheckSpecialActions()
+		{
+			//check if there is a key or a kitten in current cell
+			int[] keyDetails = CheckForNearbyKey();
+			int[] kittenDetails = CheckForNearbyKitten();
+
+			/* 
+			 * 0 = Nothing
+			 * 1 = Pickup Key
+			 * 2 = Use Key
+			 * 3 = Pickup Kitten
+			 * 4 = Both Key and Kitten
+			 * 5 = Use Stairs
+			 */
+			int interactionType = 0;
+			bool interactionFound = false;
+
+			//Checks if special actions concerns an item
+			#region [ Special Item Action ]
+			if((keyDetails[0] != 0) | (kittenDetails[0] != 0))
+			{
+
+				//Get Item Type and Enable or Disable Pickup button
+				if((keyDetails[0] != 0) & (kittenDetails[0] != 0))
+				{
+					//Set interactionType to a Key and a Kitten Pickup
+					interactionType = 4;
+					interactionFound = true;
+				}
+				else if(keyDetails[0] != 0)
+				{
+					//Set interactionType to a Key Pickup
+					interactionType = 1;
+					interactionFound = true;
+				}
+				else if(kittenDetails[0] != 0)
+				{
+					//Set interactionType to a Kitten Pickup
+					interactionType = 3;
+					interactionFound = true;
+				}
+			}
+			#endregion
+
+			//Checks if special actions concerns Unlocking a Door
+			#region [ Special Action Door ]
+			//Checks if a Door Should be Opened
+			//First checks if the player has a key in its inventory
+			else if((!interactionFound) && (Inventory.Contains<Item>(key)))
+			{
+				//First checks if the player has a key in its inventory
+
+				//Creates starting point for search, 1 cell up and 1 cell left, centered on the player.
+				int x = player.XCoord - 1;
+				int y = player.YCoord - 1;
+
+
+				//Goes through each "column" of the search area
+				for(int ix = 0; ix < 3; ix++)
+				{
+					//Goes through each "row" of the column
+					for(int iy = 0; iy < 3; iy++)
+					{
+						//If the cell is a door, check if its locked.
+						if(cellGrid.CheckType((x + ix), (y + iy)) == Cell.Archetypes.DOOR)
+						{
+							//  Search found a locked door.
+							if(cellGrid.CheckDoorModifier((x + ix), (y + iy)) == Cell.Modifiers.LOCKED)
+							{
+								//Set interactionType to a Key being Used
+								interactionType = 2;
+								interactionFound = true;
+							}
+						}
+					}
+				}
+
+			}
+			#endregion
+
+			//Checks if special actions concerns Stairs
+			#region [ Special Action Stairs ]
+			//checks if the player is standing on stairs
+			else if((!interactionFound) && (cellGrid.CheckType(player.XCoord, player.YCoord) == Cell.Archetypes.STAIR))
+			{
+				//Set interactionType to use Stairs
+				interactionType = 5;
+				interactionFound = true;
+			}
+			#endregion
+
+			//If Interaction found returns the coresponding int type
+			if(interactionFound)
+			{
+				btnInteract.Enabled = true;
+				return interactionType;
+			}
+			else
+			{
+				//if no interaction found then returns 0
+				btnInteract.Enabled = false;
+				return 0;
+			}
+			
+		}
 
 
         #endregion
@@ -432,192 +556,441 @@ namespace Thief_Escape
 
         #region [ Action Button Clicks ]
 
+		//Interact Button
+		private void btnInteract_Click(object sender, EventArgs e)
+		{
 
-        // Pick-up Key Button
-        private void btnPickupKey_Click(object sender, EventArgs e)
-        {
-            int[] keyDetails = CheckForNearbyKey();
-            if (keyDetails[0] != 0)
-            {
-                //  Remove key from grid.
-                cellGrid.RemoveItem(keyDetails[1], keyDetails[2]);
+			/*
+			 * Switch between Item Special Actions
+			 * 0 = Nothing
+			 * 1 = Pickup Key
+			 * 2 = Use Key
+			 * 3 = Pickup Kitten
+			 * 4 = Both Key and Kitten
+			 * 5 = Use Stairs
+			 */
+			switch(CheckSpecialActions())
+			{
+				//Nothing
+				case 0:
+					MessageBox.Show("There is nothing to Interact With", "Nothing Around!");
+					break;
 
-                //  Refresh grid.
-                ViewArea();
+				//Pickup Key
+				case 1:
+					PickupKey( );
+					break;
 
-                //  Add a key to the inventory
-                Inventory.Add(key);
-                UpdateInventory();
+				//Use Key
+				case 2:
+					UseKey( );
+					break;
 
-                //  Tell user they have picked up a key.
-                lstDialog.Items.Add("I have found a Key, I can use this to open doors.");
-                lstDialog.SelectedIndex = lstDialog.Items.Count - 1;
-                lstDialog.SelectedIndex = -1;
-            }
-            else
-            {
-                //  Tell user there is no key nearby.
-                lstDialog.Items.Add("There is no key nearby!");
-                lstDialog.SelectedIndex = lstDialog.Items.Count - 1;
-                lstDialog.SelectedIndex = -1;
-            }
+				//Pickup Kitten
+				case 3:
+					PickupKitten( );
+					break;
 
-            //  Update
-            UpdateInventory();
-        }
+				//Pickup both Key and Kitten
+				case 4:
+					PickupKey( );
+					PickupKitten( );
+					break;
 
-        private void btnPickupKitten_Click(object sender, EventArgs e)
-        {
-            int[] kittenDetails = CheckForNearbyKitten();
+				//Use Stairs
+				case 5:
+					UseStairs( );
+					break;
 
-            if (kittenDetails[0] != 0)
-            {
-                //  Remove kitten from grid.
-                cellGrid.RemoveItem(kittenDetails[1], kittenDetails[2]);
+				//Default
+				default:
+					MessageBox.Show("There is nothing to Interact With", "Nothing Around!");
+					break;
+			}
+		}
 
-                //  Refresh grid.
-                ViewArea();
+		
+		
 
-                //  Add a kitten to the inventory
-                Inventory.Add(kitten);
-                UpdateInventory();
 
-                //  Tell user they have picked up a kitten.
-                lstDialog.Items.Add("I found a kitten!");
-                lstDialog.SelectedIndex = lstDialog.Items.Count - 1;
-                lstDialog.SelectedIndex = -1;
-            }
-            else
-            {
-                //  Tell user there is no kitten nearby.
-                lstDialog.Items.Add("There is no kitten nearby!");
-                lstDialog.SelectedIndex = lstDialog.Items.Count - 1;
-                lstDialog.SelectedIndex = -1;
-            }
+        // removed Use/Pick-up Key, kitten, and Use Stairs Buttons
+		//private void btnPickupKey_Click(object sender, EventArgs e)
+		//{
+		//	int[ ] keyDetails = CheckForNearbyKey( );
+		//	if(keyDetails[0] != 0)
+		//	{
+		//		//  Remove key from grid.
+		//		cellGrid.RemoveItem(keyDetails[1], keyDetails[2]);
 
-            //  Update
-            UpdateInventory();
-        }
+		//		//  Refresh grid.
+		//		ViewArea( );
+
+		//		//  Add a key to the inventory
+		//		Inventory.Add(key);
+		//		UpdateInventory( );
+
+		//		//  Tell user they have picked up a key.
+		//		lstDialog.Items.Add("I have found a Key, I can use this to open doors.");
+		//		lstDialog.SelectedIndex = lstDialog.Items.Count - 1;
+		//		lstDialog.SelectedIndex = -1;
+		//	}
+		//	else
+		//	{
+		//		//  Tell user there is no key nearby.
+		//		lstDialog.Items.Add("There is no key nearby!");
+		//		lstDialog.SelectedIndex = lstDialog.Items.Count - 1;
+		//		lstDialog.SelectedIndex = -1;
+		//	}
+
+		//	//  Update
+		//	UpdateInventory( );
+		//}
+
+		
+
+		//private void btnPickupKitten_Click(object sender, EventArgs e)
+		//{
+		//	int[] kittenDetails = CheckForNearbyKitten();
+
+		//	if (kittenDetails[0] != 0)
+		//	{
+		//		//  Remove kitten from grid.
+		//		cellGrid.RemoveItem(kittenDetails[1], kittenDetails[2]);
+
+		//		//  Refresh grid.
+		//		ViewArea();
+
+		//		//  Add a kitten to the inventory
+		//		Inventory.Add(kitten);
+		//		UpdateInventory();
+
+		//		//  Tell user they have picked up a kitten.
+		//		lstDialog.Items.Add("I found a kitten!");
+		//		lstDialog.SelectedIndex = lstDialog.Items.Count - 1;
+		//		lstDialog.SelectedIndex = -1;
+		//	}
+		//	else
+		//	{
+		//		//  Tell user there is no kitten nearby.
+		//		lstDialog.Items.Add("There is no kitten nearby!");
+		//		lstDialog.SelectedIndex = lstDialog.Items.Count - 1;
+		//		lstDialog.SelectedIndex = -1;
+		//	}
+
+		//	//  Update
+		//	UpdateInventory();
+		//}
+
         // Use Key Button
-        private void btnUseKey_Click(object sender, EventArgs e)
-        {
-            bool foundDoor = false;
+		//private void btnUseKey_Click(object sender, EventArgs e)
+		//{
+		//	bool foundDoor = false;
 
-            //First checks if the player has a key in its inventory
-            if (Inventory.Contains<Item>(key))
-            {
-                //Creates starting point for search, 1 cell up and 1 cell left, centered on the player.
-                int x = player.XCoord - 1;
-                int y = player.YCoord - 1;
+		//	//First checks if the player has a key in its inventory
+		//	if (Inventory.Contains<Item>(key))
+		//	{
+		//		//Creates starting point for search, 1 cell up and 1 cell left, centered on the player.
+		//		int x = player.XCoord - 1;
+		//		int y = player.YCoord - 1;
 
 
-                //Goes through each "column" of the search area
-                for (int ix = 0; ix < 3; ix++)
-                {
-                    //Goes through each "row" of the column
-                    for (int iy = 0; iy < 3; iy++)
-                    {
-                        //If the cell is a door, check if its locked.
-                        if (cellGrid.CheckType((x + ix), (y + iy)) == Cell.Archetypes.DOOR)
-                        {
-                            foundDoor = true;
+		//		//Goes through each "column" of the search area
+		//		for (int ix = 0; ix < 3; ix++)
+		//		{
+		//			//Goes through each "row" of the column
+		//			for (int iy = 0; iy < 3; iy++)
+		//			{
+		//				//If the cell is a door, check if its locked.
+		//				if (cellGrid.CheckType((x + ix), (y + iy)) == Cell.Archetypes.DOOR)
+		//				{
+		//					foundDoor = true;
 
-                            //  Search found a locked door.
-                            if (cellGrid.CheckDoorModifier((x + ix), (y + iy)) == Cell.Modifiers.LOCKED)
-                            {
-                                Inventory.Remove(key);
-                                cellGrid.ToggleDoorModifier((x + ix), (y + iy));
+		//					//  Search found a locked door.
+		//					if (cellGrid.CheckDoorModifier((x + ix), (y + iy)) == Cell.Modifiers.LOCKED)
+		//					{
+		//						Inventory.Remove(key);
+		//						cellGrid.ToggleDoorModifier((x + ix), (y + iy));
 
-                                //Door is now unlocked
-                                lstDialog.Items.Add("This door is now unlocked.");
-                                lstDialog.SelectedIndex = lstDialog.Items.Count - 1;
-                                lstDialog.SelectedIndex = -1;
-                            }
+		//						//Door is now unlocked
+		//						lstDialog.Items.Add("This door is now unlocked.");
+		//						lstDialog.SelectedIndex = lstDialog.Items.Count - 1;
+		//						lstDialog.SelectedIndex = -1;
+		//					}
                                 
-                            else
-                            {
-                                //Door is already unlocked
-                                lstDialog.Items.Add("This door is already unlocked.");
-                                lstDialog.SelectedIndex = lstDialog.Items.Count - 1;
-                                lstDialog.SelectedIndex = -1;
-                            }
+		//					else
+		//					{
+		//						//Door is already unlocked
+		//						lstDialog.Items.Add("This door is already unlocked.");
+		//						lstDialog.SelectedIndex = lstDialog.Items.Count - 1;
+		//						lstDialog.SelectedIndex = -1;
+		//					}
 
 
-                        }
-                    }
-                }
-                //  Tell the user there is no door if the search didn't find one.
-                if (!foundDoor)
-                {
-                    lstDialog.Items.Add("I don't see a door near me.");
-                    lstDialog.SelectedIndex = lstDialog.Items.Count - 1;
-                    lstDialog.SelectedIndex = -1;
-                }
-            }
-            else if (!(Inventory.Contains(key)))
-            {
-                //  Player does not have key.
-                lstDialog.Items.Add("I don't have a key to use.");
-                lstDialog.SelectedIndex = lstDialog.Items.Count - 1;
-                lstDialog.SelectedIndex = -1;
-            }
+		//				}
+		//			}
+		//		}
+		//		//  Tell the user there is no door if the search didn't find one.
+		//		if (!foundDoor)
+		//		{
+		//			lstDialog.Items.Add("I don't see a door near me.");
+		//			lstDialog.SelectedIndex = lstDialog.Items.Count - 1;
+		//			lstDialog.SelectedIndex = -1;
+		//		}
+		//	}
+		//	else if (!(Inventory.Contains(key)))
+		//	{
+		//		//  Player does not have key.
+		//		lstDialog.Items.Add("I don't have a key to use.");
+		//		lstDialog.SelectedIndex = lstDialog.Items.Count - 1;
+		//		lstDialog.SelectedIndex = -1;
+		//	}
 
-            //Refresh the map
-            ViewArea();
+		//	//Refresh the map
+		//	ViewArea();
 
-            //Revalidate movements
-            CheckValidMovements(player.XCoord, player.YCoord);
+		//	//Revalidate movements
+		//	CheckValidMovements(player.XCoord, player.YCoord);
 
-            //Update Inventory
-            UpdateInventory();
-        }
+		//	//Update Inventory
+		//	UpdateInventory();
+		//}
 
 
         //  Use Stairs Button
-        private void btnUseStairs_Click(object sender, EventArgs e)
-        {
-            //Check to see if the player is currently standing on stairs.
-            if (cellGrid.CheckType(player.XCoord,player.YCoord) == Cell.Archetypes.STAIR)
-            {
-                // Get the stairs destination
-                Grid.MapFiles destination = cellGrid.Destination(player.XCoord, player.YCoord);
-                int[] coords = cellGrid.DestinationCoords(player.XCoord, player.YCoord);
 
-                //Fog everything
-                InitialFog();
 
-                //  Recreate the grid
-                cellGrid = new Grid(destination);
+		//private void btnUseStairs_Click(object sender, EventArgs e)
+		//{
+		//	//Check to see if the player is currently standing on stairs.
+		//	if (cellGrid.CheckType(player.XCoord,player.YCoord) == Cell.Archetypes.STAIR)
+		//	{
+		//		// Get the stairs destination
+		//		Grid.MapFiles destination = cellGrid.Destination(player.XCoord, player.YCoord);
+		//		int[] coords = cellGrid.DestinationCoords(player.XCoord, player.YCoord);
 
-                //Place the player
-                player.XCoord = coords[0];
-                player.YCoord = coords[1];
+		//		//Fog everything
+		//		InitialFog();
 
-                // Refresh the view
-                ViewArea();
+		//		//  Recreate the grid
+		//		cellGrid = new Grid(destination);
 
-                //Check new valid movements
-                CheckValidMovements(player.XCoord,player.YCoord);
+		//		//Place the player
+		//		player.XCoord = coords[0];
+		//		player.YCoord = coords[1];
 
-                //Tell the user they have used stairs.
-                //  Tell user there not on the stairs
-                lstDialog.Items.Add("Those where some tall stairs.");
-                lstDialog.SelectedIndex = lstDialog.Items.Count - 1;
-                lstDialog.SelectedIndex = -1;
-            }
+		//		// Refresh the view
+		//		ViewArea();
 
-            else
-            {
-                //  Tell user there not on the stairs
-                lstDialog.Items.Add("I have to be on the stairs to use them.");
-                lstDialog.SelectedIndex = lstDialog.Items.Count - 1;
-                lstDialog.SelectedIndex = -1;
-            }
-        }
+		//		//Check new valid movements
+		//		CheckValidMovements(player.XCoord,player.YCoord);
+
+		//		//Tell the user they have used stairs.
+		//		//  Tell user there not on the stairs
+		//		lstDialog.Items.Add("Those where some tall stairs.");
+		//		lstDialog.SelectedIndex = lstDialog.Items.Count - 1;
+		//		lstDialog.SelectedIndex = -1;
+		//	}
+
+		//	else
+		//	{
+		//		//  Tell user there not on the stairs
+		//		lstDialog.Items.Add("I have to be on the stairs to use them.");
+		//		lstDialog.SelectedIndex = lstDialog.Items.Count - 1;
+		//		lstDialog.SelectedIndex = -1;
+		//	}
+		//}
         #endregion
 
         #region [ Action Methods ]
 
+		//Pickup Kitten Method
+		private void PickupKitten( )
+		{
+			int[ ] kittenDetails = CheckForNearbyKitten( );
+
+			if(kittenDetails[0] != 0)
+			{
+				//  Remove kitten from grid.
+				cellGrid.RemoveItem(kittenDetails[1], kittenDetails[2]);
+
+				//  Refresh grid.
+				ViewArea( );
+
+				//  Add a kitten to the inventory
+				Inventory.Add(kitten);
+				UpdateInventory( );
+
+				//  Tell user they have picked up a kitten.
+				lstDialog.Items.Add("I found a kitten!");
+				lstDialog.SelectedIndex = lstDialog.Items.Count - 1;
+				lstDialog.SelectedIndex = -1;
+			}
+			else
+			{
+				//  Tell user there is no kitten nearby.
+				lstDialog.Items.Add("There is no kitten nearby!");
+				lstDialog.SelectedIndex = lstDialog.Items.Count - 1;
+				lstDialog.SelectedIndex = -1;
+			}
+
+			//  Update
+			UpdateInventory( );
+		}
+
+		//Pickup Key Method
+		private void PickupKey( )
+		{
+			int[ ] keyDetails = CheckForNearbyKey( );
+			if(keyDetails[0] != 0)
+			{
+				//  Remove key from grid.
+				cellGrid.RemoveItem(keyDetails[1], keyDetails[2]);
+
+				//  Refresh grid.
+				ViewArea( );
+
+				//  Add a key to the inventory
+				Inventory.Add(key);
+				UpdateInventory( );
+
+				//  Tell user they have picked up a key.
+				lstDialog.Items.Add("I have found a Key, I can use this to open doors.");
+				lstDialog.SelectedIndex = lstDialog.Items.Count - 1;
+				lstDialog.SelectedIndex = -1;
+			}
+			else
+			{
+				//  Tell user there is no key nearby.
+				lstDialog.Items.Add("There is no key nearby!");
+				lstDialog.SelectedIndex = lstDialog.Items.Count - 1;
+				lstDialog.SelectedIndex = -1;
+			}
+
+			//  Update
+			UpdateInventory( );
+		}
+
+		//Uses a Key to Unlock a Door Method
+		private void UseKey( )
+		{
+			bool foundDoor = false;
+
+			//First checks if the player has a key in its inventory
+			if(Inventory.Contains<Item>(key))
+			{
+				//Creates starting point for search, 1 cell up and 1 cell left, centered on the player.
+				int x = player.XCoord - 1;
+				int y = player.YCoord - 1;
+
+
+				//Goes through each "column" of the search area
+				for(int ix = 0; ix < 3; ix++)
+				{
+					//Goes through each "row" of the column
+					for(int iy = 0; iy < 3; iy++)
+					{
+						//If the cell is a door, check if its locked.
+						if(cellGrid.CheckType((x + ix), (y + iy)) == Cell.Archetypes.DOOR)
+						{
+							foundDoor = true;
+
+							//  Search found a locked door.
+							if(cellGrid.CheckDoorModifier((x + ix), (y + iy)) == Cell.Modifiers.LOCKED)
+							{
+								Inventory.Remove(key);
+								cellGrid.ToggleDoorModifier((x + ix), (y + iy));
+
+								//Door is now unlocked
+								lstDialog.Items.Add("This door is now unlocked.");
+								lstDialog.SelectedIndex = lstDialog.Items.Count - 1;
+								lstDialog.SelectedIndex = -1;
+							}
+
+							else
+							{
+								//Door is already unlocked
+								lstDialog.Items.Add("This door is already unlocked.");
+								lstDialog.SelectedIndex = lstDialog.Items.Count - 1;
+								lstDialog.SelectedIndex = -1;
+							}
+
+
+						}
+					}
+				}
+				//  Tell the user there is no door if the search didn't find one.
+				if(!foundDoor)
+				{
+					lstDialog.Items.Add("I don't see a door near me.");
+					lstDialog.SelectedIndex = lstDialog.Items.Count - 1;
+					lstDialog.SelectedIndex = -1;
+				}
+			}
+			else if(!(Inventory.Contains(key)))
+			{
+				//  Player does not have key.
+				lstDialog.Items.Add("I don't have a key to use.");
+				lstDialog.SelectedIndex = lstDialog.Items.Count - 1;
+				lstDialog.SelectedIndex = -1;
+			}
+
+			//Refresh the map
+			ViewArea( );
+
+			//Revalidate movements
+			CheckValidMovements(player.XCoord, player.YCoord);
+
+			//Check Valid Special Interactions
+			CheckSpecialActions( );
+
+			//Update Inventory
+			UpdateInventory( );
+		}
+
+		//Method to use Stairs
+		private void UseStairs( )
+		{
+			//Check to see if the player is currently standing on stairs.
+			if(cellGrid.CheckType(player.XCoord, player.YCoord) == Cell.Archetypes.STAIR)
+			{
+				// Get the stairs destination
+				Grid.MapFiles destination = cellGrid.Destination(player.XCoord, player.YCoord);
+				int[ ] coords = cellGrid.DestinationCoords(player.XCoord, player.YCoord);
+
+				//Fog everything
+				InitialFog( );
+
+				//  Recreate the grid
+				cellGrid = new Grid(destination);
+
+				//Place the player
+				player.XCoord = coords[0];
+				player.YCoord = coords[1];
+
+				// Refresh the view
+				ViewArea( );
+
+				//Check new valid movements
+				CheckValidMovements(player.XCoord, player.YCoord);
+
+				//Check Valid Special Interactions
+				CheckSpecialActions( );
+
+				//Tell the user they have used stairs.
+				//  Tell user there not on the stairs
+				lstDialog.Items.Add("Those where some tall stairs.");
+				lstDialog.SelectedIndex = lstDialog.Items.Count - 1;
+				lstDialog.SelectedIndex = -1;
+			}
+
+			else
+			{
+				//  Tell user there not on the stairs
+				lstDialog.Items.Add("I have to be on the stairs to use them.");
+				lstDialog.SelectedIndex = lstDialog.Items.Count - 1;
+				lstDialog.SelectedIndex = -1;
+			}
+		}
 
         private int[] CheckForNearbyKey()
         {
@@ -682,6 +1055,7 @@ namespace Thief_Escape
             return result;
 
         }
+
         private void UpdateInventory()
         {
             //  Clear the current inventory dialog
@@ -1024,12 +1398,7 @@ namespace Thief_Escape
             }
         }
 
-
-
         #endregion
-
-      
-
 
 
     }
