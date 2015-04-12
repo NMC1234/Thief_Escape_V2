@@ -29,12 +29,10 @@
         private void InitializeComponent()
         {
 			this.components = new System.ComponentModel.Container();
-			Syncfusion.Windows.Forms.Grid.GridBaseStyle gridBaseStyle21 = new Syncfusion.Windows.Forms.Grid.GridBaseStyle();
-			Syncfusion.Windows.Forms.Grid.GridBaseStyle gridBaseStyle22 = new Syncfusion.Windows.Forms.Grid.GridBaseStyle();
-			Syncfusion.Windows.Forms.Grid.GridBaseStyle gridBaseStyle23 = new Syncfusion.Windows.Forms.Grid.GridBaseStyle();
-			Syncfusion.Windows.Forms.Grid.GridBaseStyle gridBaseStyle24 = new Syncfusion.Windows.Forms.Grid.GridBaseStyle();
-			Syncfusion.Windows.Forms.Grid.GridRangeStyle gridRangeStyle51 = new Syncfusion.Windows.Forms.Grid.GridRangeStyle();
-			Syncfusion.Windows.Forms.Grid.GridRangeStyle gridRangeStyle52 = new Syncfusion.Windows.Forms.Grid.GridRangeStyle();
+			Syncfusion.Windows.Forms.Grid.GridBaseStyle gridBaseStyle17 = new Syncfusion.Windows.Forms.Grid.GridBaseStyle();
+			Syncfusion.Windows.Forms.Grid.GridBaseStyle gridBaseStyle18 = new Syncfusion.Windows.Forms.Grid.GridBaseStyle();
+			Syncfusion.Windows.Forms.Grid.GridBaseStyle gridBaseStyle19 = new Syncfusion.Windows.Forms.Grid.GridBaseStyle();
+			Syncfusion.Windows.Forms.Grid.GridBaseStyle gridBaseStyle20 = new Syncfusion.Windows.Forms.Grid.GridBaseStyle();
 			Syncfusion.Windows.Forms.Grid.GridRangeStyle gridRangeStyle53 = new Syncfusion.Windows.Forms.Grid.GridRangeStyle();
 			Syncfusion.Windows.Forms.Grid.GridRangeStyle gridRangeStyle54 = new Syncfusion.Windows.Forms.Grid.GridRangeStyle();
 			Syncfusion.Windows.Forms.Grid.GridRangeStyle gridRangeStyle55 = new Syncfusion.Windows.Forms.Grid.GridRangeStyle();
@@ -43,6 +41,11 @@
 			Syncfusion.Windows.Forms.Grid.GridRangeStyle gridRangeStyle58 = new Syncfusion.Windows.Forms.Grid.GridRangeStyle();
 			Syncfusion.Windows.Forms.Grid.GridRangeStyle gridRangeStyle59 = new Syncfusion.Windows.Forms.Grid.GridRangeStyle();
 			Syncfusion.Windows.Forms.Grid.GridRangeStyle gridRangeStyle60 = new Syncfusion.Windows.Forms.Grid.GridRangeStyle();
+			Syncfusion.Windows.Forms.Grid.GridRangeStyle gridRangeStyle61 = new Syncfusion.Windows.Forms.Grid.GridRangeStyle();
+			Syncfusion.Windows.Forms.Grid.GridRangeStyle gridRangeStyle62 = new Syncfusion.Windows.Forms.Grid.GridRangeStyle();
+			Syncfusion.Windows.Forms.Grid.GridRangeStyle gridRangeStyle63 = new Syncfusion.Windows.Forms.Grid.GridRangeStyle();
+			Syncfusion.Windows.Forms.Grid.GridRangeStyle gridRangeStyle64 = new Syncfusion.Windows.Forms.Grid.GridRangeStyle();
+			Syncfusion.Windows.Forms.Grid.GridRangeStyle gridRangeStyle65 = new Syncfusion.Windows.Forms.Grid.GridRangeStyle();
 			this.grpboxLegend = new System.Windows.Forms.GroupBox();
 			this.textBox2 = new System.Windows.Forms.TextBox();
 			this.lblKey = new System.Windows.Forms.Label();
@@ -60,15 +63,9 @@
 			this.lblFloors = new System.Windows.Forms.Label();
 			this.txtFloors = new System.Windows.Forms.TextBox();
 			this.lblWall = new System.Windows.Forms.Label();
-			this.grpActions = new System.Windows.Forms.GroupBox();
-			this.btnAction6 = new System.Windows.Forms.Button();
-			this.btnAction5 = new System.Windows.Forms.Button();
-			this.btnUseKey = new System.Windows.Forms.Button();
-			this.btnUseStairs = new System.Windows.Forms.Button();
-			this.btnPickupKitten = new System.Windows.Forms.Button();
-			this.btnPickupKey = new System.Windows.Forms.Button();
 			this.grpMovement = new System.Windows.Forms.GroupBox();
 			this.btnMoveWest = new System.Windows.Forms.Button();
+			this.btnInteract = new System.Windows.Forms.Button();
 			this.btnMoveEast = new System.Windows.Forms.Button();
 			this.btnMoveSouth = new System.Windows.Forms.Button();
 			this.btnMoveNorth = new System.Windows.Forms.Button();
@@ -82,9 +79,11 @@
 			this.btnLoadGame = new System.Windows.Forms.Button();
 			this.grdconMap = new Syncfusion.Windows.Forms.Grid.GridControl();
 			this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-			this.btnInteract = new System.Windows.Forms.Button();
+			this.tmrGameClock = new System.Windows.Forms.Timer(this.components);
+			this.lblGameClock1 = new System.Windows.Forms.Label();
+			this.lblGameClock = new System.Windows.Forms.Label();
+			this.lblGameClock2 = new System.Windows.Forms.Label();
 			this.grpboxLegend.SuspendLayout();
-			this.grpActions.SuspendLayout();
 			this.grpMovement.SuspendLayout();
 			this.tabDialog.SuspendLayout();
 			this.tabDialogs.SuspendLayout();
@@ -279,112 +278,19 @@
 			this.lblWall.TabIndex = 1;
 			this.lblWall.Text = "- Walls";
 			// 
-			// grpActions
-			// 
-			this.grpActions.Controls.Add(this.btnAction6);
-			this.grpActions.Controls.Add(this.btnAction5);
-			this.grpActions.Controls.Add(this.btnUseKey);
-			this.grpActions.Controls.Add(this.btnUseStairs);
-			this.grpActions.Controls.Add(this.btnPickupKey);
-			this.grpActions.Controls.Add(this.btnPickupKitten);
-			this.grpActions.ForeColor = System.Drawing.Color.MidnightBlue;
-			this.grpActions.Location = new System.Drawing.Point(817, 70);
-			this.grpActions.Name = "grpActions";
-			this.grpActions.Size = new System.Drawing.Size(283, 142);
-			this.grpActions.TabIndex = 15;
-			this.grpActions.TabStop = false;
-			this.grpActions.Text = "Actions";
-			// 
-			// btnAction6
-			// 
-			this.btnAction6.BackColor = System.Drawing.Color.DarkGray;
-			this.btnAction6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnAction6.Location = new System.Drawing.Point(184, 75);
-			this.btnAction6.Name = "btnAction6";
-			this.btnAction6.Size = new System.Drawing.Size(74, 50);
-			this.btnAction6.TabIndex = 9;
-			this.btnAction6.Text = "Action 6";
-			this.toolTip1.SetToolTip(this.btnAction6, "This button is currently unavailable.   \r\nCheck back in future maps!");
-			this.btnAction6.UseVisualStyleBackColor = false;
-			// 
-			// btnAction5
-			// 
-			this.btnAction5.BackColor = System.Drawing.Color.DarkGray;
-			this.btnAction5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnAction5.Location = new System.Drawing.Point(103, 75);
-			this.btnAction5.Name = "btnAction5";
-			this.btnAction5.Size = new System.Drawing.Size(74, 50);
-			this.btnAction5.TabIndex = 8;
-			this.btnAction5.Text = "Action 5";
-			this.toolTip1.SetToolTip(this.btnAction5, "This button is currently unavailable.   \r\nCheck back in future maps!");
-			this.btnAction5.UseVisualStyleBackColor = false;
-			// 
-			// btnUseKey
-			// 
-			this.btnUseKey.BackColor = System.Drawing.Color.DarkGray;
-			this.btnUseKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnUseKey.ForeColor = System.Drawing.Color.DarkGreen;
-			this.btnUseKey.Location = new System.Drawing.Point(22, 75);
-			this.btnUseKey.Name = "btnUseKey";
-			this.btnUseKey.Size = new System.Drawing.Size(74, 50);
-			this.btnUseKey.TabIndex = 7;
-			this.btnUseKey.Text = "Use Ke&y";
-			this.toolTip1.SetToolTip(this.btnUseKey, "This button will unlock doors if you \r\nhave a key in your inventory. ");
-			this.btnUseKey.UseVisualStyleBackColor = false;
-			// 
-			// btnUseStairs
-			// 
-			this.btnUseStairs.BackColor = System.Drawing.Color.DarkGray;
-			this.btnUseStairs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnUseStairs.ForeColor = System.Drawing.Color.DarkGreen;
-			this.btnUseStairs.Location = new System.Drawing.Point(184, 19);
-			this.btnUseStairs.Name = "btnUseStairs";
-			this.btnUseStairs.Size = new System.Drawing.Size(74, 50);
-			this.btnUseStairs.TabIndex = 6;
-			this.btnUseStairs.Text = "&Use Stairs";
-			this.toolTip1.SetToolTip(this.btnUseStairs, "Use this button to navigate \r\nup and down stairs. ");
-			this.btnUseStairs.UseVisualStyleBackColor = false;
-			// 
-			// btnPickupKitten
-			// 
-			this.btnPickupKitten.BackColor = System.Drawing.Color.DarkGray;
-			this.btnPickupKitten.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnPickupKitten.ForeColor = System.Drawing.Color.DarkGreen;
-			this.btnPickupKitten.Location = new System.Drawing.Point(103, 19);
-			this.btnPickupKitten.Name = "btnPickupKitten";
-			this.btnPickupKitten.Size = new System.Drawing.Size(74, 50);
-			this.btnPickupKitten.TabIndex = 5;
-			this.btnPickupKitten.Text = "&Pickup Kitten";
-			this.toolTip1.SetToolTip(this.btnPickupKitten, "If there is a kitten nearby, this button will \r\nhelp you put it into your invento" +
-        "ry. ");
-			this.btnPickupKitten.UseVisualStyleBackColor = false;
-			// 
-			// btnPickupKey
-			// 
-			this.btnPickupKey.BackColor = System.Drawing.Color.DarkGray;
-			this.btnPickupKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnPickupKey.ForeColor = System.Drawing.Color.DarkGreen;
-			this.btnPickupKey.Location = new System.Drawing.Point(23, 19);
-			this.btnPickupKey.Name = "btnPickupKey";
-			this.btnPickupKey.Size = new System.Drawing.Size(74, 50);
-			this.btnPickupKey.TabIndex = 4;
-			this.btnPickupKey.Text = "Pickup &Key";
-			this.toolTip1.SetToolTip(this.btnPickupKey, "If there is a key nearby, this button will \r\nlet you put it into your inventory.");
-			this.btnPickupKey.UseVisualStyleBackColor = false;
-			// 
 			// grpMovement
 			// 
 			this.grpMovement.BackColor = System.Drawing.Color.Transparent;
-			this.grpMovement.Controls.Add(this.btnInteract);
 			this.grpMovement.Controls.Add(this.btnMoveWest);
+			this.grpMovement.Controls.Add(this.btnInteract);
 			this.grpMovement.Controls.Add(this.btnMoveEast);
 			this.grpMovement.Controls.Add(this.btnMoveSouth);
 			this.grpMovement.Controls.Add(this.btnMoveNorth);
 			this.grpMovement.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.grpMovement.ForeColor = System.Drawing.Color.MidnightBlue;
-			this.grpMovement.Location = new System.Drawing.Point(817, 218);
+			this.grpMovement.Location = new System.Drawing.Point(813, 68);
 			this.grpMovement.Name = "grpMovement";
-			this.grpMovement.Size = new System.Drawing.Size(283, 169);
+			this.grpMovement.Size = new System.Drawing.Size(283, 225);
 			this.grpMovement.TabIndex = 16;
 			this.grpMovement.TabStop = false;
 			this.grpMovement.Text = "Movement and Actions";
@@ -394,7 +300,7 @@
 			this.btnMoveWest.BackColor = System.Drawing.Color.DarkGray;
 			this.btnMoveWest.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.btnMoveWest.ForeColor = System.Drawing.Color.DarkGreen;
-			this.btnMoveWest.Location = new System.Drawing.Point(40, 86);
+			this.btnMoveWest.Location = new System.Drawing.Point(25, 130);
 			this.btnMoveWest.Name = "btnMoveWest";
 			this.btnMoveWest.Size = new System.Drawing.Size(75, 50);
 			this.btnMoveWest.TabIndex = 3;
@@ -402,12 +308,27 @@
 			this.btnMoveWest.UseVisualStyleBackColor = false;
 			this.btnMoveWest.Click += new System.EventHandler(this.btnMoveWest_Click);
 			// 
+			// btnInteract
+			// 
+			this.btnInteract.BackColor = System.Drawing.Color.OliveDrab;
+			this.btnInteract.Cursor = System.Windows.Forms.Cursors.Default;
+			this.btnInteract.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btnInteract.ForeColor = System.Drawing.Color.Blue;
+			this.btnInteract.Location = new System.Drawing.Point(6, 47);
+			this.btnInteract.Name = "btnInteract";
+			this.btnInteract.Size = new System.Drawing.Size(94, 61);
+			this.btnInteract.TabIndex = 22;
+			this.btnInteract.Text = "&Interact";
+			this.toolTip1.SetToolTip(this.btnInteract, "Use This Button To Interact With Items And More!");
+			this.btnInteract.UseVisualStyleBackColor = false;
+			this.btnInteract.Click += new System.EventHandler(this.btnInteract_Click);
+			// 
 			// btnMoveEast
 			// 
 			this.btnMoveEast.BackColor = System.Drawing.Color.DarkGray;
 			this.btnMoveEast.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.btnMoveEast.ForeColor = System.Drawing.Color.DarkGreen;
-			this.btnMoveEast.Location = new System.Drawing.Point(202, 86);
+			this.btnMoveEast.Location = new System.Drawing.Point(187, 130);
 			this.btnMoveEast.Name = "btnMoveEast";
 			this.btnMoveEast.Size = new System.Drawing.Size(75, 50);
 			this.btnMoveEast.TabIndex = 2;
@@ -420,7 +341,7 @@
 			this.btnMoveSouth.BackColor = System.Drawing.Color.DarkGray;
 			this.btnMoveSouth.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.btnMoveSouth.ForeColor = System.Drawing.Color.DarkGreen;
-			this.btnMoveSouth.Location = new System.Drawing.Point(121, 113);
+			this.btnMoveSouth.Location = new System.Drawing.Point(106, 157);
 			this.btnMoveSouth.Name = "btnMoveSouth";
 			this.btnMoveSouth.Size = new System.Drawing.Size(75, 50);
 			this.btnMoveSouth.TabIndex = 1;
@@ -433,7 +354,7 @@
 			this.btnMoveNorth.BackColor = System.Drawing.Color.DarkGray;
 			this.btnMoveNorth.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.btnMoveNorth.ForeColor = System.Drawing.Color.DarkGreen;
-			this.btnMoveNorth.Location = new System.Drawing.Point(121, 57);
+			this.btnMoveNorth.Location = new System.Drawing.Point(106, 101);
 			this.btnMoveNorth.Name = "btnMoveNorth";
 			this.btnMoveNorth.Size = new System.Drawing.Size(75, 50);
 			this.btnMoveNorth.TabIndex = 0;
@@ -448,10 +369,10 @@
 			this.tabDialog.Controls.Add(this.tabDialogs);
 			this.tabDialog.Controls.Add(this.tabInventory);
 			this.tabDialog.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.tabDialog.Location = new System.Drawing.Point(679, 393);
+			this.tabDialog.Location = new System.Drawing.Point(647, 393);
 			this.tabDialog.Name = "tabDialog";
 			this.tabDialog.SelectedIndex = 0;
-			this.tabDialog.Size = new System.Drawing.Size(421, 248);
+			this.tabDialog.Size = new System.Drawing.Size(453, 248);
 			this.tabDialog.TabIndex = 17;
 			this.toolTip1.SetToolTip(this.tabDialog, "Check here for tips and inventory stock.");
 			// 
@@ -463,7 +384,7 @@
 			this.tabDialogs.Location = new System.Drawing.Point(4, 32);
 			this.tabDialogs.Name = "tabDialogs";
 			this.tabDialogs.Padding = new System.Windows.Forms.Padding(3);
-			this.tabDialogs.Size = new System.Drawing.Size(413, 212);
+			this.tabDialogs.Size = new System.Drawing.Size(445, 212);
 			this.tabDialogs.TabIndex = 0;
 			this.tabDialogs.Text = "Dialog";
 			this.toolTip1.SetToolTip(this.tabDialogs, "Check here for tips and conversations.");
@@ -477,7 +398,7 @@
 			this.lstDialog.ItemHeight = 19;
 			this.lstDialog.Location = new System.Drawing.Point(6, 6);
 			this.lstDialog.Name = "lstDialog";
-			this.lstDialog.Size = new System.Drawing.Size(407, 213);
+			this.lstDialog.Size = new System.Drawing.Size(439, 213);
 			this.lstDialog.TabIndex = 9;
 			// 
 			// tabInventory
@@ -488,7 +409,7 @@
 			this.tabInventory.ForeColor = System.Drawing.Color.Black;
 			this.tabInventory.Location = new System.Drawing.Point(4, 32);
 			this.tabInventory.Name = "tabInventory";
-			this.tabInventory.Size = new System.Drawing.Size(413, 212);
+			this.tabInventory.Size = new System.Drawing.Size(445, 212);
 			this.tabInventory.TabIndex = 2;
 			this.tabInventory.Text = "Inventory";
 			this.toolTip1.SetToolTip(this.tabInventory, "Check here to see what you have collected.");
@@ -501,7 +422,7 @@
 			this.lstInventory.ItemHeight = 16;
 			this.lstInventory.Location = new System.Drawing.Point(4, 4);
 			this.lstInventory.Name = "lstInventory";
-			this.lstInventory.Size = new System.Drawing.Size(409, 212);
+			this.lstInventory.Size = new System.Drawing.Size(441, 212);
 			this.lstInventory.TabIndex = 0;
 			// 
 			// btnMainMenu
@@ -555,30 +476,30 @@
 			this.grdconMap.AllowIncreaseSmallChange = false;
 			this.grdconMap.AllowSelection = Syncfusion.Windows.Forms.Grid.GridSelectionFlags.None;
 			this.grdconMap.BackColor = System.Drawing.Color.Black;
-			gridBaseStyle21.Name = "Header";
-			gridBaseStyle21.StyleInfo.Borders.Bottom = new Syncfusion.Windows.Forms.Grid.GridBorder(Syncfusion.Windows.Forms.Grid.GridBorderStyle.None);
-			gridBaseStyle21.StyleInfo.Borders.Left = new Syncfusion.Windows.Forms.Grid.GridBorder(Syncfusion.Windows.Forms.Grid.GridBorderStyle.None);
-			gridBaseStyle21.StyleInfo.Borders.Right = new Syncfusion.Windows.Forms.Grid.GridBorder(Syncfusion.Windows.Forms.Grid.GridBorderStyle.None);
-			gridBaseStyle21.StyleInfo.Borders.Top = new Syncfusion.Windows.Forms.Grid.GridBorder(Syncfusion.Windows.Forms.Grid.GridBorderStyle.None);
-			gridBaseStyle21.StyleInfo.CellType = "Header";
-			gridBaseStyle21.StyleInfo.Font.Bold = true;
-			gridBaseStyle21.StyleInfo.Interior = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.Vertical, System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(199)))), ((int)(((byte)(184))))), System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(234)))), ((int)(((byte)(216))))));
-			gridBaseStyle21.StyleInfo.VerticalAlignment = Syncfusion.Windows.Forms.Grid.GridVerticalAlignment.Middle;
-			gridBaseStyle22.Name = "Standard";
-			gridBaseStyle22.StyleInfo.Font.Facename = "Tahoma";
-			gridBaseStyle22.StyleInfo.Interior = new Syncfusion.Drawing.BrushInfo(System.Drawing.SystemColors.Window);
-			gridBaseStyle23.Name = "Column Header";
-			gridBaseStyle23.StyleInfo.BaseStyle = "Header";
-			gridBaseStyle23.StyleInfo.HorizontalAlignment = Syncfusion.Windows.Forms.Grid.GridHorizontalAlignment.Center;
-			gridBaseStyle24.Name = "Row Header";
-			gridBaseStyle24.StyleInfo.BaseStyle = "Header";
-			gridBaseStyle24.StyleInfo.HorizontalAlignment = Syncfusion.Windows.Forms.Grid.GridHorizontalAlignment.Left;
-			gridBaseStyle24.StyleInfo.Interior = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.Horizontal, System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(199)))), ((int)(((byte)(184))))), System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(234)))), ((int)(((byte)(216))))));
+			gridBaseStyle17.Name = "Header";
+			gridBaseStyle17.StyleInfo.Borders.Bottom = new Syncfusion.Windows.Forms.Grid.GridBorder(Syncfusion.Windows.Forms.Grid.GridBorderStyle.None);
+			gridBaseStyle17.StyleInfo.Borders.Left = new Syncfusion.Windows.Forms.Grid.GridBorder(Syncfusion.Windows.Forms.Grid.GridBorderStyle.None);
+			gridBaseStyle17.StyleInfo.Borders.Right = new Syncfusion.Windows.Forms.Grid.GridBorder(Syncfusion.Windows.Forms.Grid.GridBorderStyle.None);
+			gridBaseStyle17.StyleInfo.Borders.Top = new Syncfusion.Windows.Forms.Grid.GridBorder(Syncfusion.Windows.Forms.Grid.GridBorderStyle.None);
+			gridBaseStyle17.StyleInfo.CellType = "Header";
+			gridBaseStyle17.StyleInfo.Font.Bold = true;
+			gridBaseStyle17.StyleInfo.Interior = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.Vertical, System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(199)))), ((int)(((byte)(184))))), System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(234)))), ((int)(((byte)(216))))));
+			gridBaseStyle17.StyleInfo.VerticalAlignment = Syncfusion.Windows.Forms.Grid.GridVerticalAlignment.Middle;
+			gridBaseStyle18.Name = "Standard";
+			gridBaseStyle18.StyleInfo.Font.Facename = "Tahoma";
+			gridBaseStyle18.StyleInfo.Interior = new Syncfusion.Drawing.BrushInfo(System.Drawing.SystemColors.Window);
+			gridBaseStyle19.Name = "Column Header";
+			gridBaseStyle19.StyleInfo.BaseStyle = "Header";
+			gridBaseStyle19.StyleInfo.HorizontalAlignment = Syncfusion.Windows.Forms.Grid.GridHorizontalAlignment.Center;
+			gridBaseStyle20.Name = "Row Header";
+			gridBaseStyle20.StyleInfo.BaseStyle = "Header";
+			gridBaseStyle20.StyleInfo.HorizontalAlignment = Syncfusion.Windows.Forms.Grid.GridHorizontalAlignment.Left;
+			gridBaseStyle20.StyleInfo.Interior = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.Horizontal, System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(199)))), ((int)(((byte)(184))))), System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(234)))), ((int)(((byte)(216))))));
 			this.grdconMap.BaseStylesMap.AddRange(new Syncfusion.Windows.Forms.Grid.GridBaseStyle[] {
-            gridBaseStyle21,
-            gridBaseStyle22,
-            gridBaseStyle23,
-            gridBaseStyle24});
+            gridBaseStyle17,
+            gridBaseStyle18,
+            gridBaseStyle19,
+            gridBaseStyle20});
 			this.grdconMap.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.grdconMap.ColCount = 24;
 			this.grdconMap.ColWidthEntries.AddRange(new Syncfusion.Windows.Forms.Grid.GridColWidth[] {
@@ -604,22 +525,6 @@
 			this.grdconMap.Properties.MarkColHeader = false;
 			this.grdconMap.Properties.MarkRowHeader = false;
 			this.grdconMap.Properties.RowHeaders = false;
-			gridRangeStyle51.Range = Syncfusion.Windows.Forms.Grid.GridRangeInfo.Table();
-			gridRangeStyle51.StyleInfo.Font.Bold = false;
-			gridRangeStyle51.StyleInfo.Font.Facename = "Arial";
-			gridRangeStyle51.StyleInfo.Font.Italic = false;
-			gridRangeStyle51.StyleInfo.Font.Size = 15F;
-			gridRangeStyle51.StyleInfo.Font.Strikeout = false;
-			gridRangeStyle51.StyleInfo.Font.Underline = false;
-			gridRangeStyle51.StyleInfo.Font.Unit = System.Drawing.GraphicsUnit.Point;
-			gridRangeStyle52.Range = Syncfusion.Windows.Forms.Grid.GridRangeInfo.Table();
-			gridRangeStyle52.StyleInfo.Font.Bold = false;
-			gridRangeStyle52.StyleInfo.Font.Facename = "Arial";
-			gridRangeStyle52.StyleInfo.Font.Italic = false;
-			gridRangeStyle52.StyleInfo.Font.Size = 15F;
-			gridRangeStyle52.StyleInfo.Font.Strikeout = false;
-			gridRangeStyle52.StyleInfo.Font.Underline = false;
-			gridRangeStyle52.StyleInfo.Font.Unit = System.Drawing.GraphicsUnit.Point;
 			gridRangeStyle53.Range = Syncfusion.Windows.Forms.Grid.GridRangeInfo.Table();
 			gridRangeStyle53.StyleInfo.Font.Bold = false;
 			gridRangeStyle53.StyleInfo.Font.Facename = "Arial";
@@ -684,9 +589,47 @@
 			gridRangeStyle60.StyleInfo.Font.Strikeout = false;
 			gridRangeStyle60.StyleInfo.Font.Underline = false;
 			gridRangeStyle60.StyleInfo.Font.Unit = System.Drawing.GraphicsUnit.Point;
+			gridRangeStyle61.Range = Syncfusion.Windows.Forms.Grid.GridRangeInfo.Table();
+			gridRangeStyle61.StyleInfo.Font.Bold = false;
+			gridRangeStyle61.StyleInfo.Font.Facename = "Arial";
+			gridRangeStyle61.StyleInfo.Font.Italic = false;
+			gridRangeStyle61.StyleInfo.Font.Size = 15F;
+			gridRangeStyle61.StyleInfo.Font.Strikeout = false;
+			gridRangeStyle61.StyleInfo.Font.Underline = false;
+			gridRangeStyle61.StyleInfo.Font.Unit = System.Drawing.GraphicsUnit.Point;
+			gridRangeStyle62.Range = Syncfusion.Windows.Forms.Grid.GridRangeInfo.Table();
+			gridRangeStyle62.StyleInfo.Font.Bold = false;
+			gridRangeStyle62.StyleInfo.Font.Facename = "Arial";
+			gridRangeStyle62.StyleInfo.Font.Italic = false;
+			gridRangeStyle62.StyleInfo.Font.Size = 15F;
+			gridRangeStyle62.StyleInfo.Font.Strikeout = false;
+			gridRangeStyle62.StyleInfo.Font.Underline = false;
+			gridRangeStyle62.StyleInfo.Font.Unit = System.Drawing.GraphicsUnit.Point;
+			gridRangeStyle63.Range = Syncfusion.Windows.Forms.Grid.GridRangeInfo.Table();
+			gridRangeStyle63.StyleInfo.Font.Bold = false;
+			gridRangeStyle63.StyleInfo.Font.Facename = "Arial";
+			gridRangeStyle63.StyleInfo.Font.Italic = false;
+			gridRangeStyle63.StyleInfo.Font.Size = 15F;
+			gridRangeStyle63.StyleInfo.Font.Strikeout = false;
+			gridRangeStyle63.StyleInfo.Font.Underline = false;
+			gridRangeStyle63.StyleInfo.Font.Unit = System.Drawing.GraphicsUnit.Point;
+			gridRangeStyle64.Range = Syncfusion.Windows.Forms.Grid.GridRangeInfo.Table();
+			gridRangeStyle64.StyleInfo.Font.Bold = false;
+			gridRangeStyle64.StyleInfo.Font.Facename = "Arial";
+			gridRangeStyle64.StyleInfo.Font.Italic = false;
+			gridRangeStyle64.StyleInfo.Font.Size = 15F;
+			gridRangeStyle64.StyleInfo.Font.Strikeout = false;
+			gridRangeStyle64.StyleInfo.Font.Underline = false;
+			gridRangeStyle64.StyleInfo.Font.Unit = System.Drawing.GraphicsUnit.Point;
+			gridRangeStyle65.Range = Syncfusion.Windows.Forms.Grid.GridRangeInfo.Table();
+			gridRangeStyle65.StyleInfo.Font.Bold = false;
+			gridRangeStyle65.StyleInfo.Font.Facename = "Arial";
+			gridRangeStyle65.StyleInfo.Font.Italic = false;
+			gridRangeStyle65.StyleInfo.Font.Size = 15F;
+			gridRangeStyle65.StyleInfo.Font.Strikeout = false;
+			gridRangeStyle65.StyleInfo.Font.Underline = false;
+			gridRangeStyle65.StyleInfo.Font.Unit = System.Drawing.GraphicsUnit.Point;
 			this.grdconMap.RangeStyles.AddRange(new Syncfusion.Windows.Forms.Grid.GridRangeStyle[] {
-            gridRangeStyle51,
-            gridRangeStyle52,
             gridRangeStyle53,
             gridRangeStyle54,
             gridRangeStyle55,
@@ -694,7 +637,12 @@
             gridRangeStyle57,
             gridRangeStyle58,
             gridRangeStyle59,
-            gridRangeStyle60});
+            gridRangeStyle60,
+            gridRangeStyle61,
+            gridRangeStyle62,
+            gridRangeStyle63,
+            gridRangeStyle64,
+            gridRangeStyle65});
 			this.grdconMap.ResizeColsBehavior = Syncfusion.Windows.Forms.Grid.GridResizeCellsBehavior.None;
 			this.grdconMap.ResizeRowsBehavior = Syncfusion.Windows.Forms.Grid.GridResizeCellsBehavior.None;
 			this.grdconMap.RowCount = 24;
@@ -711,20 +659,39 @@
 			this.grdconMap.VerticalThumbTrack = true;
 			this.grdconMap.VScrollPixel = true;
 			// 
-			// btnInteract
+			// tmrGameClock
 			// 
-			this.btnInteract.BackColor = System.Drawing.Color.LightSteelBlue;
-			this.btnInteract.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnInteract.ForeColor = System.Drawing.Color.DarkGreen;
-			this.btnInteract.Location = new System.Drawing.Point(6, 19);
-			this.btnInteract.Name = "btnInteract";
-			this.btnInteract.Size = new System.Drawing.Size(90, 61);
-			this.btnInteract.TabIndex = 10;
-			this.btnInteract.Text = "&Interact";
-			this.toolTip1.SetToolTip(this.btnInteract, "Click Here to Interact:\r\nPickup A Key\r\nPickup A Kitten\r\nUse A Key and Unlock A Do" +
-        "or\r\nGo Up or Down Stairs");
-			this.btnInteract.UseVisualStyleBackColor = false;
-			this.btnInteract.Click += new System.EventHandler(this.btnInteract_Click);
+			this.tmrGameClock.Interval = 1000;
+			this.tmrGameClock.Tick += new System.EventHandler(this.tmrGameClock_Tick);
+			// 
+			// lblGameClock1
+			// 
+			this.lblGameClock1.AutoSize = true;
+			this.lblGameClock1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lblGameClock1.Location = new System.Drawing.Point(651, 304);
+			this.lblGameClock1.Name = "lblGameClock1";
+			this.lblGameClock1.Size = new System.Drawing.Size(106, 20);
+			this.lblGameClock1.TabIndex = 22;
+			this.lblGameClock1.Text = "Game Clock";
+			// 
+			// lblGameClock
+			// 
+			this.lblGameClock.AutoSize = true;
+			this.lblGameClock.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lblGameClock.Location = new System.Drawing.Point(675, 327);
+			this.lblGameClock.Name = "lblGameClock";
+			this.lblGameClock.Size = new System.Drawing.Size(0, 24);
+			this.lblGameClock.TabIndex = 23;
+			// 
+			// lblGameClock2
+			// 
+			this.lblGameClock2.AutoSize = true;
+			this.lblGameClock2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lblGameClock2.Location = new System.Drawing.Point(712, 333);
+			this.lblGameClock2.Name = "lblGameClock2";
+			this.lblGameClock2.Size = new System.Drawing.Size(35, 15);
+			this.lblGameClock2.TabIndex = 24;
+			this.lblGameClock2.Text = "Sec.";
 			// 
 			// FrmGame
 			// 
@@ -732,13 +699,15 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.DarkKhaki;
 			this.ClientSize = new System.Drawing.Size(1112, 653);
+			this.Controls.Add(this.lblGameClock2);
+			this.Controls.Add(this.lblGameClock);
+			this.Controls.Add(this.lblGameClock1);
 			this.Controls.Add(this.grdconMap);
 			this.Controls.Add(this.btnLoadGame);
 			this.Controls.Add(this.btnSaveGame);
 			this.Controls.Add(this.btnMainMenu);
 			this.Controls.Add(this.tabDialog);
 			this.Controls.Add(this.grpMovement);
-			this.Controls.Add(this.grpActions);
 			this.Controls.Add(this.grpboxLegend);
 			this.MinimumSize = new System.Drawing.Size(590, 430);
 			this.Name = "FrmGame";
@@ -747,13 +716,13 @@
 			this.Load += new System.EventHandler(this.FrmGame_Load);
 			this.grpboxLegend.ResumeLayout(false);
 			this.grpboxLegend.PerformLayout();
-			this.grpActions.ResumeLayout(false);
 			this.grpMovement.ResumeLayout(false);
 			this.tabDialog.ResumeLayout(false);
 			this.tabDialogs.ResumeLayout(false);
 			this.tabInventory.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.grdconMap)).EndInit();
 			this.ResumeLayout(false);
+			this.PerformLayout();
 
         }
 
@@ -775,14 +744,7 @@
         private System.Windows.Forms.TextBox txtDoorLocked;
         private System.Windows.Forms.Label lblFloors;
         private System.Windows.Forms.TextBox txtFloors;
-        private System.Windows.Forms.Label lblWall;
-        private System.Windows.Forms.GroupBox grpActions;
-        private System.Windows.Forms.Button btnAction6;
-        private System.Windows.Forms.Button btnAction5;
-        private System.Windows.Forms.Button btnUseKey;
-        private System.Windows.Forms.Button btnUseStairs;
-        private System.Windows.Forms.Button btnPickupKitten;
-        private System.Windows.Forms.Button btnPickupKey;
+		private System.Windows.Forms.Label lblWall;
         private System.Windows.Forms.GroupBox grpMovement;
         private System.Windows.Forms.Button btnMoveWest;
         private System.Windows.Forms.Button btnMoveEast;
@@ -797,7 +759,11 @@
         private System.Windows.Forms.Button btnSaveGame;
         private System.Windows.Forms.Button btnLoadGame;
         private Syncfusion.Windows.Forms.Grid.GridControl grdconMap;
-        private System.Windows.Forms.ToolTip toolTip1;
+		private System.Windows.Forms.ToolTip toolTip1;
 		private System.Windows.Forms.Button btnInteract;
+		private System.Windows.Forms.Timer tmrGameClock;
+		private System.Windows.Forms.Label lblGameClock1;
+		private System.Windows.Forms.Label lblGameClock;
+		private System.Windows.Forms.Label lblGameClock2;
     }
 }

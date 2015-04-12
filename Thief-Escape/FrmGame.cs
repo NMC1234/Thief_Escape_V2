@@ -22,6 +22,7 @@ namespace Thief_Escape
         Item key, kitten;
         Grid cellGrid;
         string name;
+		int gameClock;
 
         //Exit bool is used to prevent unwanted shutdowns 
         //  when going to the main menu.
@@ -237,6 +238,9 @@ namespace Thief_Escape
 
             //  Initial Prompt
             InitalPrompt();
+
+			//Start Timmer
+			tmrGameClock.Enabled = true;
 
         }
 
@@ -534,12 +538,14 @@ namespace Thief_Escape
 			//If Interaction found returns the coresponding int type
 			if(interactionFound)
 			{
+				btnInteract.BackColor = Color.OliveDrab;
 				btnInteract.Enabled = true;
 				return interactionType;
 			}
 			else
 			{
 				//if no interaction found then returns 0
+				btnInteract.BackColor = Color.Firebrick;
 				btnInteract.Enabled = false;
 				return 0;
 			}
@@ -835,6 +841,7 @@ namespace Thief_Escape
 
 			//  Update
 			UpdateInventory( );
+			CheckSpecialActions( );
 		}
 
 		//Pickup Key Method
@@ -868,6 +875,7 @@ namespace Thief_Escape
 
 			//  Update
 			UpdateInventory( );
+			CheckSpecialActions( );
 		}
 
 		//Uses a Key to Unlock a Door Method
@@ -945,6 +953,7 @@ namespace Thief_Escape
 
 			//Update Inventory
 			UpdateInventory( );
+			CheckSpecialActions( );
 		}
 
 		//Method to use Stairs
@@ -1399,6 +1408,12 @@ namespace Thief_Escape
         }
 
         #endregion
+
+		private void tmrGameClock_Tick(object sender, EventArgs e)
+		{
+			gameClock++;
+			lblGameClock.Text = Convert.ToString(gameClock);
+		}
 
 
     }
