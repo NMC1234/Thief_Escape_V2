@@ -17,6 +17,9 @@ namespace Thief_Escape
         //Player's name
         string _name;
 
+		//Game Clock
+		int _gameClock;
+
         //Player's coords
         int _x;
         int _y;
@@ -38,6 +41,16 @@ namespace Thief_Escape
             set { _name = value.Trim(); }
         }
 
+		//Gets or sets the Player's Game Clock
+		public int GameClock
+		{
+			get { return _gameClock; }
+
+			set { 
+				if(value >= 0)
+					_gameClock = value; 
+			}
+		}
 
         //Gets or sets the player's X coordinate
         public int XCoord 
@@ -93,6 +106,11 @@ namespace Thief_Escape
 
         #region [ Constructors ]
 
+		//Default constructor needed for serialization
+		public Player( )
+		{
+
+		}
 
 		//Constructor with player name propertie
 		public Player(string sentname)
@@ -108,7 +126,14 @@ namespace Thief_Escape
 			YCoord = y;
 		}
 
-
+		//Constructor with a name property, GameClock, and an x,y for the current cell
+		public Player(string sentName, int clock, int x, int y)
+		{
+			_name = sentName;
+			_gameClock = clock;
+			XCoord = x;
+			YCoord = y;
+		}
         #endregion
 
         #region [ Methods ]

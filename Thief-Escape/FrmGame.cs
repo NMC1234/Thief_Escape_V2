@@ -262,6 +262,7 @@ namespace Thief_Escape
         private void tmrGameClock_Tick(object sender, EventArgs e)
         {
             gameClock++;
+			player.GameClock = gameClock;
             lblGameClock.Text = Convert.ToString(gameClock);
         }
 
