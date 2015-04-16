@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Thief_Escape
 {
-    class Player
+
+    [Serializable]
+
+    public class Player
     {
         #region [ Fields ]
 

@@ -7,7 +7,10 @@ using System.Threading.Tasks;
 
 namespace Thief_Escape
 {
-    class Grid
+
+    [Serializable]
+
+    public class Grid
     {
         #region [ Enums ]
 
@@ -41,6 +44,9 @@ namespace Thief_Escape
         //The Grid's size
         private int _mapSize;
 
+        //The Grid's file
+        private MapFiles _file;
+
         // The Grid's starting cell
         private int _startingY;
         private int _startingX;
@@ -56,7 +62,7 @@ namespace Thief_Escape
         {
             get
             {
-                int[] coords = { _startingY, _startingX };
+                int[] coords = { _startingX, _startingY };
                 return coords;
             }
         }
@@ -66,14 +72,24 @@ namespace Thief_Escape
             get { return _mapSize; }
         }
 
+        public MapFiles File
+        {
+            get { return _file; }
+        }
+
+
 
         #endregion
 
 
         #region [ Constructors ]
 
+        public Grid()
+        {
 
-        public Grid(MapFiles file)
+        }
+
+        public Grid(MapFiles file, string playerName)
         {
             //Switch Statement to determine MapSize
             switch (file)
@@ -90,7 +106,7 @@ namespace Thief_Escape
                     _mapSize = 24; //   24 is the size of the Grid control on the form.
                     break;
             }
-
+            _file = file;
             //Instantiate the Grid
             _map = new Cell[MapSize, MapSize];
 
@@ -108,8 +124,8 @@ namespace Thief_Escape
             {
                 #region [ Test Map Creation ]
                 //Starting Cell
-                _startingY = 2;
-                _startingX = 4;
+                _startingX = 2;
+                _startingY = 4;
                 #region Walls
                 //create top row of walls
                 for (int i = 0; i < 16; i++)
@@ -299,7 +315,7 @@ namespace Thief_Escape
                 _map[5, 5].DestinationCoords = coords2;
                 #endregion
                 #region Items
-                _map[5,2].Content = Cell.Contents.KEY;
+                _map[5, 2].Content = Cell.Contents.KEY;
                 _map[2, 5].Content = Cell.Contents.KITTEN;
                 #endregion
                 #endregion
@@ -358,7 +374,7 @@ namespace Thief_Escape
         }
 
         //Returns the cell's destination map
-        public Grid.MapFiles Destination( int x, int y)
+        public Grid.MapFiles Destination(int x, int y)
         {
             Grid.MapFiles result;
             result = _map[x, y].Destination;
