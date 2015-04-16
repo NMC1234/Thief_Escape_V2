@@ -289,7 +289,6 @@ namespace Thief_Escape
             if (newDialog == DialogResult.OK)
             {
                 SaveGame();
-                MessageBox.Show("Your game has been saved!", "SUCCESS!");
             }
         }
 
@@ -1424,26 +1423,37 @@ namespace Thief_Escape
         #region [ File Interaction Methods ]
 
         //  Saves the GAME to the SaveGames Directory - for when the player saves the game before quiting
+		//Must currently go through SaveGame to get to SaveRoom!
         public void SaveGame()
         {
+			//Temp used vars for save path creation
 			string savePath;
 			bool saveCancel = false;
+
+			//Default values/settings are assigned
 			saveTarget = ".txt";
 			saveDirectory = Directory.GetCurrentDirectory( );
 			saveFD.InitialDirectory = saveDirectory;
 			saveFD.FileName = "SaveGames";
+			saveFD.Title = "Select Where You Want To Save The Game.  Default Save Folder is 'SaveGames'.";
+			saveFD.AddExtension = false;
+			saveFD.CheckFileExists = false;
+			saveFD.CheckPathExists = false;
+			saveFD.CreatePrompt = false;
+			saveFD.OverwritePrompt = false;
+
 			//Shows the file dialog window to let user select where to save game
-			//if no path was given then default is used
-			//Selected path is set upon accept
-			if(saveFD.ShowDialog( ) == (DialogResult.Cancel | DialogResult.Abort | DialogResult.No | DialogResult.None))
+			if(saveFD.ShowDialog( ) == DialogResult.OK)
 			{
-				saveDirectory = Directory.GetCurrentDirectory( );
-				saveCancel = true;
+				//Selected path is set upon accept
+				saveDirectory = saveFD.FileName;
+				saveCancel = false;
 			}
 			else
 			{
-				saveDirectory = saveFD.FileName;
-				saveCancel = false;
+				//if no path was given then default is used
+				saveDirectory = Directory.GetCurrentDirectory( );
+				saveCancel = true;
 			}
 
 			//checks if save was cancelled
@@ -1488,6 +1498,12 @@ namespace Thief_Escape
 						file.WriteLine(line);
 					}
 				}
+
+				MessageBox.Show("Your game has been saved!", "SUCCESS!");
+			}
+			else
+			{
+				MessageBox.Show("Cancelled Save Operation", "CANCELLED");
 			}
         }
 
