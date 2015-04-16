@@ -275,16 +275,14 @@ namespace Thief_Escape
         //  Save Button
         private void btnSaveGame_Click(object sender, EventArgs e)
         {
-            //to-do
-            //Planned feature: Save a gamestate to file
-
             //message box to go along with saving of new game...
             DialogResult newDialog = MessageBox.Show("Are you sure you want to save your game?", "SAVING...",
                 MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
 
             if (newDialog == DialogResult.OK)
             {
-                SaveRoom();
+                SaveGame();
+                MessageBox.Show("Your game has been saved!", "SUCCESS!");
             }
         }
 
@@ -1420,6 +1418,45 @@ namespace Thief_Escape
         //  Saves the GAME to the SaveGames Directory - for when the player saves the game before quiting
         public void SaveGame()
         {
+            //  First saves the current room - Assumes all other rooms have already been saved
+            SaveRoom();
+
+            //  Creates the target string for the player.txt file
+            string target = ".txt";
+            target = player.Name + target;
+
+            //  Determine if the player's save folder exists
+            string directory = Directory.GetCurrentDirectory();
+            directory = string.Format(directory + "\\SaveGames\\" + player.Name + "\\");
+            if (!System.IO.Directory.Exists(directory)) //  If the folder doesn't exist create it
+            {
+                System.IO.Directory.CreateDirectory(directory);
+            }
+
+            //  Create list to hold strings
+            List<String> fileStrings = new List<string>();
+
+            //  Store the player's Name - Not sure if this is necessary because its the name of the text file
+            fileStrings.Add(player.Name);
+
+            //  Store the player's current coordinates
+            fileStrings.Add(string.Format(player.XCoord.ToString() + "," + player.YCoord.ToString() + ","));
+            
+            //  Store the player's current room
+            fileStrings.Add(string.Format(player.CurrentMap.ToString()));
+
+            //  Add the target file to the end of the directory string
+            directory = directory + target;
+
+
+            //  save filestrings to file.
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter(directory))
+            {
+                foreach (string line in fileStrings)
+                {
+                    file.WriteLine(line);
+                }
+            }
 
         }
 
