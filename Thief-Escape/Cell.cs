@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Thief_Escape
 {
-    class Cell
+
+    [ Serializable ]
+
+    public class Cell
     {
 
         #region [ Class Enumerations ]
