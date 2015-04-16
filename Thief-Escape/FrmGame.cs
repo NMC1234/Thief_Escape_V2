@@ -50,9 +50,16 @@ namespace Thief_Escape
         #endregion
 
 
-        #region [ Constructors ]
+		#region [ Fields/Properties ]
+		//Strings used in saving a user's game
+		private string saveTarget { get; set; }
+		private string saveDirectory { get; set; }
+		#endregion
 
-        //Default constructor
+
+		#region [ Constructors ]
+
+		//Default constructor
         public FrmGame()
         {
             InitializeComponent();
@@ -1413,66 +1420,90 @@ namespace Thief_Escape
 
         #endregion
 
+
         #region [ File Interaction Methods ]
 
         //  Saves the GAME to the SaveGames Directory - for when the player saves the game before quiting
         public void SaveGame()
         {
-            //  First saves the current room - Assumes all other rooms have already been saved
-            SaveRoom();
+			string savePath;
+			bool saveCancel = false;
+			saveTarget = ".txt";
+			saveDirectory = Directory.GetCurrentDirectory( );
+			saveFD.InitialDirectory = saveDirectory;
+			saveFD.FileName = "SaveGames";
+			//Shows the file dialog window to let user select where to save game
+			//if no path was given then default is used
+			//Selected path is set upon accept
+			if(saveFD.ShowDialog( ) == (DialogResult.Cancel | DialogResult.Abort | DialogResult.No | DialogResult.None))
+			{
+				saveDirectory = Directory.GetCurrentDirectory( );
+				saveCancel = true;
+			}
+			else
+			{
+				saveDirectory = saveFD.FileName;
+				saveCancel = false;
+			}
 
-            //  Creates the target string for the player.txt file
-            string target = ".txt";
-            target = player.Name + target;
+			//checks if save was cancelled
+			if(!saveCancel)
+			{
 
-            //  Determine if the player's save folder exists
-            string directory = Directory.GetCurrentDirectory();
-            directory = string.Format(directory + "\\SaveGames\\" + player.Name + "\\");
-            if (!System.IO.Directory.Exists(directory)) //  If the folder doesn't exist create it
-            {
-                System.IO.Directory.CreateDirectory(directory);
-            }
+				//  First saves the current room - Assumes all other rooms have already been saved
+				SaveRoom( );
 
-            //  Create list to hold strings
-            List<String> fileStrings = new List<string>();
+				//  Creates the saveTarget string for the player.txt file
+				saveTarget = ".txt";
+				saveTarget = player.Name + saveTarget;
 
-            //  Store the player's Name - Not sure if this is necessary because its the name of the text file
-            fileStrings.Add(player.Name);
+				//  Determine if the player's save folder exists
+				savePath = string.Format(saveDirectory + "\\" + player.Name + "\\");
+				if(!System.IO.Directory.Exists(savePath)) //  If the folder doesn't exist create it
+				{
+					System.IO.Directory.CreateDirectory(savePath);
+				}
 
-            //  Store the player's current coordinates
-            fileStrings.Add(string.Format(player.XCoord.ToString() + "," + player.YCoord.ToString() + ","));
-            
-            //  Store the player's current room
-            fileStrings.Add(string.Format(player.CurrentMap.ToString()));
+				//  Create list to hold strings
+				List<String> fileStrings = new List<string>( );
 
-            //  Add the target file to the end of the directory string
-            directory = directory + target;
+				//  Store the player's Name - Not sure if this is necessary because its the name of the text file
+				fileStrings.Add(player.Name);
+
+				//  Store the player's current coordinates
+				fileStrings.Add(string.Format(player.XCoord.ToString( ) + "," + player.YCoord.ToString( ) + ","));
+
+				//  Store the player's current room
+				fileStrings.Add(string.Format(player.CurrentMap.ToString( )));
+
+				//  Add the saveTarget file to the end of the directory string
+				savePath = savePath + saveTarget;
 
 
-            //  save filestrings to file.
-            using (System.IO.StreamWriter file = new System.IO.StreamWriter(directory))
-            {
-                foreach (string line in fileStrings)
-                {
-                    file.WriteLine(line);
-                }
-            }
-
+				//  save filestrings to file.
+				using(System.IO.StreamWriter file = new System.IO.StreamWriter(savePath))
+				{
+					foreach(string line in fileStrings)
+					{
+						file.WriteLine(line);
+					}
+				}
+			}
         }
 
         //  Saves the ROOM to the SaveGames Directory - for when the player transitions between rooms
         public void SaveRoom()
         {
+			string savePath;
             //  Determine which room is currently open
-            string target = ".txt";
-            target = cellGrid.File.ToString() + target;
+            saveTarget = cellGrid.File.ToString() + saveTarget;
 
             //  Determine if the player's save folder exists
-            string directory = Directory.GetCurrentDirectory();
-            directory = string.Format(directory + "\\SaveGames\\" + player.Name + "\\");
-            if (!System.IO.Directory.Exists(directory)) //  If the folder doesn't exist create it
+			savePath = string.Format(saveDirectory + "\\" + player.Name + "\\");
+			//  If the folder doesn't exist create it
+			if(!System.IO.Directory.Exists(savePath)) 
             {
-                System.IO.Directory.CreateDirectory(directory);
+				System.IO.Directory.CreateDirectory(savePath);
             }
 
             //  Create list to hold strings
@@ -1542,12 +1573,12 @@ namespace Thief_Escape
                     fileStrings.Add(input);
                 }
             }
-            //  Add the target file to the end of the directory string
-            directory = directory + target;
+            //  Add the saveTarget file to the end of the directory string
+			savePath = savePath + saveTarget;
 
 
             //  save filestrings to file.
-            using (System.IO.StreamWriter file = new System.IO.StreamWriter(directory))
+			using(System.IO.StreamWriter file = new System.IO.StreamWriter(savePath))
             {
                 foreach (string line in fileStrings)
                 {
