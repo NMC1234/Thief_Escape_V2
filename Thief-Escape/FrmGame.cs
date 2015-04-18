@@ -269,7 +269,7 @@ namespace Thief_Escape
         #endregion
 
 
-        #region [ Menu Button Clicks ]
+        #region [ Menu Button Clicks & Menu Tool Strip Clicks ]
 
         //  Load Button
         private void btnLoadGame_Click(object sender, EventArgs e)
@@ -305,6 +305,41 @@ namespace Thief_Escape
 
             //Close this form
             this.Close();
+        }
+        private void loadGameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //message box to go along with loading of new game...
+            DialogResult newDialog = MessageBox.Show("Your game is being loaded.", "LOADING...",
+                MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
+        }
+
+        private void saveGameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //message box to go along with saving of new game...
+            DialogResult newDialog = MessageBox.Show("Are you sure you want to save your game?", "SAVING...",
+                MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (newDialog == DialogResult.OK)
+            {
+                SaveGame();
+            }
+        }
+
+        private void mainMenuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //Change the exit bool to false;
+            exit = false;
+            //Load the menu form
+            FrmMain frm = new FrmMain();
+            frm.Show();
+
+            //Close this form
+            this.Close();
+        }
+
+        private void exitGameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
 
 
@@ -493,6 +528,8 @@ namespace Thief_Escape
                             {
                                 //Set interactionType to a Key being Used
                                 interactionType = 2;
+                                //Change name of button
+                                btnInteract.Text = "Open the Door";
                                 interactionFound = true;
                             }
                         }
@@ -509,21 +546,23 @@ namespace Thief_Escape
             {
                 //Set interactionType to use Stairs
                 interactionType = 5;
+                //Change name of button
+                btnInteract.Text = "Use the Stairs";
                 interactionFound = true;
             }
             #endregion
 
-            //If Interaction found returns the coresponding int type
+            //If Interaction found returns the corresponding int type
             if (interactionFound)
             {
-                btnInteract.BackColor = Color.OliveDrab;
+                btnInteract.BackColor = Color.YellowGreen;
                 btnInteract.Enabled = true;
                 return interactionType;
             }
             else
             {
                 //if no interaction found then returns 0
-                btnInteract.BackColor = Color.Firebrick;
+                btnInteract.BackColor = Color.Crimson;
                 btnInteract.Enabled = false;
                 return 0;
             }
@@ -596,28 +635,34 @@ namespace Thief_Escape
 
                 //Pickup Key
                 case 1:
+                   
                     PickupKey();
+                    btnInteract.Text = "Interact";
                     break;
 
                 //Use Key
                 case 2:
                     UseKey();
+                    btnInteract.Text = "Interact";
                     break;
 
                 //Pickup Kitten
                 case 3:
                     PickupKitten();
+                    btnInteract.Text = "Interact";
                     break;
 
                 //Pickup both Key and Kitten
                 case 4:
                     PickupKey();
                     PickupKitten();
+                    btnInteract.Text = "Interact";
                     break;
 
                 //Use Stairs
                 case 5:
                     UseStairs();
+                    btnInteract.Text = "Interact";
                     break;
 
                 //Default
@@ -1036,6 +1081,8 @@ namespace Thief_Escape
                         result[1] = (x + ix);
                         //Key's y-coord
                         result[2] = (y + iy);
+                        //Change name of button
+                        btnInteract.Text = "Pickup Key";
                     }
                 }
             }
@@ -1068,6 +1115,9 @@ namespace Thief_Escape
                         result[1] = (x + ix);
                         //Kitten's y-coord
                         result[2] = (y + iy);
+                        //Change name of button
+                        btnInteract.Text = "Pickup Kitten";
+                       
                     }
                 }
             }
