@@ -46,10 +46,6 @@
             this.lstLoadGame.BackColor = System.Drawing.Color.DarkKhaki;
             this.lstLoadGame.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lstLoadGame.FormattingEnabled = true;
-            this.lstLoadGame.Items.AddRange(new object[] {
-            "Jamie\'s Game",
-            "Zachary\'s Game",
-            "Keegon\'s Game"});
             this.lstLoadGame.Location = new System.Drawing.Point(0, 24);
             this.lstLoadGame.Name = "lstLoadGame";
             this.lstLoadGame.Size = new System.Drawing.Size(240, 174);
@@ -79,21 +75,21 @@
             // newGameToolStripMenuItem
             // 
             this.newGameToolStripMenuItem.Name = "newGameToolStripMenuItem";
-            this.newGameToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newGameToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.newGameToolStripMenuItem.Text = "&New Game";
             this.newGameToolStripMenuItem.Click += new System.EventHandler(this.newGameToolStripMenuItem_Click);
             // 
             // loadSelectedToolStripMenuItem
             // 
             this.loadSelectedToolStripMenuItem.Name = "loadSelectedToolStripMenuItem";
-            this.loadSelectedToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.loadSelectedToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.loadSelectedToolStripMenuItem.Text = "&Load Selected";
             this.loadSelectedToolStripMenuItem.Click += new System.EventHandler(this.loadSelectedToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -143,6 +139,7 @@
             this.MinimizeBox = false;
             this.Name = "frmLoad";
             this.Text = "Select a Game to Load";
+            this.Load += new System.EventHandler(this.frmLoad_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

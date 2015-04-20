@@ -38,7 +38,7 @@ namespace Thief_Escape
         private void btnLoadGame_Click(object sender, EventArgs e)
         {
             //to-do
-            var LoadGame = new frmLoad(PlayerName);
+            var LoadGame = new frmLoad();
             if (LoadGame.ShowDialog() == DialogResult.OK) 
             {
                     Form LoadSavedGame = new FrmGame(LoadGame.UserName);

@@ -28,7 +28,8 @@ namespace Thief_Escape
         {
             NULL,
             LOCKED,
-            UNLOCKED
+            UNLOCKED,
+            EXIT
         }
 
         //Enumeration of all items possible to be found in a cell.
