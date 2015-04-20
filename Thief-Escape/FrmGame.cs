@@ -458,7 +458,7 @@ namespace Thief_Escape
 
         //Checks for any Special Action Available
         internal int CheckSpecialActions()
-        {
+         {
             //check if there is a key or a kitten in current cell
             int[] keyDetails = CheckForNearbyKey();
             int[] kittenDetails = CheckForNearbyKitten();
@@ -501,6 +501,19 @@ namespace Thief_Escape
             }
             #endregion
 
+            //Checks if special actions concerns Stairs
+            #region [ Special Action Stairs ]
+            //checks if the player is standing on stairs
+            else if ((!interactionFound) && (cellGrid.CheckType(player.XCoord, player.YCoord) == Cell.Archetypes.STAIR))
+            {
+                //Set interactionType to use Stairs
+                interactionType = 5;
+                //Change name of button
+                btnInteract.Text = "Use the Stairs";
+                interactionFound = true;
+            }
+            #endregion
+
             //Checks if special actions concerns Unlocking a Door
             #region [ Special Action Door ]
             //Checks if a Door Should be Opened
@@ -536,19 +549,6 @@ namespace Thief_Escape
                     }
                 }
 
-            }
-            #endregion
-
-            //Checks if special actions concerns Stairs
-            #region [ Special Action Stairs ]
-            //checks if the player is standing on stairs
-            else if ((!interactionFound) && (cellGrid.CheckType(player.XCoord, player.YCoord) == Cell.Archetypes.STAIR))
-            {
-                //Set interactionType to use Stairs
-                interactionType = 5;
-                //Change name of button
-                btnInteract.Text = "Use the Stairs";
-                interactionFound = true;
             }
             #endregion
 
@@ -600,8 +600,6 @@ namespace Thief_Escape
             //Check Valid Special Interactions
             CheckSpecialActions();
 
-            //Check Valid Special Interactions
-            CheckSpecialActions();
         }
 
         #endregion
