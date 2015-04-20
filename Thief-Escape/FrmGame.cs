@@ -30,6 +30,9 @@ namespace Thief_Escape
         //  when going to the main menu.
         bool exit = true;
 
+        //  The default map , used in the creation of new games.
+        Grid.MapFiles defaultMap = Grid.MapFiles.Test1;
+
 
         #region [ Colors ]
 
@@ -49,17 +52,9 @@ namespace Thief_Escape
 
         #endregion
 
+        #region [ Constructors ]
 
-		#region [ Fields/Properties ]
-		//Strings used in saving a user's game
-		private string saveTarget { get; set; }
-		private string saveDirectory { get; set; }
-		#endregion
-
-
-		#region [ Constructors ]
-
-		//Default constructor
+        //Default constructor
         public FrmGame()
         {
             InitializeComponent();
@@ -82,7 +77,6 @@ namespace Thief_Escape
 
 
         #region [ Form Events ]
-
 
         //  Form Closed
         private void FrmGame_FormClosed(object sender, FormClosedEventArgs e)
@@ -210,9 +204,6 @@ namespace Thief_Escape
         //  Form Loaded
         private void FrmGame_Load(object sender, EventArgs e)
         {
-            //  Create the Player
-            player = new Player(name);
-
             //  Create Items
             key = new Item(Item.ItemType.KEY);
             kitten = new Item(Item.ItemType.KITTEN);
@@ -220,15 +211,12 @@ namespace Thief_Escape
             //  Create the Inventory
             Inventory = new List<Item>();
 
+            //  Call the LoadGame method, passing in the player name
+            //  This method will create the player, create the cellGrid, and populate the inventory
+            LoadGame(name);
+
             //  Update Inventory Dialog
             UpdateInventory();
-
-            //  Create the Grid
-            cellGrid = new Grid(Grid.MapFiles.Test1, player.Name);
-
-            //  Place the player
-            player.SetLocation(cellGrid.StartingCell);
-            player.CurrentMap = Grid.MapFiles.Test1;
 
             //  Make everything black
             InitialFog();
@@ -262,7 +250,7 @@ namespace Thief_Escape
         private void tmrGameClock_Tick(object sender, EventArgs e)
         {
             gameClock++;
-			player.GameClock = gameClock;
+            player.GameClock = gameClock;
             lblGameClock.Text = Convert.ToString(gameClock);
         }
 
@@ -501,6 +489,19 @@ namespace Thief_Escape
             }
             #endregion
 
+            //Checks if special actions concerns Stairs
+            #region [ Special Action Stairs ]
+            //checks if the player is standing on stairs
+            else if ((!interactionFound) && (cellGrid.CheckType(player.XCoord, player.YCoord) == Cell.Archetypes.STAIR))
+            {
+                //Set interactionType to use Stairs
+                interactionType = 5;
+                //Change name of button
+                btnInteract.Text = "Use the Stairs";
+                interactionFound = true;
+            }
+            #endregion
+
             //Checks if special actions concerns Unlocking a Door
             #region [ Special Action Door ]
             //Checks if a Door Should be Opened
@@ -536,19 +537,6 @@ namespace Thief_Escape
                     }
                 }
 
-            }
-            #endregion
-
-            //Checks if special actions concerns Stairs
-            #region [ Special Action Stairs ]
-            //checks if the player is standing on stairs
-            else if ((!interactionFound) && (cellGrid.CheckType(player.XCoord, player.YCoord) == Cell.Archetypes.STAIR))
-            {
-                //Set interactionType to use Stairs
-                interactionType = 5;
-                //Change name of button
-                btnInteract.Text = "Use the Stairs";
-                interactionFound = true;
             }
             #endregion
 
@@ -601,8 +589,6 @@ namespace Thief_Escape
             //Check Valid Special Interactions
             CheckSpecialActions();
 
-            //Check Valid Special Interactions
-            CheckSpecialActions();
         }
 
         #endregion
@@ -636,7 +622,7 @@ namespace Thief_Escape
 
                 //Pickup Key
                 case 1:
-                   
+
                     PickupKey();
                     btnInteract.Text = "Interact";
                     break;
@@ -1118,7 +1104,7 @@ namespace Thief_Escape
                         result[2] = (y + iy);
                         //Change name of button
                         btnInteract.Text = "Pickup Kitten";
-                       
+
                     }
                 }
             }
@@ -1474,104 +1460,79 @@ namespace Thief_Escape
 
         #region [ File Interaction Methods ]
 
-        //  Saves the GAME to the SaveGames Directory - for when the player saves the game before quiting
-		//Must currently go through SaveGame to get to SaveRoom!
+        //  Saves the PLAYER and CURRENT ROOM to the SaveGames Directory - for when the player saves the game before quiting
         public void SaveGame()
         {
-			//Temp used vars for save path creation
-			string savePath;
-			bool saveCancel = false;
+            //  Saves the current room, assumes all other rooms have already been saved
+            SaveRoom();
 
-			//Default values/settings are assigned
-			saveTarget = ".txt";
-			saveDirectory = Directory.GetCurrentDirectory( );
-			saveFD.InitialDirectory = saveDirectory;
-			saveFD.FileName = "SaveGames";
-			saveFD.Title = "Select Where You Want To Save The Game.  Default Save Folder is 'SaveGames'.";
-			saveFD.AddExtension = false;
-			saveFD.CheckFileExists = false;
-			saveFD.CheckPathExists = false;
-			saveFD.CreatePrompt = false;
-			saveFD.OverwritePrompt = false;
-
-			//Shows the file dialog window to let user select where to save game
-			if(saveFD.ShowDialog( ) == DialogResult.OK)
-			{
-				//Selected path is set upon accept
-				saveDirectory = saveFD.FileName;
-				saveCancel = false;
-			}
-			else
-			{
-				//if no path was given then default is used
-				saveDirectory = Directory.GetCurrentDirectory( );
-				saveCancel = true;
-			}
-
-			//checks if save was cancelled
-			if(!saveCancel)
-			{
-
-				//  First saves the current room - Assumes all other rooms have already been saved
-				SaveRoom( );
-
-				//  Creates the saveTarget string for the player.txt file
-				saveTarget = ".txt";
-				saveTarget = player.Name + saveTarget;
-
-				//  Determine if the player's save folder exists
-				savePath = string.Format(saveDirectory + "\\" + player.Name + "\\");
-				if(!System.IO.Directory.Exists(savePath)) //  If the folder doesn't exist create it
-				{
-					System.IO.Directory.CreateDirectory(savePath);
-				}
-
-				//  Create list to hold strings
-				List<String> fileStrings = new List<string>( );
-
-				//  Store the player's Name - Not sure if this is necessary because its the name of the text file
-				fileStrings.Add(player.Name);
-
-				//  Store the player's current coordinates
-				fileStrings.Add(string.Format(player.XCoord.ToString( ) + "," + player.YCoord.ToString( ) + ","));
-
-				//  Store the player's current room
-				fileStrings.Add(string.Format(player.CurrentMap.ToString( )));
-
-				//  Add the saveTarget file to the end of the directory string
-				savePath = savePath + saveTarget;
-
-
-				//  save filestrings to file.
-				using(System.IO.StreamWriter file = new System.IO.StreamWriter(savePath))
-				{
-					foreach(string line in fileStrings)
-					{
-						file.WriteLine(line);
-					}
-				}
-
-				MessageBox.Show("Your game has been saved!", "SUCCESS!");
-			}
-			else
-			{
-				MessageBox.Show("Cancelled Save Operation", "CANCELLED");
-			}
-        }
-
-        //  Saves the ROOM to the SaveGames Directory - for when the player transitions between rooms
-        public void SaveRoom()
-        {
-			string savePath;
-            //  Determine which room is currently open
-            saveTarget = cellGrid.File.ToString() + saveTarget;
+            //  Creates the target string for the player.txt file
+            string target = ".txt";
+            target = player.Name + target;
 
             //  Determine if the player's save folder exists
-			savePath = string.Format(saveDirectory + "\\" + player.Name + "\\");
-			//  If the folder doesn't exist create it
-			if(!System.IO.Directory.Exists(savePath)) 
+            string directory = Directory.GetCurrentDirectory();
+            directory = string.Format(directory + "\\SaveGames\\" + player.Name + "\\");
+            if (!System.IO.Directory.Exists(directory)) //  If the folder doesn't exist create it
             {
-				System.IO.Directory.CreateDirectory(savePath);
+                System.IO.Directory.CreateDirectory(directory);
+            }
+
+            //  Create list to hold strings
+            List<String> fileStrings = new List<string>();
+
+            //  Store the player's Name - Not sure if this is necessary because its the name of the text file
+            fileStrings.Add(player.Name);
+            //  Store the player's current coordinates
+            fileStrings.Add(string.Format(player.XCoord.ToString() + "," + player.YCoord.ToString() + ","));
+
+            //  Store the player's current room
+            fileStrings.Add(string.Format(player.CurrentMap.ToString()));
+
+            //  Get the player's current count of keys and kittens
+            int keyCount = 0;
+            int kittenCount = 0;
+            foreach (var item in Inventory)
+            {
+                if (item == key)
+                    keyCount++;
+                else if (item == kitten)
+                    kittenCount++;
+            }
+
+            //  Store the player's current count of keys and kittens
+            fileStrings.Add(string.Format(Cell.Contents.KEY.ToString() + "," + keyCount));
+            fileStrings.Add(string.Format(Cell.Contents.KITTEN.ToString() + "," + kittenCount));
+
+            //  Store the player's timer
+            fileStrings.Add(string.Format(player.GameClock.ToString()));
+
+            //  Add the target file to the end of the directory string
+            directory = directory + target;
+
+            //  save filestrings to file.
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter(directory))
+            {
+                foreach (string line in fileStrings)
+                {
+                    file.WriteLine(line);
+                }
+            }
+        }
+
+        //  Saves the  CURRENT ROOM to the SaveGames Directory - for when the player transitions between rooms
+        public void SaveRoom()
+        {
+            //  Determine which room is currently open
+            string target = ".txt";
+            target = cellGrid.File.ToString() + target;
+
+            //  Determine if the player's save folder exists
+            string directory = Directory.GetCurrentDirectory();
+            directory = string.Format(directory + "\\SaveGames\\" + player.Name + "\\");
+            if (!System.IO.Directory.Exists(directory)) //  If the folder doesn't exist create it
+            {
+                System.IO.Directory.CreateDirectory(directory);
             }
 
             //  Create list to hold strings
@@ -1641,12 +1602,12 @@ namespace Thief_Escape
                     fileStrings.Add(input);
                 }
             }
-            //  Add the saveTarget file to the end of the directory string
-			savePath = savePath + saveTarget;
+            //  Add the target file to the end of the directory string
+            directory = directory + target;
 
 
             //  save filestrings to file.
-			using(System.IO.StreamWriter file = new System.IO.StreamWriter(savePath))
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter(directory))
             {
                 foreach (string line in fileStrings)
                 {
@@ -1655,6 +1616,146 @@ namespace Thief_Escape
             }
         }
 
+        //  Loads the Game - Will call the NewGame method if the save file does not exist
+        public void LoadGame(string playerName)
+        {
+            //  Checks if the SaveGames directory exists
+            if (Directory.Exists(@"SaveGames"))
+            {
+                //  Checks if the Player's directory exists
+                string target = string.Format(@"SaveGames\\" + playerName);
+                if (Directory.Exists(target))
+                {
+                    #region [ Load Player ]
+                    //  Load the "player.txt" file if it exists
+                    target = string.Format(target + @"\\" + playerName + ".txt");
+                    if (File.Exists(target))
+                    {
+                        string[] playerLines = File.ReadAllLines(target);
+                        try
+                        {
+                            // Instantiate the player with the name from line 1 of the file
+                            player = new Player(playerLines[0].ToString());
+
+                            //  Get the coordinates from line 2 of the file
+                            string[] playerCoords = playerLines[1].Split(',').ToArray<string>();
+                            player.XCoord = int.Parse(playerCoords[0]);
+                            player.YCoord = int.Parse(playerCoords[1]);
+
+                            //  Get the current map from line 3 of the file
+                            Grid.MapFiles map;
+                            if (Enum.TryParse<Grid.MapFiles>(playerLines[2].ToString(), out map))
+                            {
+                                player.CurrentMap = map;
+                            }
+                            else
+                                throw new ArgumentException();
+
+                            //  Get the player's inventory, line 4 is KEYS and line 5 is KITTENS
+                            int keyCount = int.Parse(playerLines[3]);
+                            int kittenCount = int.Parse(playerLines[4]);
+                            {
+                                //  KEYS
+                                for (int i = 0; i < keyCount; i++)
+                                {
+                                    Inventory.Add(key);
+                                }
+
+                                //  KITTENS
+                                for (int i = 0; i < kittenCount; i++)
+                                {
+                                    Inventory.Add(kitten);
+                                }
+                            }
+
+                            //  Get the player's time from line 6
+                            int counter = int.Parse(playerLines[5]);
+                            player.GameClock = counter;
+                        }
+                        catch
+                        {
+                            MessageBox.Show("Something went wrong during the loading process, the \"Player Name\".txt file may have been corrupted", "Loading Error");
+                        }
+
+
+                    }
+                    else   //   If the file does not exist, then assume its broken and start a new game.
+                    {
+                        NewGame(playerName);
+                    }
+                    #endregion
+
+                    #region [ Load Current Room ]
+
+                    //  Get the room based on the player's current room
+                    Grid.MapFiles currentMap = player.CurrentMap;
+
+                    //  Calls the grid constructor based on that map
+                    cellGrid = new Grid(currentMap, player.Name);
+
+                    #endregion
+                }
+                else   //   If it does not exist, then call the NewGame method
+                {
+                    NewGame(playerName);
+                }
+            }
+        }
+
+        //  Creates a new game - called by the LoadGame method
+        public void NewGame(string playerName)
+        {
+            //  Copies the contents of the DefaultMaps folder to the player's SaveGame folder
+            string sourcePath = @"DefaultMaps";
+            string targetPath = string.Format(@"SaveGames\" + playerName);
+
+            if (!Directory.Exists(targetPath))  //  Creates the player folder if it doesn't exist
+            {
+                Directory.CreateDirectory(targetPath);
+            }
+
+            if (System.IO.Directory.Exists(sourcePath)) //  Checks to ensure the DefaultMaps folder exists
+            {
+                string[] files = System.IO.Directory.GetFiles(sourcePath);  //  Get an array of all files in default maps
+
+                string fileName;
+                string destFile;
+                // Copy the files and overwrite destination files if they already exist.
+                foreach (string s in files)
+                {
+                    // Use static Path methods to extract only the file name from the path.
+                    fileName = System.IO.Path.GetFileName(s);
+                    destFile = System.IO.Path.Combine(targetPath, fileName);
+                    System.IO.File.Copy(s, destFile, true);
+                }
+            }
+            else   //   DefaultMaps did not exist, return to main menu
+            {
+                MessageBox.Show(@"Unable to find the DefaultMaps directory. This folder should be in the same folder as Theif-Escape.exe. Without this folder the game cannot load.", "Critical Failure");
+                FrmMain main = new FrmMain();
+                main.Show();
+                this.Close();
+            }
+
+
+            //  Load the starter room first
+            //  Instantiates cellGrid using the default map.
+            cellGrid = new Grid(defaultMap, playerName);
+
+            //  Create the player next
+            //  Instantiate player with name
+            player = new Player(playerName);
+
+            //  Sets player's current map to default map
+            player.CurrentMap = defaultMap;
+
+            //  Sets player's current coords to starter coords
+            player.XCoord = cellGrid.StartingCell[0];
+            player.YCoord = cellGrid.StartingCell[1];
+
+            //  Sets player's gameclock to 0
+            player.GameClock = 0;
+        }
         #endregion
     }
 }

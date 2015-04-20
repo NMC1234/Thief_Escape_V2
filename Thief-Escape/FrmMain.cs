@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace Thief_Escape
 {
@@ -38,7 +39,7 @@ namespace Thief_Escape
         private void btnLoadGame_Click(object sender, EventArgs e)
         {
             //to-do
-            var LoadGame = new frmLoad(PlayerName);
+            var LoadGame = new frmLoad();
             if (LoadGame.ShowDialog() == DialogResult.OK) 
             {
                     Form LoadSavedGame = new FrmGame(LoadGame.UserName);
@@ -61,6 +62,17 @@ namespace Thief_Escape
         private void FrmMain_FormClosed(object sender, FormClosedEventArgs e)
         {
                 Application.Exit();
+        }
+
+        //  When the program is loaded make sure the DefaultMaps exist.
+        private void FrmMain_Load(object sender, EventArgs e)
+        {
+            //  Ensure the DefaultMaps directory exists, if not inform the user and close the program
+            if (!Directory.Exists("DefaultMaps"))
+            {
+                MessageBox.Show(@"Unable to find the DefaultMaps directory. This folder should be in the same folder as Theif-Escape.exe. Without this folder the game cannot load.", "Critical Failure");
+                this.Close();
+            }
         }
     }
 }
