@@ -1525,7 +1525,7 @@ namespace Thief_Escape
         {
             //  Determine which room is currently open
             string target = ".txt";
-            target = cellGrid.File.ToString() + target;
+            target = cellGrid.MapFile.ToString() + target;
 
             //  Determine if the player's save folder exists
             string directory = Directory.GetCurrentDirectory();

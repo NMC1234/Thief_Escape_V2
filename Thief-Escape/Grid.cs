@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 
 namespace Thief_Escape
@@ -72,7 +73,7 @@ namespace Thief_Escape
             get { return _mapSize; }
         }
 
-        public MapFiles File
+        public MapFiles MapFile
         {
             get { return _file; }
         }
@@ -91,22 +92,23 @@ namespace Thief_Escape
 
         public Grid(MapFiles file, string playerName)
         {
-            //Switch Statement to determine MapSize
-            switch (file)
-            {
-                case MapFiles.Test1:
-                    _mapSize = 16;
-                    break;
-
-                case MapFiles.Test2:
-                    _mapSize = 8;
-                    break;
-
-                default:
-                    _mapSize = 24; //   24 is the size of the Grid control on the form.
-                    break;
-            }
+            //  Store the map file
             _file = file;
+
+            //  Create the target path
+            string target = @"SaveGames\" + playerName + @"\" + file.ToString() + @".txt";
+
+            //  Read the file to a string array
+            string[] line = File.ReadAllLines(target);
+            string[][] fileLines = line.Select(l => l.Split(new[] { ',' })).ToArray();
+
+            //  Read the mapsize at line 1
+            _mapSize = int.Parse(fileLines[0][0].ToString());
+
+            //  Read the starting coords at line 2
+            _startingX = int.Parse(fileLines[1][0].ToString());
+            _startingY = int.Parse(fileLines[1][1].ToString());
+
             //Instantiate the Grid
             _map = new Cell[MapSize, MapSize];
 
@@ -119,206 +121,77 @@ namespace Thief_Escape
                 }
             }
 
-            //Now what I'd like to do is load from a file here, but because I haven't found a working solution for that, maps are being created in code here.
-            if (file == MapFiles.Test1)
+            //  For loop to iterate from line 3 of the file to the end, create cells 
+            for (int i = 2; i < line.Count(); i++)
             {
-                #region [ Test Map Creation ]
-                //Starting Cell
-                _startingX = 2;
-                _startingY = 4;
-                #region Walls
-                //create top row of walls
-                for (int i = 0; i < 16; i++)
+                //  Read x and y coords
+                int x = int.Parse(fileLines[i][0]);
+                int y = int.Parse(fileLines[i][1]);
+
+                //  Figure out what type the line references
+                Cell.Archetypes type;
+                if (Enum.TryParse<Cell.Archetypes>(fileLines[i][2].ToString(), out type))
                 {
-                    _map[0, i].Archetype = Cell.Archetypes.WALL;
-                }
+                    //  Switch on archetype
+                    switch (type)
+                    {
+                        case Cell.Archetypes.WALL:
+                            //  Create the cell
+                            _map[x, y].Archetype = type;
 
-                //create bottom row of walls
-                for (int i = 0; i < 16; i++)
+                            //  If there is something in the Item spot in the line
+                            if (fileLines[i][3].ToString() != null & fileLines[i][3].ToString() != "")
+                            {
+                                //  Read the item type and assign it
+                                Cell.Contents cont = (Cell.Contents)Enum.Parse(typeof(Cell.Contents), fileLines[i][3].ToString());
+                                _map[x, y].Content = cont;
+                            }
+
+                            break;
+
+                        case Cell.Archetypes.FLOOR:
+                            //  Create the cell
+                            _map[x, y].Archetype = type;
+
+                            //  If there is something in the Item spot in the line
+                            if (fileLines[i][3].ToString() != null & fileLines[i][3].ToString() != "")
+                            {
+                                //  Read the item type and assign it
+                                Cell.Contents cont = (Cell.Contents)Enum.Parse(typeof(Cell.Contents), fileLines[i][3].ToString());
+                                _map[x, y].Content = cont;
+                            }
+
+                            break;
+
+                        case Cell.Archetypes.DOOR:
+                            //  Create the Cell
+                            _map[x, y].Archetype = type;
+
+                            //  Set the LOCKED, UNLOCKED, or EXIT state
+                            Cell.Modifiers mod = (Cell.Modifiers)Enum.Parse(typeof(Cell.Modifiers), fileLines[i][3].ToString());
+                            _map[x, y].Modifier = mod;
+
+                            break;
+
+                        case Cell.Archetypes.STAIR:
+                            //  Create the Cell
+                            _map[x, y].Archetype = type;
+
+                            //  Set the destination map
+                            Grid.MapFiles map = (Grid.MapFiles)Enum.Parse(typeof(Grid.MapFiles), fileLines[i][3].ToString());
+                            _map[x, y].Destination = map;
+
+                            //  Set the destination coords
+                            int[] coords = { int.Parse(fileLines[i][4]), int.Parse(fileLines[i][5]) };
+                            _map[x, y].DestinationCoords = coords;
+
+                            break;
+                    }
+                }
+                else   //   Unable to read the enumeration
                 {
-                    _map[15, i].Archetype = Cell.Archetypes.WALL;
+                    throw new ArgumentException("Error occured during file reading, unable to process cell Archetype");
                 }
-
-                //create left column of walls
-                for (int i = 0; i < 15; i++)
-                {
-                    _map[i, 0].Archetype = Cell.Archetypes.WALL;
-                }
-
-                //create right column of walls
-                for (int i = 0; i < 15; i++)
-                {
-                    _map[i, 15].Archetype = Cell.Archetypes.WALL;
-                }
-                //create all other walls
-                _map[1, 5].Archetype = Cell.Archetypes.WALL;
-                _map[1, 12].Archetype = Cell.Archetypes.WALL;
-
-                _map[2, 3].Archetype = Cell.Archetypes.WALL;
-                _map[2, 5].Archetype = Cell.Archetypes.WALL;
-                _map[2, 8].Archetype = Cell.Archetypes.WALL;
-                _map[2, 12].Archetype = Cell.Archetypes.WALL;
-
-                _map[3, 1].Archetype = Cell.Archetypes.WALL;
-                _map[3, 2].Archetype = Cell.Archetypes.WALL;
-                _map[3, 3].Archetype = Cell.Archetypes.WALL;
-                _map[3, 5].Archetype = Cell.Archetypes.WALL;
-                _map[3, 7].Archetype = Cell.Archetypes.WALL;
-                _map[3, 8].Archetype = Cell.Archetypes.WALL;
-                _map[3, 9].Archetype = Cell.Archetypes.WALL;
-                _map[3, 11].Archetype = Cell.Archetypes.WALL;
-                _map[3, 12].Archetype = Cell.Archetypes.WALL;
-
-                _map[4, 3].Archetype = Cell.Archetypes.WALL;
-                _map[4, 5].Archetype = Cell.Archetypes.WALL;
-                _map[4, 7].Archetype = Cell.Archetypes.WALL;
-                _map[4, 11].Archetype = Cell.Archetypes.WALL;
-                _map[4, 12].Archetype = Cell.Archetypes.WALL;
-                _map[4, 13].Archetype = Cell.Archetypes.WALL;
-
-                _map[5, 3].Archetype = Cell.Archetypes.WALL;
-                _map[5, 5].Archetype = Cell.Archetypes.WALL;
-                _map[5, 6].Archetype = Cell.Archetypes.WALL;
-                _map[5, 7].Archetype = Cell.Archetypes.WALL;
-
-                _map[6, 11].Archetype = Cell.Archetypes.WALL;
-                _map[6, 12].Archetype = Cell.Archetypes.WALL;
-
-                _map[7, 1].Archetype = Cell.Archetypes.WALL;
-                _map[7, 2].Archetype = Cell.Archetypes.WALL;
-                _map[7, 3].Archetype = Cell.Archetypes.WALL;
-                _map[7, 4].Archetype = Cell.Archetypes.WALL;
-                _map[7, 5].Archetype = Cell.Archetypes.WALL;
-                _map[7, 6].Archetype = Cell.Archetypes.WALL;
-                _map[7, 7].Archetype = Cell.Archetypes.WALL;
-                _map[7, 8].Archetype = Cell.Archetypes.WALL;
-                _map[7, 9].Archetype = Cell.Archetypes.WALL;
-                _map[7, 10].Archetype = Cell.Archetypes.WALL;
-                _map[7, 11].Archetype = Cell.Archetypes.WALL;
-                _map[7, 12].Archetype = Cell.Archetypes.WALL;
-
-                _map[8, 1].Archetype = Cell.Archetypes.WALL;
-                _map[8, 2].Archetype = Cell.Archetypes.WALL;
-                _map[8, 3].Archetype = Cell.Archetypes.WALL;
-                _map[8, 4].Archetype = Cell.Archetypes.WALL;
-                _map[8, 5].Archetype = Cell.Archetypes.WALL;
-                _map[8, 6].Archetype = Cell.Archetypes.WALL;
-                _map[8, 11].Archetype = Cell.Archetypes.WALL;
-                _map[8, 12].Archetype = Cell.Archetypes.WALL;
-
-                _map[9, 6].Archetype = Cell.Archetypes.WALL;
-                _map[9, 9].Archetype = Cell.Archetypes.WALL;
-                _map[9, 11].Archetype = Cell.Archetypes.WALL;
-                _map[9, 12].Archetype = Cell.Archetypes.WALL;
-
-                _map[10, 2].Archetype = Cell.Archetypes.WALL;
-                _map[10, 3].Archetype = Cell.Archetypes.WALL;
-                _map[10, 4].Archetype = Cell.Archetypes.WALL;
-                _map[10, 5].Archetype = Cell.Archetypes.WALL;
-                _map[10, 6].Archetype = Cell.Archetypes.WALL;
-                _map[10, 7].Archetype = Cell.Archetypes.WALL;
-                _map[10, 8].Archetype = Cell.Archetypes.WALL;
-                _map[10, 9].Archetype = Cell.Archetypes.WALL;
-
-                _map[11, 9].Archetype = Cell.Archetypes.WALL;
-                _map[11, 11].Archetype = Cell.Archetypes.WALL;
-                _map[11, 12].Archetype = Cell.Archetypes.WALL;
-                _map[11, 13].Archetype = Cell.Archetypes.WALL;
-
-                _map[12, 1].Archetype = Cell.Archetypes.WALL;
-                _map[12, 2].Archetype = Cell.Archetypes.WALL;
-                _map[12, 3].Archetype = Cell.Archetypes.WALL;
-                _map[12, 5].Archetype = Cell.Archetypes.WALL;
-                _map[12, 6].Archetype = Cell.Archetypes.WALL;
-                _map[12, 9].Archetype = Cell.Archetypes.WALL;
-                _map[12, 11].Archetype = Cell.Archetypes.WALL;
-                _map[12, 12].Archetype = Cell.Archetypes.WALL;
-
-                _map[13, 6].Archetype = Cell.Archetypes.WALL;
-                _map[13, 9].Archetype = Cell.Archetypes.WALL;
-                _map[13, 12].Archetype = Cell.Archetypes.WALL;
-
-                _map[14, 6].Archetype = Cell.Archetypes.WALL;
-                _map[14, 12].Archetype = Cell.Archetypes.WALL;
-                #endregion
-                //Cells are assumed to be floors until told otherwise
-                #region Doors
-                //Unlocked doors
-                _map[1, 3].Archetype = Cell.Archetypes.DOOR;
-                _map[10, 1].Archetype = Cell.Archetypes.DOOR;
-                _map[8, 9].Archetype = Cell.Archetypes.DOOR;
-                _map[14, 9].Archetype = Cell.Archetypes.DOOR;
-                _map[3, 10].Archetype = Cell.Archetypes.DOOR;
-
-                //Locked doors
-                _map[6, 3].Archetype = Cell.Archetypes.DOOR;
-                _map[6, 3].Modifier = Cell.Modifiers.LOCKED;
-                _map[12, 4].Archetype = Cell.Archetypes.DOOR;
-                _map[12, 4].Modifier = Cell.Modifiers.LOCKED;
-                _map[1, 8].Archetype = Cell.Archetypes.DOOR;
-                _map[1, 8].Modifier = Cell.Modifiers.LOCKED;
-                _map[4, 14].Archetype = Cell.Archetypes.DOOR;
-                _map[4, 14].Modifier = Cell.Modifiers.LOCKED;
-                _map[11, 14].Archetype = Cell.Archetypes.DOOR;
-                _map[11, 14].Modifier = Cell.Modifiers.LOCKED;
-                #endregion
-                #region Stairs
-                _map[1, 13].Archetype = Cell.Archetypes.STAIR;
-                _map[1, 13].Destination = MapFiles.Test2;
-                int[] coords1 = { 2, 2 };
-                _map[1, 13].DestinationCoords = coords1;
-
-                _map[14, 13].Archetype = Cell.Archetypes.STAIR;
-                _map[14, 13].Destination = MapFiles.Test2;
-                int[] coords2 = { 5, 5 };
-                _map[14, 13].DestinationCoords = coords2;
-                #endregion
-                #region Items
-                _map[9, 7].Content = Cell.Contents.KEY;
-                #endregion
-                #endregion
-            }
-            else if (file == MapFiles.Test2)
-            {
-                #region [ Test Map Creation ]
-                //No starting cell this time, You cant start in this room.
-                #region Walls
-                //Borders of the grid
-                for (int i = 0; i < _mapSize - 1; i++)
-                {
-                    _map[0, i].Archetype = Cell.Archetypes.WALL;
-                    _map[7, i].Archetype = Cell.Archetypes.WALL;
-                    _map[i, 0].Archetype = Cell.Archetypes.WALL;
-                    _map[i, 7].Archetype = Cell.Archetypes.WALL;
-                }
-                //This one wall wouldn't be set for some reason.
-                _map[7, 7].Archetype = Cell.Archetypes.WALL;
-                //Inner walls of the grid
-                for (int i = 0; i < 5; i++)
-                {
-                    _map[i, 4].Archetype = Cell.Archetypes.WALL;
-                }
-                for (int i = 3; i < 8; i++)
-                {
-                    _map[i, 3].Archetype = Cell.Archetypes.WALL;
-                }
-                #endregion
-                #region Stairs
-                _map[2, 2].Archetype = Cell.Archetypes.STAIR;
-                _map[2, 2].Destination = MapFiles.Test1;
-                int[] coords1 = { 1, 13 };
-                _map[2, 2].DestinationCoords = coords1;
-
-                _map[5, 5].Archetype = Cell.Archetypes.STAIR;
-                _map[5, 5].Destination = MapFiles.Test1;
-                int[] coords2 = { 14, 13 };
-                _map[5, 5].DestinationCoords = coords2;
-                #endregion
-                #region Items
-                _map[5, 2].Content = Cell.Contents.KEY;
-                _map[2, 5].Content = Cell.Contents.KITTEN;
-                #endregion
-                #endregion
             }
         }
 
