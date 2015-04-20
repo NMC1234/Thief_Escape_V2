@@ -49,14 +49,6 @@ namespace Thief_Escape
 
         #endregion
 
-
-		#region [ Fields/Properties ]
-		//Strings used in saving a user's game
-		private string saveTarget { get; set; }
-		private string saveDirectory { get; set; }
-		#endregion
-
-
 		#region [ Constructors ]
 
 		//Default constructor
@@ -82,7 +74,6 @@ namespace Thief_Escape
 
 
         #region [ Form Events ]
-
 
         //  Form Closed
         private void FrmGame_FormClosed(object sender, FormClosedEventArgs e)
@@ -1471,104 +1462,62 @@ namespace Thief_Escape
 
         #region [ File Interaction Methods ]
 
-        //  Saves the GAME to the SaveGames Directory - for when the player saves the game before quiting
-		//Must currently go through SaveGame to get to SaveRoom!
+        //  Saves the PLAYER and CURRENT ROOM to the SaveGames Directory - for when the player saves the game before quiting
         public void SaveGame()
         {
-			//Temp used vars for save path creation
-			string savePath;
-			bool saveCancel = false;
+            //  Saves the current room, assumes all other rooms have already been saved
+            SaveRoom();
 
-			//Default values/settings are assigned
-			saveTarget = ".txt";
-			saveDirectory = Directory.GetCurrentDirectory( );
-			saveFD.InitialDirectory = saveDirectory;
-			saveFD.FileName = "SaveGames";
-			saveFD.Title = "Select Where You Want To Save The Game.  Default Save Folder is 'SaveGames'.";
-			saveFD.AddExtension = false;
-			saveFD.CheckFileExists = false;
-			saveFD.CheckPathExists = false;
-			saveFD.CreatePrompt = false;
-			saveFD.OverwritePrompt = false;
-
-			//Shows the file dialog window to let user select where to save game
-			if(saveFD.ShowDialog( ) == DialogResult.OK)
-			{
-				//Selected path is set upon accept
-				saveDirectory = saveFD.FileName;
-				saveCancel = false;
-			}
-			else
-			{
-				//if no path was given then default is used
-				saveDirectory = Directory.GetCurrentDirectory( );
-				saveCancel = true;
-			}
-
-			//checks if save was cancelled
-			if(!saveCancel)
-			{
-
-				//  First saves the current room - Assumes all other rooms have already been saved
-				SaveRoom( );
-
-				//  Creates the saveTarget string for the player.txt file
-				saveTarget = ".txt";
-				saveTarget = player.Name + saveTarget;
-
-				//  Determine if the player's save folder exists
-				savePath = string.Format(saveDirectory + "\\" + player.Name + "\\");
-				if(!System.IO.Directory.Exists(savePath)) //  If the folder doesn't exist create it
-				{
-					System.IO.Directory.CreateDirectory(savePath);
-				}
-
-				//  Create list to hold strings
-				List<String> fileStrings = new List<string>( );
-
-				//  Store the player's Name - Not sure if this is necessary because its the name of the text file
-				fileStrings.Add(player.Name);
-
-				//  Store the player's current coordinates
-				fileStrings.Add(string.Format(player.XCoord.ToString( ) + "," + player.YCoord.ToString( ) + ","));
-
-				//  Store the player's current room
-				fileStrings.Add(string.Format(player.CurrentMap.ToString( )));
-
-				//  Add the saveTarget file to the end of the directory string
-				savePath = savePath + saveTarget;
-
-
-				//  save filestrings to file.
-				using(System.IO.StreamWriter file = new System.IO.StreamWriter(savePath))
-				{
-					foreach(string line in fileStrings)
-					{
-						file.WriteLine(line);
-					}
-				}
-
-				MessageBox.Show("Your game has been saved!", "SUCCESS!");
-			}
-			else
-			{
-				MessageBox.Show("Cancelled Save Operation", "CANCELLED");
-			}
-        }
-
-        //  Saves the ROOM to the SaveGames Directory - for when the player transitions between rooms
-        public void SaveRoom()
-        {
-			string savePath;
-            //  Determine which room is currently open
-            saveTarget = cellGrid.File.ToString() + saveTarget;
+            //  Creates the target string for the player.txt file
+            string target = ".txt";
+            target = player.Name + target;
 
             //  Determine if the player's save folder exists
-			savePath = string.Format(saveDirectory + "\\" + player.Name + "\\");
-			//  If the folder doesn't exist create it
-			if(!System.IO.Directory.Exists(savePath)) 
+            string directory = Directory.GetCurrentDirectory();
+            directory = string.Format(directory + "\\SaveGames\\" + player.Name + "\\");
+            if (!System.IO.Directory.Exists(directory)) //  If the folder doesn't exist create it
             {
-				System.IO.Directory.CreateDirectory(savePath);
+                System.IO.Directory.CreateDirectory(directory);
+            }
+
+            //  Create list to hold strings
+            List<String> fileStrings = new List<string>();
+
+            //  Store the player's Name - Not sure if this is necessary because its the name of the text file
+            fileStrings.Add(player.Name);
+            //  Store the player's current coordinates
+            fileStrings.Add(string.Format(player.XCoord.ToString() + "," + player.YCoord.ToString() + ","));
+
+            //  Store the player's current room
+            fileStrings.Add(string.Format(player.CurrentMap.ToString()));
+
+            //  Add the target file to the end of the directory string
+            directory = directory + target;
+
+
+            //  save filestrings to file.
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter(directory))
+            {
+                foreach (string line in fileStrings)
+                {
+                    file.WriteLine(line);
+                }
+            }
+        }
+
+        //  Saves the  CURRENT ROOM to the SaveGames Directory - for when the player transitions between rooms
+        public void SaveRoom()
+        {
+            //  Determine which room is currently open
+            string target = ".txt";
+            target = cellGrid.File.ToString() + target;
+
+            //  Determine if the player's save folder exists
+            string directory = Directory.GetCurrentDirectory();
+            directory = string.Format(directory + "\\SaveGames\\" + player.Name + "\\");
+            if (!System.IO.Directory.Exists(directory)) //  If the folder doesn't exist create it
+            {
+                System.IO.Directory.CreateDirectory(directory);
             }
 
             //  Create list to hold strings
@@ -1638,12 +1587,12 @@ namespace Thief_Escape
                     fileStrings.Add(input);
                 }
             }
-            //  Add the saveTarget file to the end of the directory string
-			savePath = savePath + saveTarget;
+            //  Add the target file to the end of the directory string
+            directory = directory + target;
 
 
             //  save filestrings to file.
-			using(System.IO.StreamWriter file = new System.IO.StreamWriter(savePath))
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter(directory))
             {
                 foreach (string line in fileStrings)
                 {
