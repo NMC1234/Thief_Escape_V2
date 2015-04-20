@@ -48,6 +48,8 @@
             Syncfusion.Windows.Forms.Grid.GridRangeStyle gridRangeStyle13 = new Syncfusion.Windows.Forms.Grid.GridRangeStyle();
             Syncfusion.Windows.Forms.Grid.GridRangeStyle gridRangeStyle14 = new Syncfusion.Windows.Forms.Grid.GridRangeStyle();
             Syncfusion.Windows.Forms.Grid.GridRangeStyle gridRangeStyle15 = new Syncfusion.Windows.Forms.Grid.GridRangeStyle();
+            Syncfusion.Windows.Forms.Grid.GridRangeStyle gridRangeStyle16 = new Syncfusion.Windows.Forms.Grid.GridRangeStyle();
+            Syncfusion.Windows.Forms.Grid.GridRangeStyle gridRangeStyle17 = new Syncfusion.Windows.Forms.Grid.GridRangeStyle();
             this.grpboxLegend = new System.Windows.Forms.GroupBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.lblKey = new System.Windows.Forms.Label();
@@ -67,10 +69,10 @@
             this.lblWall = new System.Windows.Forms.Label();
             this.grpMovement = new System.Windows.Forms.GroupBox();
             this.btnMoveWest = new System.Windows.Forms.Button();
-            this.btnInteract = new System.Windows.Forms.Button();
             this.btnMoveEast = new System.Windows.Forms.Button();
             this.btnMoveSouth = new System.Windows.Forms.Button();
             this.btnMoveNorth = new System.Windows.Forms.Button();
+            this.btnInteract = new System.Windows.Forms.Button();
             this.tabDialog = new System.Windows.Forms.TabControl();
             this.tabDialogs = new System.Windows.Forms.TabPage();
             this.lstDialog = new System.Windows.Forms.ListBox();
@@ -202,13 +204,13 @@
             this.lblCurrentCell.AutoSize = true;
             this.lblCurrentCell.Location = new System.Drawing.Point(28, 22);
             this.lblCurrentCell.Name = "lblCurrentCell";
-            this.lblCurrentCell.Size = new System.Drawing.Size(71, 13);
+            this.lblCurrentCell.Size = new System.Drawing.Size(32, 13);
             this.lblCurrentCell.TabIndex = 11;
-            this.lblCurrentCell.Text = "- Current Cell";
+            this.lblCurrentCell.Text = "- Exit";
             // 
             // txtCurrentCell
             // 
-            this.txtCurrentCell.BackColor = System.Drawing.Color.Orange;
+            this.txtCurrentCell.BackColor = System.Drawing.Color.Green;
             this.txtCurrentCell.Enabled = false;
             this.txtCurrentCell.Location = new System.Drawing.Point(6, 19);
             this.txtCurrentCell.Name = "txtCurrentCell";
@@ -319,22 +321,6 @@
             this.btnMoveWest.UseVisualStyleBackColor = false;
             this.btnMoveWest.Click += new System.EventHandler(this.btnMoveWest_Click);
             // 
-            // btnInteract
-            // 
-            this.btnInteract.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnInteract.BackColor = System.Drawing.Color.YellowGreen;
-            this.btnInteract.Cursor = System.Windows.Forms.Cursors.Default;
-            this.btnInteract.Font = new System.Drawing.Font("Constantia", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnInteract.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.btnInteract.Location = new System.Drawing.Point(794, 37);
-            this.btnInteract.Name = "btnInteract";
-            this.btnInteract.Size = new System.Drawing.Size(83, 49);
-            this.btnInteract.TabIndex = 22;
-            this.btnInteract.Text = "&Interact";
-            this.toolTip1.SetToolTip(this.btnInteract, "[Space Bar] Use This Button To Interact With Items And More!");
-            this.btnInteract.UseVisualStyleBackColor = false;
-            this.btnInteract.Click += new System.EventHandler(this.btnInteract_Click);
-            // 
             // btnMoveEast
             // 
             this.btnMoveEast.BackColor = System.Drawing.Color.LightGray;
@@ -373,6 +359,22 @@
             this.btnMoveNorth.Text = "&North";
             this.btnMoveNorth.UseVisualStyleBackColor = false;
             this.btnMoveNorth.Click += new System.EventHandler(this.btnMoveNorth_Click);
+            // 
+            // btnInteract
+            // 
+            this.btnInteract.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnInteract.BackColor = System.Drawing.Color.YellowGreen;
+            this.btnInteract.Cursor = System.Windows.Forms.Cursors.Default;
+            this.btnInteract.Font = new System.Drawing.Font("Constantia", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnInteract.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.btnInteract.Location = new System.Drawing.Point(794, 37);
+            this.btnInteract.Name = "btnInteract";
+            this.btnInteract.Size = new System.Drawing.Size(83, 49);
+            this.btnInteract.TabIndex = 22;
+            this.btnInteract.Text = "&Interact";
+            this.toolTip1.SetToolTip(this.btnInteract, "[Space Bar] Use This Button To Interact With Items And More!");
+            this.btnInteract.UseVisualStyleBackColor = false;
+            this.btnInteract.Click += new System.EventHandler(this.btnInteract_Click);
             // 
             // tabDialog
             // 
@@ -419,9 +421,9 @@
             this.tabInventory.Controls.Add(this.lstInventory);
             this.tabInventory.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabInventory.ForeColor = System.Drawing.Color.Black;
-            this.tabInventory.Location = new System.Drawing.Point(4, 32);
+            this.tabInventory.Location = new System.Drawing.Point(4, 31);
             this.tabInventory.Name = "tabInventory";
-            this.tabInventory.Size = new System.Drawing.Size(384, 212);
+            this.tabInventory.Size = new System.Drawing.Size(387, 213);
             this.tabInventory.TabIndex = 2;
             this.tabInventory.Text = "Inventory";
             this.toolTip1.SetToolTip(this.tabInventory, "Check here to see what you have collected.");
@@ -615,6 +617,22 @@
             gridRangeStyle15.StyleInfo.Font.Strikeout = false;
             gridRangeStyle15.StyleInfo.Font.Underline = false;
             gridRangeStyle15.StyleInfo.Font.Unit = System.Drawing.GraphicsUnit.Point;
+            gridRangeStyle16.Range = Syncfusion.Windows.Forms.Grid.GridRangeInfo.Table();
+            gridRangeStyle16.StyleInfo.Font.Bold = false;
+            gridRangeStyle16.StyleInfo.Font.Facename = "Arial";
+            gridRangeStyle16.StyleInfo.Font.Italic = false;
+            gridRangeStyle16.StyleInfo.Font.Size = 15F;
+            gridRangeStyle16.StyleInfo.Font.Strikeout = false;
+            gridRangeStyle16.StyleInfo.Font.Underline = false;
+            gridRangeStyle16.StyleInfo.Font.Unit = System.Drawing.GraphicsUnit.Point;
+            gridRangeStyle17.Range = Syncfusion.Windows.Forms.Grid.GridRangeInfo.Table();
+            gridRangeStyle17.StyleInfo.Font.Bold = false;
+            gridRangeStyle17.StyleInfo.Font.Facename = "Arial";
+            gridRangeStyle17.StyleInfo.Font.Italic = false;
+            gridRangeStyle17.StyleInfo.Font.Size = 15F;
+            gridRangeStyle17.StyleInfo.Font.Strikeout = false;
+            gridRangeStyle17.StyleInfo.Font.Underline = false;
+            gridRangeStyle17.StyleInfo.Font.Unit = System.Drawing.GraphicsUnit.Point;
             this.grdconMap.RangeStyles.AddRange(new Syncfusion.Windows.Forms.Grid.GridRangeStyle[] {
             gridRangeStyle1,
             gridRangeStyle2,
@@ -630,7 +648,9 @@
             gridRangeStyle12,
             gridRangeStyle13,
             gridRangeStyle14,
-            gridRangeStyle15});
+            gridRangeStyle15,
+            gridRangeStyle16,
+            gridRangeStyle17});
             this.grdconMap.ResizeColsBehavior = Syncfusion.Windows.Forms.Grid.GridResizeCellsBehavior.None;
             this.grdconMap.ResizeRowsBehavior = Syncfusion.Windows.Forms.Grid.GridResizeCellsBehavior.None;
             this.grdconMap.RowCount = 24;
@@ -720,28 +740,28 @@
             // saveGameToolStripMenuItem
             // 
             this.saveGameToolStripMenuItem.Name = "saveGameToolStripMenuItem";
-            this.saveGameToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveGameToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.saveGameToolStripMenuItem.Text = "&Save Game";
             this.saveGameToolStripMenuItem.Click += new System.EventHandler(this.saveGameToolStripMenuItem_Click);
             // 
             // loadGameToolStripMenuItem
             // 
             this.loadGameToolStripMenuItem.Name = "loadGameToolStripMenuItem";
-            this.loadGameToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.loadGameToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.loadGameToolStripMenuItem.Text = "&Load Game";
             this.loadGameToolStripMenuItem.Click += new System.EventHandler(this.loadGameToolStripMenuItem_Click);
             // 
             // mainMenuToolStripMenuItem
             // 
             this.mainMenuToolStripMenuItem.Name = "mainMenuToolStripMenuItem";
-            this.mainMenuToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.mainMenuToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.mainMenuToolStripMenuItem.Text = "&Main Menu";
             this.mainMenuToolStripMenuItem.Click += new System.EventHandler(this.mainMenuToolStripMenuItem_Click);
             // 
             // exitGameToolStripMenuItem
             // 
             this.exitGameToolStripMenuItem.Name = "exitGameToolStripMenuItem";
-            this.exitGameToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitGameToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.exitGameToolStripMenuItem.Text = "E&xit Game ";
             this.exitGameToolStripMenuItem.Click += new System.EventHandler(this.exitGameToolStripMenuItem_Click);
             // 
@@ -763,6 +783,7 @@
             this.MinimumSize = new System.Drawing.Size(590, 430);
             this.Name = "FrmGame";
             this.Text = "Thief-Escape - Game";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmGame_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmGame_FormClosed);
             this.Load += new System.EventHandler(this.FrmGame_Load);
             this.grpboxLegend.ResumeLayout(false);

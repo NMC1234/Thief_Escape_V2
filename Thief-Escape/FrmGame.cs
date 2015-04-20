@@ -41,6 +41,7 @@ namespace Thief_Escape
         Color floorColor = Color.White;
         Color doorUnlockedColor = Color.Chocolate;
         Color doorLockedColor = Color.SaddleBrown;
+        Color doorExitColor = Color.Green;
         Color stairColor = Color.Yellow;
         Color kittenColor = Color.Purple;
         Color keyColor = Color.SpringGreen;
@@ -84,6 +85,22 @@ namespace Thief_Escape
             if (exit)
                 Application.Exit();
 
+        }
+
+        //  Form Closing
+        private void FrmGame_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //Prompt user if they want to save game
+            DialogResult newDialog = MessageBox.Show("Would you like to save the game before you leave?", "Save Game?",
+                MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+
+            if (newDialog == DialogResult.Yes)
+            {
+                SaveGame();
+            }
+
+            if (newDialog == DialogResult.Cancel)
+                e.Cancel = true;
         }
 
         //  Arrow-Key Press handler
@@ -659,193 +676,6 @@ namespace Thief_Escape
             }
         }
 
-
-        // removed Use/Pick-up Key, kitten, and Use Stairs Buttons
-        //private void btnPickupKey_Click(object sender, EventArgs e)
-        //{
-        //	int[ ] keyDetails = CheckForNearbyKey( );
-        //	if(keyDetails[0] != 0)
-        //	{
-        //		//  Remove key from grid.
-        //		cellGrid.RemoveItem(keyDetails[1], keyDetails[2]);
-
-        //		//  Refresh grid.
-        //		ViewArea( );
-
-        //		//  Add a key to the inventory
-        //		Inventory.Add(key);
-        //		UpdateInventory( );
-
-        //		//  Tell user they have picked up a key.
-        //		lstDialog.Items.Add("I have found a Key, I can use this to open doors.");
-        //		lstDialog.SelectedIndex = lstDialog.Items.Count - 1;
-        //		lstDialog.SelectedIndex = -1;
-        //	}
-        //	else
-        //	{
-        //		//  Tell user there is no key nearby.
-        //		lstDialog.Items.Add("There is no key nearby!");
-        //		lstDialog.SelectedIndex = lstDialog.Items.Count - 1;
-        //		lstDialog.SelectedIndex = -1;
-        //	}
-
-        //	//  Update
-        //	UpdateInventory( );
-        //}
-
-
-
-        //private void btnPickupKitten_Click(object sender, EventArgs e)
-        //{
-        //	int[] kittenDetails = CheckForNearbyKitten();
-
-        //	if (kittenDetails[0] != 0)
-        //	{
-        //		//  Remove kitten from grid.
-        //		cellGrid.RemoveItem(kittenDetails[1], kittenDetails[2]);
-
-        //		//  Refresh grid.
-        //		ViewArea();
-
-        //		//  Add a kitten to the inventory
-        //		Inventory.Add(kitten);
-        //		UpdateInventory();
-
-        //		//  Tell user they have picked up a kitten.
-        //		lstDialog.Items.Add("I found a kitten!");
-        //		lstDialog.SelectedIndex = lstDialog.Items.Count - 1;
-        //		lstDialog.SelectedIndex = -1;
-        //	}
-        //	else
-        //	{
-        //		//  Tell user there is no kitten nearby.
-        //		lstDialog.Items.Add("There is no kitten nearby!");
-        //		lstDialog.SelectedIndex = lstDialog.Items.Count - 1;
-        //		lstDialog.SelectedIndex = -1;
-        //	}
-
-        //	//  Update
-        //	UpdateInventory();
-        //}
-
-        // Use Key Button
-        //private void btnUseKey_Click(object sender, EventArgs e)
-        //{
-        //	bool foundDoor = false;
-
-        //	//First checks if the player has a key in its inventory
-        //	if (Inventory.Contains<Item>(key))
-        //	{
-        //		//Creates starting point for search, 1 cell up and 1 cell left, centered on the player.
-        //		int x = player.XCoord - 1;
-        //		int y = player.YCoord - 1;
-
-
-        //		//Goes through each "column" of the search area
-        //		for (int ix = 0; ix < 3; ix++)
-        //		{
-        //			//Goes through each "row" of the column
-        //			for (int iy = 0; iy < 3; iy++)
-        //			{
-        //				//If the cell is a door, check if its locked.
-        //				if (cellGrid.CheckType((x + ix), (y + iy)) == Cell.Archetypes.DOOR)
-        //				{
-        //					foundDoor = true;
-
-        //					//  Search found a locked door.
-        //					if (cellGrid.CheckDoorModifier((x + ix), (y + iy)) == Cell.Modifiers.LOCKED)
-        //					{
-        //						Inventory.Remove(key);
-        //						cellGrid.ToggleDoorModifier((x + ix), (y + iy));
-
-        //						//Door is now unlocked
-        //						lstDialog.Items.Add("This door is now unlocked.");
-        //						lstDialog.SelectedIndex = lstDialog.Items.Count - 1;
-        //						lstDialog.SelectedIndex = -1;
-        //					}
-
-        //					else
-        //					{
-        //						//Door is already unlocked
-        //						lstDialog.Items.Add("This door is already unlocked.");
-        //						lstDialog.SelectedIndex = lstDialog.Items.Count - 1;
-        //						lstDialog.SelectedIndex = -1;
-        //					}
-
-
-        //				}
-        //			}
-        //		}
-        //		//  Tell the user there is no door if the search didn't find one.
-        //		if (!foundDoor)
-        //		{
-        //			lstDialog.Items.Add("I don't see a door near me.");
-        //			lstDialog.SelectedIndex = lstDialog.Items.Count - 1;
-        //			lstDialog.SelectedIndex = -1;
-        //		}
-        //	}
-        //	else if (!(Inventory.Contains(key)))
-        //	{
-        //		//  Player does not have key.
-        //		lstDialog.Items.Add("I don't have a key to use.");
-        //		lstDialog.SelectedIndex = lstDialog.Items.Count - 1;
-        //		lstDialog.SelectedIndex = -1;
-        //	}
-
-        //	//Refresh the map
-        //	ViewArea();
-
-        //	//Revalidate movements
-        //	CheckValidMovements(player.XCoord, player.YCoord);
-
-        //	//Update Inventory
-        //	UpdateInventory();
-        //}
-
-
-        //  Use Stairs Button
-
-
-        //private void btnUseStairs_Click(object sender, EventArgs e)
-        //{
-        //	//Check to see if the player is currently standing on stairs.
-        //	if (cellGrid.CheckType(player.XCoord,player.YCoord) == Cell.Archetypes.STAIR)
-        //	{
-        //		// Get the stairs destination
-        //		Grid.MapFiles destination = cellGrid.Destination(player.XCoord, player.YCoord);
-        //		int[] coords = cellGrid.DestinationCoords(player.XCoord, player.YCoord);
-
-        //		//Fog everything
-        //		InitialFog();
-
-        //		//  Recreate the grid
-        //		cellGrid = new Grid(destination);
-
-        //		//Place the player
-        //		player.XCoord = coords[0];
-        //		player.YCoord = coords[1];
-
-        //		// Refresh the view
-        //		ViewArea();
-
-        //		//Check new valid movements
-        //		CheckValidMovements(player.XCoord,player.YCoord);
-
-        //		//Tell the user they have used stairs.
-        //		//  Tell user there not on the stairs
-        //		lstDialog.Items.Add("Those where some tall stairs.");
-        //		lstDialog.SelectedIndex = lstDialog.Items.Count - 1;
-        //		lstDialog.SelectedIndex = -1;
-        //	}
-
-        //	else
-        //	{
-        //		//  Tell user there not on the stairs
-        //		lstDialog.Items.Add("I have to be on the stairs to use them.");
-        //		lstDialog.SelectedIndex = lstDialog.Items.Count - 1;
-        //		lstDialog.SelectedIndex = -1;
-        //	}
-        //}
         #endregion
 
         #region [ Action Methods ]
@@ -1011,6 +841,9 @@ namespace Thief_Escape
                 //Fog everything
                 InitialFog();
 
+                //  Save the current room
+                SaveRoom();
+
                 //  Recreate the grid
                 cellGrid = new Grid(destination, player.Name);
 
@@ -1028,7 +861,6 @@ namespace Thief_Escape
                 CheckSpecialActions();
 
                 //Tell the user they have used stairs.
-                //  Tell user there not on the stairs
                 lstDialog.Items.Add("Those where some tall stairs.");
                 lstDialog.SelectedIndex = lstDialog.Items.Count - 1;
                 lstDialog.SelectedIndex = -1;
@@ -1276,7 +1108,10 @@ namespace Thief_Escape
                                             grdconMap[y + 1, x + 1].BackColor = doorUnlockedColor;
                                         }
                                         break;
-                                    default:
+                                    case Cell.Modifiers.EXIT:
+                                        {
+                                            grdconMap[y + 1, x + 1].BackColor = doorExitColor;
+                                        }
                                         break;
                                 }
                             }
@@ -1500,9 +1335,9 @@ namespace Thief_Escape
                     kittenCount++;
             }
 
-            //  Store the player's current count of keys and kittens
-            fileStrings.Add(string.Format(Cell.Contents.KEY.ToString() + "," + keyCount));
-            fileStrings.Add(string.Format(Cell.Contents.KITTEN.ToString() + "," + kittenCount));
+            //  Store the player's current count of keys on line 4 and kittens on line 5
+            fileStrings.Add(keyCount.ToString());
+            fileStrings.Add(kittenCount.ToString());
 
             //  Store the player's timer
             fileStrings.Add(string.Format(player.GameClock.ToString()));
@@ -1670,7 +1505,7 @@ namespace Thief_Escape
 
                             //  Get the player's time from line 6
                             int counter = int.Parse(playerLines[5]);
-                            player.GameClock = counter;
+                            gameClock = counter;
                         }
                         catch
                         {
@@ -1757,5 +1592,6 @@ namespace Thief_Escape
             player.GameClock = 0;
         }
         #endregion
+
     }
 }
