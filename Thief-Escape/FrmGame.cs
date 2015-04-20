@@ -563,6 +563,7 @@ namespace Thief_Escape
             {
                 //if no interaction found then returns 0
                 btnInteract.BackColor = Color.Crimson;
+                btnInteract.Text = "Interact";
                 btnInteract.Enabled = false;
                 return 0;
             }
