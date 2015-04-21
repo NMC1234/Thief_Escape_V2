@@ -2,7 +2,7 @@
 2,4,start,
 0,0,WALL,
 1,0,WALL,
-2,0,WALL,
+2,0,DOOR,EXIT,
 3,0,WALL,
 4,0,WALL,
 5,0,WALL,

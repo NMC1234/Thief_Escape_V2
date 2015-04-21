@@ -29,7 +29,8 @@ namespace Thief_Escape
         public enum MapFiles
         {
             Test1,
-            Test2
+            Test2,
+            End
 
         }
 

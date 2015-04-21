@@ -50,6 +50,7 @@
             Syncfusion.Windows.Forms.Grid.GridRangeStyle gridRangeStyle15 = new Syncfusion.Windows.Forms.Grid.GridRangeStyle();
             Syncfusion.Windows.Forms.Grid.GridRangeStyle gridRangeStyle16 = new Syncfusion.Windows.Forms.Grid.GridRangeStyle();
             Syncfusion.Windows.Forms.Grid.GridRangeStyle gridRangeStyle17 = new Syncfusion.Windows.Forms.Grid.GridRangeStyle();
+            Syncfusion.Windows.Forms.Grid.GridRangeStyle gridRangeStyle18 = new Syncfusion.Windows.Forms.Grid.GridRangeStyle();
             this.grpboxLegend = new System.Windows.Forms.GroupBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.lblKey = new System.Windows.Forms.Label();
@@ -386,7 +387,7 @@
             this.tabDialog.Location = new System.Drawing.Point(651, 277);
             this.tabDialog.Name = "tabDialog";
             this.tabDialog.SelectedIndex = 0;
-            this.tabDialog.Size = new System.Drawing.Size(395, 248);
+            this.tabDialog.Size = new System.Drawing.Size(395, 252);
             this.tabDialog.TabIndex = 17;
             this.toolTip1.SetToolTip(this.tabDialog, "Check here for tips and inventory stock.");
             // 
@@ -412,7 +413,7 @@
             this.lstDialog.ItemHeight = 19;
             this.lstDialog.Location = new System.Drawing.Point(6, 6);
             this.lstDialog.Name = "lstDialog";
-            this.lstDialog.Size = new System.Drawing.Size(378, 213);
+            this.lstDialog.Size = new System.Drawing.Size(378, 194);
             this.lstDialog.TabIndex = 9;
             // 
             // tabInventory
@@ -423,7 +424,7 @@
             this.tabInventory.ForeColor = System.Drawing.Color.Black;
             this.tabInventory.Location = new System.Drawing.Point(4, 31);
             this.tabInventory.Name = "tabInventory";
-            this.tabInventory.Size = new System.Drawing.Size(387, 213);
+            this.tabInventory.Size = new System.Drawing.Size(387, 217);
             this.tabInventory.TabIndex = 2;
             this.tabInventory.Text = "Inventory";
             this.toolTip1.SetToolTip(this.tabInventory, "Check here to see what you have collected.");
@@ -633,6 +634,14 @@
             gridRangeStyle17.StyleInfo.Font.Strikeout = false;
             gridRangeStyle17.StyleInfo.Font.Underline = false;
             gridRangeStyle17.StyleInfo.Font.Unit = System.Drawing.GraphicsUnit.Point;
+            gridRangeStyle18.Range = Syncfusion.Windows.Forms.Grid.GridRangeInfo.Table();
+            gridRangeStyle18.StyleInfo.Font.Bold = false;
+            gridRangeStyle18.StyleInfo.Font.Facename = "Arial";
+            gridRangeStyle18.StyleInfo.Font.Italic = false;
+            gridRangeStyle18.StyleInfo.Font.Size = 15F;
+            gridRangeStyle18.StyleInfo.Font.Strikeout = false;
+            gridRangeStyle18.StyleInfo.Font.Underline = false;
+            gridRangeStyle18.StyleInfo.Font.Unit = System.Drawing.GraphicsUnit.Point;
             this.grdconMap.RangeStyles.AddRange(new Syncfusion.Windows.Forms.Grid.GridRangeStyle[] {
             gridRangeStyle1,
             gridRangeStyle2,
@@ -650,7 +659,8 @@
             gridRangeStyle14,
             gridRangeStyle15,
             gridRangeStyle16,
-            gridRangeStyle17});
+            gridRangeStyle17,
+            gridRangeStyle18});
             this.grdconMap.ResizeColsBehavior = Syncfusion.Windows.Forms.Grid.GridResizeCellsBehavior.None;
             this.grdconMap.ResizeRowsBehavior = Syncfusion.Windows.Forms.Grid.GridResizeCellsBehavior.None;
             this.grdconMap.RowCount = 24;

@@ -399,8 +399,8 @@ namespace Thief_Escape
             {
                 btnMoveNorth.Enabled = false;
             }
-            //  If the cell is a Door and is LOCKED, disable movement
-            else if (cellGrid.CheckType(x, y - 1) == Cell.Archetypes.DOOR & cellGrid.CheckDoorModifier(x, y - 1) == Cell.Modifiers.LOCKED)
+            //  If the cell is a Door and is NOT UNLOCKED, disable movement
+            else if (cellGrid.CheckType(x, y - 1) == Cell.Archetypes.DOOR & cellGrid.CheckDoorModifier(x, y - 1) != Cell.Modifiers.UNLOCKED)
             {
                 btnMoveNorth.Enabled = false;
             }
@@ -416,8 +416,8 @@ namespace Thief_Escape
             {
                 btnMoveSouth.Enabled = false;
             }
-            //  If the cell is a Door and is LOCKED, disable movement
-            else if (cellGrid.CheckType(x, y + 1) == Cell.Archetypes.DOOR & cellGrid.CheckDoorModifier(x, y + 1) == Cell.Modifiers.LOCKED)
+            //  If the cell is a Door and is NOT UNLOCKED, disable movement
+            else if (cellGrid.CheckType(x, y + 1) == Cell.Archetypes.DOOR & cellGrid.CheckDoorModifier(x, y + 1) != Cell.Modifiers.UNLOCKED)
             {
                 btnMoveSouth.Enabled = false;
             }
@@ -432,8 +432,8 @@ namespace Thief_Escape
             {
                 btnMoveWest.Enabled = false;
             }
-            //  If the cell is a Door and is LOCKED, disable movement
-            else if (cellGrid.CheckType(x - 1, y) == Cell.Archetypes.DOOR & cellGrid.CheckDoorModifier(x - 1, y) == Cell.Modifiers.LOCKED)
+            //  If the cell is a Door and is NOT UNLOCKED, disable movement
+            else if (cellGrid.CheckType(x - 1, y) == Cell.Archetypes.DOOR & cellGrid.CheckDoorModifier(x - 1, y) != Cell.Modifiers.UNLOCKED)
             {
                 btnMoveWest.Enabled = false;
             }
@@ -449,8 +449,8 @@ namespace Thief_Escape
             {
                 btnMoveEast.Enabled = false;
             }
-            //  If the cell is a Door and is LOCKED, disable movement
-            else if (cellGrid.CheckType(x + 1, y) == Cell.Archetypes.DOOR & cellGrid.CheckDoorModifier(x + 1, y) == Cell.Modifiers.LOCKED)
+            //  If the cell is a Door and is NOT UNLOCKED, disable movement
+            else if (cellGrid.CheckType(x + 1, y) == Cell.Archetypes.DOOR & cellGrid.CheckDoorModifier(x + 1, y) != Cell.Modifiers.UNLOCKED)
             {
                 btnMoveEast.Enabled = false;
             }
@@ -475,6 +475,7 @@ namespace Thief_Escape
              * 3 = Pickup Kitten
              * 4 = Both Key and Kitten
              * 5 = Use Stairs
+             * 6 = Exit Door
              */
             int interactionType = 0;
             bool interactionFound = false;
@@ -509,7 +510,7 @@ namespace Thief_Escape
             //Checks if special actions concerns Stairs
             #region [ Special Action Stairs ]
             //checks if the player is standing on stairs
-            else if ((!interactionFound) && (cellGrid.CheckType(player.XCoord, player.YCoord) == Cell.Archetypes.STAIR))
+            if ((!interactionFound) && (cellGrid.CheckType(player.XCoord, player.YCoord) == Cell.Archetypes.STAIR))
             {
                 //Set interactionType to use Stairs
                 interactionType = 5;
@@ -523,7 +524,7 @@ namespace Thief_Escape
             #region [ Special Action Door ]
             //Checks if a Door Should be Opened
             //First checks if the player has a key in its inventory
-            else if ((!interactionFound) && (Inventory.Contains<Item>(key)))
+            if ((!interactionFound) && (Inventory.Contains<Item>(key)))
             {
                 //First checks if the player has a key in its inventory
 
@@ -554,6 +555,57 @@ namespace Thief_Escape
                     }
                 }
 
+            }
+            #endregion
+
+            //  Checks for the completion of the game
+            #region [ Check for Completion Exit ]
+            //Checks for exit door condition
+            if (!interactionFound)  //  Haven't found anything else
+            {
+                //  Gets the number of Kittens in the inventory so it can be checked against
+                int kittenCount = 0;
+                foreach (var k in Inventory)
+                {
+                    if (k == kitten)
+                        kittenCount++;
+                }
+
+                //  Only with 4 kittens can the player exit the game so only check then
+                if (kittenCount == 4)
+                {
+                    //  Search for a door
+                    //  Creates starting point for search, 1 cell up and 1 cell left, centered on the player.
+                    int x = player.XCoord - 1;
+                    int y = player.YCoord - 1;
+
+
+                    //  Goes through each "column" of the search area
+                    for (int ix = 0; ix < 3; ix++)
+                    {
+                        //Goes through each "row" of the column
+                        for (int iy = 0; iy < 3; iy++)
+                        {
+                            //If the cell is a door, check if its locked.
+                            if (cellGrid.CheckType((x + ix), (y + iy)) == Cell.Archetypes.DOOR)
+                            {
+                                //  Search found a locked door.
+                                if (cellGrid.CheckDoorModifier((x + ix), (y + iy)) == Cell.Modifiers.EXIT)
+                                {
+                                    //Set interactionType to a Key being Used
+                                    interactionType = 6;
+                                    //Change name of button
+                                    btnInteract.Text = "Exit the Mansion";
+                                    interactionFound = true;
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    interactionFound = false;
+                }
             }
             #endregion
 
@@ -666,6 +718,12 @@ namespace Thief_Escape
                 //Use Stairs
                 case 5:
                     UseStairs();
+                    btnInteract.Text = "Interact";
+                    break;
+
+                //  Completion Exit
+                case 6:
+                    FinishGame();
                     btnInteract.Text = "Interact";
                     break;
 
@@ -872,6 +930,69 @@ namespace Thief_Escape
                 lstDialog.Items.Add("I have to be on the stairs to use them.");
                 lstDialog.SelectedIndex = lstDialog.Items.Count - 1;
                 lstDialog.SelectedIndex = -1;
+            }
+        }
+
+        //  Finish the Game
+        private void FinishGame()
+        {
+            //  First, double check for completion requirements
+            //  Gets the number of Kittens in the inventory so it can be checked against
+            int kittenCount = 0;
+            foreach (var k in Inventory)
+            {
+                if (k == kitten)
+                    kittenCount++;
+            }
+            //  Only with 4 kittens can the player exit the game so only check then
+            if (kittenCount == 4)
+            {
+                //  Search for a door
+                //  Creates starting point for search, 1 cell up and 1 cell left, centered on the player.
+                int x = player.XCoord - 1;
+                int y = player.YCoord - 1;
+
+
+                //  Goes through each "column" of the search area
+                for (int ix = 0; ix < 3; ix++)
+                {
+                    //Goes through each "row" of the column
+                    for (int iy = 0; iy < 3; iy++)
+                    {
+                        //If the cell is a door, check if its locked.
+                        if (cellGrid.CheckType((x + ix), (y + iy)) == Cell.Archetypes.DOOR)
+                        {
+                            //  Search found an Exit door.
+                            if (cellGrid.CheckDoorModifier((x + ix), (y + iy)) == Cell.Modifiers.EXIT)
+                            {
+                                //  Output necessary prompt
+                                string output = "Robbie escaped the mansion with all 4 Jewel Encrusted Kittens!, Good Job.";
+                                lstDialog.Items.Add(output);
+                                lstDialog.SelectedIndex = lstDialog.Items.Count - 1;
+                                lstDialog.SelectedIndex = -1;
+
+                                //  Disable Movement Keys
+                                btnMoveEast.Enabled = false;
+                                btnMoveWest.Enabled = false;
+                                btnMoveNorth.Enabled = false;
+                                btnMoveSouth.Enabled = false;
+
+                                //  Stop the timer
+                                tmrGameClock.Enabled = false;
+
+                                //  Fog Everything
+                                InitialFog();
+
+                                //  Load the "Good Game" map
+                                cellGrid = new Grid(Grid.MapFiles.End, player.Name);
+
+                                //  View Everything
+                                ClearAllFog();
+
+                            }
+                        }
+                    }
+                }
             }
         }
         #endregion
@@ -1137,6 +1258,142 @@ namespace Thief_Escape
 
         }
 
+        //Clears the fog and refreshes colors in a 5x5 square, centered on the players location
+        public void ClearAllFog()
+        {
+
+            //  NOTE :: The Grid and the Map have flipped X and Y values, as well as the Map being indented X+1 and Y+1 from the Grid.
+
+            //  For-loop through each 'column' of the Grid ( 'row' of the Map), starting at the lowerX bound and stopping at the upperX bound
+            for (int x = 0; x < cellGrid.MapSize; x++)
+            {
+                //  For-loop through each 'row' of the Grid ( 'column' of the Map), starting at the lowerY bound and stopping at the upperY bound
+                for (int y = 0; y < cellGrid.MapSize; y++)
+                {
+                    //Clear the face from the cell
+                    grdconMap[y + 1, x + 1].Text = "";
+
+                    //  Get the Archetype of the cell
+                    Cell.Archetypes type = cellGrid.CheckType(x, y);
+
+                    //  Switch on the Archetype - Get details as needed to continue switching.
+                    switch (type)
+                    {
+                        // Walls - can contain Items
+                        #region  [ Wall Switching ]
+
+
+                        case Cell.Archetypes.WALL:
+                            {
+                                //Get contents
+                                Cell.Contents cont = cellGrid.CheckForItem(x, y);
+
+                                //  Switch on Contents
+                                switch (cont)
+                                {
+                                    case Cell.Contents.NULL:
+                                        {
+                                            grdconMap[y + 1, x + 1].BackColor = wallColor;
+                                        }
+                                        break;
+                                    case Cell.Contents.KEY:
+                                        {
+                                            grdconMap[y + 1, x + 1].BackColor = keyColor;
+                                        }
+                                        break;
+                                    case Cell.Contents.KITTEN:
+                                        {
+                                            grdconMap[y + 1, x + 1].BackColor = kittenColor;
+                                        }
+                                        break;
+                                }
+
+                            }
+                            break;
+
+
+                        #endregion
+
+
+                        //  Floors - can contain Items
+                        #region [ Floor Switching ]
+                        case Cell.Archetypes.FLOOR:
+                            {
+                                //Get contents
+                                Cell.Contents cont = cellGrid.CheckForItem(x, y);
+
+                                //Switch on Contents
+                                switch (cont)
+                                {
+                                    case Cell.Contents.NULL:
+                                        {
+                                            grdconMap[y + 1, x + 1].BackColor = floorColor;
+                                        }
+                                        break;
+                                    case Cell.Contents.KEY:
+                                        {
+                                            grdconMap[y + 1, x + 1].BackColor = keyColor;
+                                        }
+                                        break;
+                                    case Cell.Contents.KITTEN:
+                                        {
+                                            grdconMap[y + 1, x + 1].BackColor = kittenColor;
+                                        }
+                                        break;
+                                }
+
+                            }
+                            break;
+                        #endregion
+
+
+                        //  Doors - have a modifier
+                        #region [ Door Switching ]
+                        case Cell.Archetypes.DOOR:
+                            {
+                                //Get Modifier
+                                Cell.Modifiers mod = cellGrid.CheckDoorModifier(x, y);
+
+                                //Switch on Modifier
+                                switch (mod)
+                                {
+                                    case Cell.Modifiers.LOCKED:
+                                        {
+                                            grdconMap[y + 1, x + 1].BackColor = doorLockedColor;
+                                        }
+                                        break;
+                                    case Cell.Modifiers.UNLOCKED:
+                                        {
+                                            grdconMap[y + 1, x + 1].BackColor = doorUnlockedColor;
+                                        }
+                                        break;
+                                    case Cell.Modifiers.EXIT:
+                                        {
+                                            grdconMap[y + 1, x + 1].BackColor = doorExitColor;
+                                        }
+                                        break;
+                                }
+                            }
+                            break;
+
+                        #endregion
+
+
+                        //  Stairs - have no other values
+                        case Cell.Archetypes.STAIR:
+                            {
+                                grdconMap[y + 1, x + 1].BackColor = stairColor;
+                            }
+                            break;
+
+                    }
+                }
+            }
+
+            //  Set the player cell text
+            grdconMap[player.YCoord + 1, player.XCoord + 1].Text = "☺";
+
+        }
 
         //Simply sets everything in the map to black
         public void InitialFog()
@@ -1534,6 +1791,10 @@ namespace Thief_Escape
                 {
                     NewGame(playerName);
                 }
+            }
+            else   //   If it does not exist, then call the NewGame method
+            {
+                NewGame(playerName);
             }
         }
 

@@ -166,6 +166,9 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DefaultMaps\End.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="DefaultMaps\Test1.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
