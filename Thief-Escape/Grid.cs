@@ -30,7 +30,10 @@ namespace Thief_Escape
         {
             Test1,
             Test2,
-            End
+            End,
+            map1,
+            map2,
+            map3
 
         }
 

@@ -31,7 +31,7 @@ namespace Thief_Escape
         bool exit = true;
 
         //  The default map , used in the creation of new games.
-        Grid.MapFiles defaultMap = Grid.MapFiles.Test1;
+        Grid.MapFiles defaultMap = Grid.MapFiles.map2;
 
 
         #region [ Colors ]
@@ -310,12 +310,6 @@ namespace Thief_Escape
 
             //Close this form
             this.Close();
-        }
-        private void loadGameToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //message box to go along with loading of new game...
-            DialogResult newDialog = MessageBox.Show("Your game is being loaded.", "LOADING...",
-                MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
         }
 
         private void saveGameToolStripMenuItem_Click(object sender, EventArgs e)

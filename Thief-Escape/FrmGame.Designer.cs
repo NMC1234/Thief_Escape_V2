@@ -51,6 +51,7 @@
             Syncfusion.Windows.Forms.Grid.GridRangeStyle gridRangeStyle16 = new Syncfusion.Windows.Forms.Grid.GridRangeStyle();
             Syncfusion.Windows.Forms.Grid.GridRangeStyle gridRangeStyle17 = new Syncfusion.Windows.Forms.Grid.GridRangeStyle();
             Syncfusion.Windows.Forms.Grid.GridRangeStyle gridRangeStyle18 = new Syncfusion.Windows.Forms.Grid.GridRangeStyle();
+            Syncfusion.Windows.Forms.Grid.GridRangeStyle gridRangeStyle19 = new Syncfusion.Windows.Forms.Grid.GridRangeStyle();
             this.grpboxLegend = new System.Windows.Forms.GroupBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.lblKey = new System.Windows.Forms.Label();
@@ -89,7 +90,6 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.saveAndLoadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.loadGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.grpboxLegend.SuspendLayout();
@@ -399,7 +399,7 @@
             this.tabDialogs.Location = new System.Drawing.Point(4, 31);
             this.tabDialogs.Name = "tabDialogs";
             this.tabDialogs.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDialogs.Size = new System.Drawing.Size(387, 213);
+            this.tabDialogs.Size = new System.Drawing.Size(387, 217);
             this.tabDialogs.TabIndex = 0;
             this.tabDialogs.Text = "Dialog";
             this.toolTip1.SetToolTip(this.tabDialogs, "Check here for tips and conversations.");
@@ -642,6 +642,14 @@
             gridRangeStyle18.StyleInfo.Font.Strikeout = false;
             gridRangeStyle18.StyleInfo.Font.Underline = false;
             gridRangeStyle18.StyleInfo.Font.Unit = System.Drawing.GraphicsUnit.Point;
+            gridRangeStyle19.Range = Syncfusion.Windows.Forms.Grid.GridRangeInfo.Table();
+            gridRangeStyle19.StyleInfo.Font.Bold = false;
+            gridRangeStyle19.StyleInfo.Font.Facename = "Arial";
+            gridRangeStyle19.StyleInfo.Font.Italic = false;
+            gridRangeStyle19.StyleInfo.Font.Size = 15F;
+            gridRangeStyle19.StyleInfo.Font.Strikeout = false;
+            gridRangeStyle19.StyleInfo.Font.Underline = false;
+            gridRangeStyle19.StyleInfo.Font.Unit = System.Drawing.GraphicsUnit.Point;
             this.grdconMap.RangeStyles.AddRange(new Syncfusion.Windows.Forms.Grid.GridRangeStyle[] {
             gridRangeStyle1,
             gridRangeStyle2,
@@ -660,7 +668,8 @@
             gridRangeStyle15,
             gridRangeStyle16,
             gridRangeStyle17,
-            gridRangeStyle18});
+            gridRangeStyle18,
+            gridRangeStyle19});
             this.grdconMap.ResizeColsBehavior = Syncfusion.Windows.Forms.Grid.GridResizeCellsBehavior.None;
             this.grdconMap.ResizeRowsBehavior = Syncfusion.Windows.Forms.Grid.GridResizeCellsBehavior.None;
             this.grdconMap.RowCount = 24;
@@ -740,7 +749,6 @@
             // 
             this.saveAndLoadToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.saveGameToolStripMenuItem,
-            this.loadGameToolStripMenuItem,
             this.mainMenuToolStripMenuItem,
             this.exitGameToolStripMenuItem});
             this.saveAndLoadToolStripMenuItem.Name = "saveAndLoadToolStripMenuItem";
@@ -750,28 +758,21 @@
             // saveGameToolStripMenuItem
             // 
             this.saveGameToolStripMenuItem.Name = "saveGameToolStripMenuItem";
-            this.saveGameToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.saveGameToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveGameToolStripMenuItem.Text = "&Save Game";
             this.saveGameToolStripMenuItem.Click += new System.EventHandler(this.saveGameToolStripMenuItem_Click);
-            // 
-            // loadGameToolStripMenuItem
-            // 
-            this.loadGameToolStripMenuItem.Name = "loadGameToolStripMenuItem";
-            this.loadGameToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
-            this.loadGameToolStripMenuItem.Text = "&Load Game";
-            this.loadGameToolStripMenuItem.Click += new System.EventHandler(this.loadGameToolStripMenuItem_Click);
             // 
             // mainMenuToolStripMenuItem
             // 
             this.mainMenuToolStripMenuItem.Name = "mainMenuToolStripMenuItem";
-            this.mainMenuToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.mainMenuToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.mainMenuToolStripMenuItem.Text = "&Main Menu";
             this.mainMenuToolStripMenuItem.Click += new System.EventHandler(this.mainMenuToolStripMenuItem_Click);
             // 
             // exitGameToolStripMenuItem
             // 
             this.exitGameToolStripMenuItem.Name = "exitGameToolStripMenuItem";
-            this.exitGameToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.exitGameToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitGameToolStripMenuItem.Text = "E&xit Game ";
             this.exitGameToolStripMenuItem.Click += new System.EventHandler(this.exitGameToolStripMenuItem_Click);
             // 
@@ -852,7 +853,6 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem saveAndLoadToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveGameToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem loadGameToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mainMenuToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitGameToolStripMenuItem;
     }
