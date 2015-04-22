@@ -899,6 +899,9 @@ namespace Thief_Escape
                 //  Recreate the grid
                 cellGrid = new Grid(destination, player.Name);
 
+                //  Update Player's current map
+                player.CurrentMap = destination;
+
                 //Place the player
                 player.XCoord = coords[0];
                 player.YCoord = coords[1];
