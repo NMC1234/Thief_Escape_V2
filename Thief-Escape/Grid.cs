@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Zachary T. Vig
+ * Jamie Gleason
+ * Keegon Cabinaw
+ * GROUP PHIV
+ * CIT195 Group Project
+ * Code-stop date: 04/22/2015
+ * 
+ * grid class .cs file
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,12 +38,12 @@ namespace Thief_Escape
         //Map list Enum for grid creation
         public enum MapFiles
         {
-            Test1,
-            Test2,
-            End,
+			Test1,
+			Test2,
             map1,
-            map2,
-            map3
+			map2,
+			map3,
+            End
 
         }
 

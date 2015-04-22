@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Zachary T. Vig
+ * Jamie Gleason
+ * Keegon Cabinaw
+ * GROUP PHIV
+ * CIT195 Group Project
+ * Code-stop date: 04/22/2015
+ * 
+ * frmGetName main .cs file
+ */
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;

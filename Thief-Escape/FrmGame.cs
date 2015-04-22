@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Zachary T. Vig
+ * Jamie Gleason
+ * Keegon Cabinaw
+ * GROUP PHIV
+ * CIT195 Group Project
+ * Code-stop date: 04/22/2015
+ * 
+ * frmGame main .cs file
+ */
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -91,7 +101,8 @@ namespace Thief_Escape
         private void FrmGame_FormClosing(object sender, FormClosingEventArgs e)
         {
             //Prompt user if they want to save game
-            DialogResult newDialog = MessageBox.Show("Would you like to save the game before you leave?", "Save Game?",
+            DialogResult newDialog = MessageBox.Show("Would you like to save the game before you leave: " 
+				+ Convert.ToString(player.Name) + "?", "Save Game?",
                 MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
 
             if (newDialog == DialogResult.Yes)
@@ -310,6 +321,37 @@ namespace Thief_Escape
 
             //Close this form
             this.Close();
+        }
+        private void loadGameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			//Asks if you would like to save your current game before loading a different one
+			
+			DialogResult newDialog = MessageBox.Show("Would You Like To Save Your Current Game Before Loading A New One?",
+				"Save Before Loading?", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+			//if the user selects yes then game is saved before movign on to the load game form
+			if(newDialog == DialogResult.OK)
+			{
+				SaveGame( );
+			}
+
+			//loads the load game form 
+			var LoadGame = new frmLoad( );
+			//and if one is selected then a new game form with that save state is created
+			//and the old game form is hidden and then disposed of
+			if(LoadGame.ShowDialog( ) == DialogResult.OK)
+			{
+				this.tmrGameClock.Enabled = false;
+				this.Hide( );
+
+				Form LoadSavedGame = new FrmGame(LoadGame.UserName);
+				LoadSavedGame.Show( );
+
+				this.Dispose( );
+				
+			}
+            //message box to go along with loading of new game...
+			//DialogResult newDialog = MessageBox.Show("Your game is being loaded.", "LOADING...",
+			//	MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
         }
 
         private void saveGameToolStripMenuItem_Click(object sender, EventArgs e)
@@ -898,6 +940,9 @@ namespace Thief_Escape
 
                 //  Recreate the grid
                 cellGrid = new Grid(destination, player.Name);
+
+				//Update Player's current Map
+				player.CurrentMap = destination;
 
                 //Place the player
                 player.XCoord = coords[0];
